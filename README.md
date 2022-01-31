@@ -65,3 +65,25 @@ add to webpack.config.js after entry
             static: './dist',
         },
 
+in webpack.config.js, change output to bundle.js
+in index.html, change script to load from bundle.js
+
+npm install --save-dev style-loader css-loader
+add to webpack.config.js after output {},
+        module: {
+            rules: [
+                {
+                    test: /\.css$/i,
+                    use: ['style-loader', 'css-loader'],
+                },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    type: 'asset/resource',
+                },
+            ],
+        },
+add to index.js
+        import './style.css';
+
+
+

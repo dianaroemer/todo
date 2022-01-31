@@ -1,8 +1,10 @@
+import './style.css';
 
 function component() {
     const element = document.createElement('div');
 
-    element.innerHTML = `Sample string goes here and a different string here and a live reload`;
+    element.innerHTML = `Sample string goes here css test`;
+    element.classList.add('hello');
     return element;
 }
 
