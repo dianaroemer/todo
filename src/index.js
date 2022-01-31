@@ -1,4 +1,5 @@
 import './style.css';
+import headerNav from "./utils/header-nav.js";
 
 function component() {
     const element = document.createElement('div');
@@ -7,5 +8,7 @@ function component() {
     element.classList.add('hello');
     return element;
 }
+
+document.body.appendChild(headerNav());
 
 document.body.appendChild(component());
