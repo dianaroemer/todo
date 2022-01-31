@@ -80,10 +80,26 @@ add to webpack.config.js after output {},
                     test: /\.(png|svg|jpg|jpeg|gif)$/i,
                     type: 'asset/resource',
                 },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    type: 'asset/resource',
+                },
             ],
         },
 add to index.js
         import './style.css';
 
+copy fonts from existing directory to src/assets
+add font code to style.css
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('./assets/fonts/montserrat/Montserrat-VariableFont_wght.ttf') format('truetype'),
+            url('./assets/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+            
+            font-weight: 400;
+            font-style: normal;
+        }
+
+Add font-family line to targeted body in css (font-family: Montserrat;)
 
 

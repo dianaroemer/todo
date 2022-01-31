@@ -1,5 +1,15 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./assets/fonts/montserrat/Montserrat-VariableFont_wght.ttf') format('truetype'),
+    url('./assets/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+    
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
     background-color: bisque;
+    font-family: Montserrat;
 }
 
 /* .hello {
