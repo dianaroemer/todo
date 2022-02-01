@@ -13,11 +13,11 @@ function headerNav() {
     let list = document.createElement('ul');
     
     let listOptions = document.createElement('li');
-    listOptions.classList.add('navButtonToggle');
+    listOptions.classList.add('navButtonToggle, optionsToggle');
     listOptions.innerHTML = 'Options';
 
     let listAbout = document.createElement('li');
-    listAbout.classList.add('navButtonToggle');
+    listAbout.classList.add('navButtonToggle, aboutToggle');
     listAbout.innerHTML = 'About';
 
     let listPortfolio = document.createElement('li');
