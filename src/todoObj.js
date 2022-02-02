@@ -13,25 +13,40 @@ const todoObj = () => {
     let _complete;
 
     const getInfo = () => {
+        console.log('_checklist contents: ');
+        console.log(getChecklist());
         return `                _title: ${_title}
                 _description: ${_description}
                 _dueDate: ${_dueDate}
                 _creationDate: ${_creationDate}
                 _priority: ${_priority}
                 _notes: ${_notes}
-                _checklistk: ${_checklist}
+                _checklist: ${_checklist}
                 _complete: ${_complete}`
+
+        // let info = `                _title: ${_title}
+        // _description: ${_description}
+        // _dueDate: ${_dueDate}
+        // _creationDate: ${_creationDate}
+        // _priority: ${_priority}
+        // _notes: ${_notes}
+        // _checklist: ${_checklist}
+        // _complete: ${_complete}
+        // _checklist contents: `
+        // info += getChecklist();
+
+        return info;
     }
 
-    const init = (_title, _description, _dueDate, _creationDate, _priority, _notes, _checklist, _complete) => {
-        this._title = _title;
-        this._description = _description;
-        this._dueDate = _dueDate;
-        this._creationDate = _creationDate;
-        this._priority = _priority;
-        this._notes = _notes;
-        this._checklist = _checklist;
-        this._complete = _complete;
+    const init = (title, description, dueDate, creationDate, priority, notes, checklist, complete) => {
+        _title = title;
+        _description = description;
+        _dueDate = dueDate;
+        _creationDate = creationDate;
+        _priority = priority;
+        _notes = notes;
+        _checklist = checklist;
+        _complete = complete;
     }
 
     const getTitle = () => {
@@ -40,7 +55,7 @@ const todoObj = () => {
 
     const setTitle = (_newTitle) => {
         if( typeof _newTitle === "string") {
-            this._title = _newTitle; 
+            _title = _newTitle; 
             return true;
         } else {
             console.log('todoObj._setTitle Error! tried to pass a non-string into the _title field!');
@@ -125,15 +140,15 @@ const todoObj = () => {
         }
     }
 
-    const enumerateChecklist = () => {
-        for (const item in _checklist) {
-            console.log(item);
-        }
-    }
-
     const addItemToChecklist = (newItem, check) => {
         if( typeof newItem === "string") {
-            _checklist.newItem = check;
+
+            Object.defineProperty(_checklist, newItem, {
+                enumerale: true,
+                writable: true,
+                configurable: true,
+                value: check
+            })
             return true;
         } else {
             console.log('todoObj.addItemToChecklist Error! tried to pass a non-string as a newItem for _checklist!');
@@ -145,7 +160,7 @@ const todoObj = () => {
         if (typeof item === "string") {
 
             if(_checklist.hasOwnProperty(item)) {
-                delete _checklist.item;
+                delete _checklist[item];
                 return true;
             } else {
                 console.log(`todoObj.deleteItemOffChecklist Error! _checklist.${item} not found as a property in _checklist!`)
@@ -154,6 +169,21 @@ const todoObj = () => {
 
         } else {
             console.log('todoObj.deleteItemOffChecklist Error! Tried to pass a non-string into propertys hasOwnProperty!');
+            return false;
+        }
+    }
+
+    const toggleItemInChecklist = (property) => {
+        if(_checklist.hasOwnProperty(property) ) {
+            if( _checklist[property] ) {
+                _checklist[property] = false;
+                return true;
+            } else {
+                _checklist[property] = true;
+                return true;
+            }
+        } else {
+            console.log('todoObj.toggleItemInChecklist Error! _checklist does not have property: ' + property);
             return false;
         }
     }
@@ -182,11 +212,8 @@ const todoObj = () => {
         getCreationDate, setCreationDate,
         getPriority, setPriority,
         getNotes, setNotes,
-        getChecklist, setChecklist, enumerateChecklist, addItemToChecklist, deleteItemOffChecklist,
+        getChecklist, setChecklist, addItemToChecklist, deleteItemOffChecklist, toggleItemInChecklist,
         getComplete, setComplete,
-        
-
-
 
         
     }

@@ -1,7 +1,10 @@
 import './style.css';
 import headerNav from "./utils/header-nav.js";
 
-import TodoObj from './todoObj.js';
+// import TodoObj from './todoObj.js';
+import todoTest from './todoTest.js';
+
+
 
 function component() {
     const element = document.createElement('div');
@@ -15,5 +18,6 @@ document.body.appendChild(headerNav());
 
 document.body.appendChild(component());
 
-let sampleToDo = TodoObj();
-console.log(sampleToDo.getInfo());
+
+
+console.log('finished state of todoTest(): ' + todoTest());
