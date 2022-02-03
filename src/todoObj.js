@@ -24,18 +24,6 @@ const todoObj = () => {
                 _checklist: ${_checklist}
                 _complete: ${_complete}`
 
-        // let info = `                _title: ${_title}
-        // _description: ${_description}
-        // _dueDate: ${_dueDate}
-        // _creationDate: ${_creationDate}
-        // _priority: ${_priority}
-        // _notes: ${_notes}
-        // _checklist: ${_checklist}
-        // _complete: ${_complete}
-        // _checklist contents: `
-        // info += getChecklist();
-
-        return info;
     }
 
     const init = (title, description, dueDate, creationDate, priority, notes, checklist, complete) => {
@@ -69,7 +57,7 @@ const todoObj = () => {
 
     const setDescription = (newDesc) => {
         if( typeof newDesc === "string") {
-            this._description = newDesc; 
+            _description = newDesc; 
             return true;
         } else {
             console.log('todoObj.setDescription Error! tried to pass a non-string into the _description field!');
@@ -83,7 +71,7 @@ const todoObj = () => {
 
     const setDueDate = (newDueDate) => {
         if( isDate(newDueDate)) {
-            this._dueDate = newDueDate; 
+            _dueDate = newDueDate; 
         } else {
             console.log('todoObj.setDueDate Error! tried to pass a non-string into the _dueDate field!')
         }
@@ -95,7 +83,7 @@ const todoObj = () => {
 
     const setCreationDate = (newCreationDate) => {
         if( isDate(newCreationDate)) {
-            this._creationDate = newCreationDate; 
+            _creationDate = newCreationDate; 
         } else {
             console.log('todoObj.setCreationDate Error! tried to pass a non-date into the _creationDate field!')
         }
@@ -107,7 +95,7 @@ const todoObj = () => {
 
     const setPriority = (newPriority) => {
         if( typeof newPriority === "number" ) {
-            this._priority = newPriority; 
+            _priority = newPriority; 
         } else 
             console.log('todoObj.setPriorty Error! tried to pass a non-number into the _priority field!')
     }
@@ -118,7 +106,7 @@ const todoObj = () => {
 
     const setNotes = (newNotes) => {
         if( typeof newNotes === "string") {
-            this._notes = newNotes; 
+            _notes = newNotes; 
             return true;
         } else {
             console.log('todoObj.setNotes Error! tried to pass a non-string into the _notes field!');
@@ -194,7 +182,7 @@ const todoObj = () => {
 
     const setComplete = (newComplete) => {
         if( typeof newComplete === "boolean") {
-            this._complete = newComplete; 
+            _complete = newComplete; 
             return true;
         } else {
             console.log('todoObj._setComplete Error! tried to pass a non-booelan into the _complete field!');
