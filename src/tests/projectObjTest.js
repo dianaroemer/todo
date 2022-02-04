@@ -130,7 +130,14 @@ function projectObjTest() {
     });
     console.log(testProject.getTodoList());
 
+    console.log('----------------------------------------------');
+    console.log('----------------------------------------------');
+    console.log('----------------------------------------------');
 
+    console.log('testing getProjectDiv: ' + testProject.getProjectDiv());
+
+    console.log('testing setProjectDiv: ' + testProject.setProjectDiv('newerDiv'));
+    console.log(testProject.getProjectDiv());
 
     return true;
 }

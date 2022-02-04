@@ -92,6 +92,7 @@ const projectObj = () => {
 
     const setProjectDiv = (newDiv) => {
         _projectDiv = newDiv;
+        return true;
     }
 
     const getTodoList = () => {

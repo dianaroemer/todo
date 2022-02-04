@@ -1,4 +1,4 @@
-import TodoObj from './todoObj.js';
+import TodoObj from '../todoObj.js';
 
 function todoTest() {
 
@@ -25,7 +25,7 @@ function todoTest() {
 
     console.log('--------------------------------');
     console.log('testing init function');
-    sampleToDo.init("New Title", "I am a sample", new Date('2022-02-04'), new Date('2022-02-02'), 5, "These are my notes", {work: true}, false, "div");
+    sampleToDo.init("New Title", "I am a sample", new Date('2022-02-04'), new Date('2022-02-02'), 5, "These are my notes", {work: true}, false, "newdiv");
     // _title, _description, _dueDate, _creationDate, _priority, _notes, _checklist, _complete
     console.log(sampleToDo.getInfo());
 
@@ -64,7 +64,11 @@ function todoTest() {
     console.log("testing enumerability of properties in _checklist");
     console.log(sampleToDo.getChecklist().propertyIsEnumerable('play'));
 
+    console.log('--------------------------------');
+    console.log('testing getTodoDiv: ' + sampleToDo.getTodoDiv());
 
+    console.log('testing setTodoDiv: ' + sampleToDo.setTodoDiv('newerDiv'));
+    console.log(sampleToDo.getTodoDiv());
 
 
     // console.log('------------------------------------------------------------');

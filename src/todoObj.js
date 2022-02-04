@@ -38,7 +38,7 @@ const todoObj = () => {
         _notes = notes;
         _checklist = checklist;
         _complete = complete;
-        _todoDiv;
+        _todoDiv = todoDiv;
     }
 
     const getTitle = () => {
@@ -200,6 +200,7 @@ const todoObj = () => {
 
     const setTodoDiv = (newDiv) => {
         _todoDiv = newDiv;
+        return true;
     }
 
 
@@ -215,7 +216,7 @@ const todoObj = () => {
         getChecklist, setChecklist, addItemToChecklist, deleteItemOffChecklist, toggleItemInChecklist,
         getComplete, setComplete,
         getTodoDiv, setTodoDiv,
-        
+
 
         
     }
