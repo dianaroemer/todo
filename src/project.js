@@ -9,21 +9,24 @@ const projectObj = () => {
     let _projectCreationDate;
     let _dueDate;
     let _projectPriority;
+    let _projectDiv;
 
     const getInfo = () => {
         return `        _projectName: ${_projectName}
         _todoList: ${_todoList}
         _projectCreationDateDate: ${_projectCreationDate}
         _dueDate: ${_dueDate}
-        _projectPriority: ${_projectPriority}`
+        _projectPriority: ${_projectPriority}
+        _projectDiv: ${_projectDiv}`
     }
 
-    const init = (projectName, todoList, creationDate, dueDate, projectPriority) => {
+    const init = (projectName, todoList, creationDate, dueDate, projectPriority, projectDiv) => {
         _projectName = projectName;
         _todoList = todoList;
         _projectCreationDate = creationDate;
         _dueDate = dueDate;
         _projectPriority = projectPriority;
+        _projectDiv = projectDiv;
         return true;
     }
 
@@ -81,6 +84,14 @@ const projectObj = () => {
             console.log('projectObj.setProjectPriorty Error! tried to pass a non-number into the _projectPriority field!');
             return false;
         }
+    }
+
+    const getProjectDiv = () => {
+        return _projectDiv;
+    }
+
+    const setProjectDiv = (newDiv) => {
+        _projectDiv = newDiv;
     }
 
     const getTodoList = () => {
@@ -150,6 +161,7 @@ const projectObj = () => {
         getProjectCreationDate, setProjectCreationDate,
         getProjectDueDate, setProjectDueDate,
         getProjectPriority, setProjectPriority,
+        getProjectDiv, setProjectDiv,
         getTodoList, setTodoList, addTodo, addTodoObj, removeTodo, reorderTodo,
         
 

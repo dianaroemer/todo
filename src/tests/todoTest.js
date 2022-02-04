@@ -25,7 +25,7 @@ function todoTest() {
 
     console.log('--------------------------------');
     console.log('testing init function');
-    sampleToDo.init("New Title", "I am a sample", new Date('2022-02-04'), new Date('2022-02-02'), 5, "These are my notes", {work: true}, false);
+    sampleToDo.init("New Title", "I am a sample", new Date('2022-02-04'), new Date('2022-02-02'), 5, "These are my notes", {work: true}, false, "div");
     // _title, _description, _dueDate, _creationDate, _priority, _notes, _checklist, _complete
     console.log(sampleToDo.getInfo());
 

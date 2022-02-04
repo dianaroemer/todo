@@ -11,6 +11,7 @@ const todoObj = () => {
     let _notes;
     let _checklist;
     let _complete;
+    let _todoDiv;
 
     const getInfo = () => {
         console.log('_checklist contents: ');
@@ -22,11 +23,13 @@ const todoObj = () => {
                 _priority: ${_priority}
                 _notes: ${_notes}
                 _checklist: ${_checklist}
-                _complete: ${_complete}`
+                _complete: ${_complete}
+                _todoDiv: ${_todoDiv}`
 
     }
 
-    const init = (title, description, dueDate, creationDate, priority, notes, checklist, complete) => {
+    // In a perfect world, init assigns these properties through their relevant setters for type-checking
+    const init = (title, description, dueDate, creationDate, priority, notes, checklist, complete, todoDiv) => {
         _title = title;
         _description = description;
         _dueDate = dueDate;
@@ -35,6 +38,7 @@ const todoObj = () => {
         _notes = notes;
         _checklist = checklist;
         _complete = complete;
+        _todoDiv;
     }
 
     const getTitle = () => {
@@ -190,6 +194,14 @@ const todoObj = () => {
         }
     }
 
+    const getTodoDiv = () => {
+        return _todoDiv;
+    }
+
+    const setTodoDiv = (newDiv) => {
+        _todoDiv = newDiv;
+    }
+
 
     return {
         getInfo,
@@ -202,6 +214,8 @@ const todoObj = () => {
         getNotes, setNotes,
         getChecklist, setChecklist, addItemToChecklist, deleteItemOffChecklist, toggleItemInChecklist,
         getComplete, setComplete,
+        getTodoDiv, setTodoDiv,
+        
 
         
     }

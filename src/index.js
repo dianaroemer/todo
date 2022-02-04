@@ -3,7 +3,7 @@ import headerNav from "./utils/header-nav.js";
 
 // import TodoObj from './todoObj.js';
 // import todoTest from './tests/todoTest.js';
-import projectObjTest from './tests/projectObjTest.js';
+// import projectObjTest from './tests/projectObjTest.js';
 
 
 
@@ -21,5 +21,5 @@ document.body.appendChild(component());
 
 
 
-// console.log('finished state of todoTest(): ' + todoTest());
-console.log(`----------------------------------------------- finished state of projectObjTest(): ` + projectObjTest())
+// console.log('(`-----------------------------------------------finished state of todoTest(): ' + todoTest());
+// console.log(`----------------------------------------------- finished state of projectObjTest(): ` + projectObjTest())

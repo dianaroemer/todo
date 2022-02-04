@@ -30,7 +30,7 @@ function projectObjTest() {
     console.log(testProject.getInfo());
 
     console.log(`testing init: `);
-    console.log(testProject.init('Sample Project For Internal Use Only', [TodoObj()], new Date('2022-02-02'), new Date('2022-02-04'), 3));
+    console.log(testProject.init('Sample Project For Internal Use Only', [TodoObj()], new Date('2022-02-02'), new Date('2022-02-04'), 3, "div"));
     console.log(testProject.getInfo());
 
     console.log('testing getProjectName: ' + testProject.getProjectName());
@@ -77,13 +77,13 @@ function projectObjTest() {
     console.log(testProject.getTodoList()); 
 
     const sampleTodo = TodoObj();
-    sampleTodo.init("Sample To Do", "I am a sample", new Date('2022-02-04'), new Date('2022-02-02'), 5, "These are my notes", {work: true}, false);
+    sampleTodo.init("Sample To Do", "I am a sample", new Date('2022-02-04'), new Date('2022-02-02'), 5, "These are my notes", {work: true}, false, "div");
 
     console.log(`testing setTodoList: ` + testProject.setTodoList(sampleTodo));
     console.log(testProject.getTodoList());
     console.log(testProject.getTodoList()[0].getInfo());
 
-    console.log('testing addTodoList: ' + testProject.addTodo("New To do", "I am new", new Date('2022-02-08'), new Date('2022-02-01'), 5, "How do you do, fellow to do", {play: true}, false));
+    console.log('testing addTodoList: ' + testProject.addTodo("New To do", "I am new", new Date('2022-02-08'), new Date('2022-02-01'), 5, "How do you do, fellow to do", {play: true}, false, "div"));
     console.log(testProject.getTodoList());
     console.log(testProject.getTodoList()[0].getInfo());
     console.log(testProject.getTodoList()[1].getInfo());
@@ -91,7 +91,7 @@ function projectObjTest() {
     console.log(typeof sampleTodo);
 
     const newTodo = TodoObj();
-    newTodo.init("New To do two: Electric to do-aloo", "I am new", new Date('2022-02-08'), new Date('2022-02-01'), 5, "How do you do, fellow to do", {play: true}, false);
+    newTodo.init("New To do two: Electric to do-aloo", "I am new", new Date('2022-02-08'), new Date('2022-02-01'), 5, "How do you do, fellow to do", {play: true}, false, "div");
 
 
     console.log('testing addTodoObj: ' + testProject.addTodoObj(newTodo));
