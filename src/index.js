@@ -4,6 +4,7 @@ import headerNav from "./utils/header-nav.js";
 // import TodoObj from './todoObj.js';
 // import todoTest from './tests/todoTest.js';
 // import projectObjTest from './tests/projectObjTest.js';
+import logicControllerObj from './logicController.js';
 
 
 
@@ -18,6 +19,9 @@ function component() {
 document.body.appendChild(headerNav());
 
 document.body.appendChild(component());
+
+let logicController = logicControllerObj();
+console.log(logicController.getInfo());
 
 
 
