@@ -27,5 +27,9 @@ logicController.generateProjectContainerObj();
 
 document.body.appendChild(nav);
 
+
+
+//                        Testing object functionality
+//        Be sure to uncomment out the corresponding imports for test purposes
 // console.log('(`-----------------------------------------------finished state of todoTest(): ' + todoTest());
 // console.log(`----------------------------------------------- finished state of projectObjTest(): ` + projectObjTest())

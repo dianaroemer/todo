@@ -1,8 +1,16 @@
 // I am eventController, I am an object that assigns event functions to div's that are passed to me via logicController.
 
-const eventController = () => {
+import logicController from "./logicController.js";
+
+const eventController = ( logicControllerReference ) => {
+
+    // console.log(logicControllerReference);
 
     let _menuOpen = false;
+    const _logicController = logicControllerReference;
+
+    console.log("I am _logicController: " + _logicController);
+
 
     const _toggleMenuOpen = () => {
         if(menuOpen) {
@@ -12,24 +20,26 @@ const eventController = () => {
         }
     }
 
-    // const attachAddButtonListener = (div) => {
-    //     div.addEventListener('click', () => {
+    const attachAddButtonListener = (div) => {
+        div.addEventListener('click', () => {
 
-    //         if(_menuOpen) {
-    //             return;
-    //         }
+            if(_menuOpen) {
+                return;
+            }
 
-    //         alert(`You've clicked the projectContainerObj's addButton!`);
+            // console.log(_logicController.getInfo());
 
-    //         // openProjectContainerAddButtonMenu();
+            alert(`You've clicked the projectContainerObj's addButton!`);
 
-    //     })
-    // };
+            // openProjectContainerAddButtonMenu();
+
+        })
+    };
 
 
     return {
         _toggleMenuOpen,
-        // attachAddButtonListener,
+        attachAddButtonListener,
     }
 
 }
@@ -38,20 +48,24 @@ const eventController = () => {
 // const attachProjectContainerAddButtonListener = 
 
 export default eventController;
-export function attachAddButtonListener(div){
-    // console.log(div);
-    // console.log('whoop');
-    div.addEventListener('click', (() => {
+// export function attachAddButtonListener(div){
+//     // console.log(div);
+//     // console.log('whoop');
+//     div.addEventListener('click', ((e) => {
 
-        console.log(`addButton's eventListener has been called!`);
+//         console.log(e.currentTarget);
 
-        // if(_menuOpen) {
-        //     return;
-        // }
+//         console.log(`addButton's eventListener has been called!`);
 
-        alert(`You've clicked the projectContainerObj's addButton!`);
+//         console.log();
 
-        // openProjectContainerAddButtonMenu();
+//         // if(_menuOpen) {
+//         //     return;
+//         // }
 
-    }))
-};
+//         alert(`You've clicked the projectContainerObj's addButton!`);
+
+//         // openProjectContainerAddButtonMenu();
+
+//     }))
+// };

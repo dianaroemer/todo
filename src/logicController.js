@@ -2,14 +2,22 @@
 
 import projectContainerObj from './projectContainerObj.js';
 import displayController from './displayController.js';
-import {eventController, attachAddButtonListener } from './eventController.js';
+// import {eventController, attachAddButtonListener } from './eventController.js';
+import eventController from './eventController.js';
+
 
 const logicController = () => {
 
     let _projectContainer = projectContainerObj();
     let _displayController = displayController();
+    let self = this;
     let _contentDiv = document.getElementById('content'); //_contentDiv should have its own getters and setters for typechecking and safety, but is only invoked and instantiated once on page init to be populated with generateProjectContainer(), so it gets a pass here
     // console.log(document.getElementById('content'));
+    let _eventController = eventController.call(self);
+    // let boundEventController = eventController.bind(this, this);
+    // let _eventController = boundEventController();
+    // console.log(this._contentDiv);
+
 
     const getInfo = () => {
         return `I am logicController.getInfo()
@@ -29,9 +37,7 @@ const logicController = () => {
         const projectContainerDiv = projectContainerDivArr[0]
         const addButton = projectContainerDivArr[1];
         _projectContainer.init([], projectContainerDiv, addButton);;
-        // console.log(_projectContainer.getInfo());
-        console.log('here')
-        attachAddButtonListener(addButton);
+        _eventController.attachAddButtonListener(addButton);
 
         _contentDiv.appendChild(projectContainerDiv);
     }
