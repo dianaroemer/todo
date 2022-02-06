@@ -11,7 +11,8 @@ const projectContainerObj = () => {
     const getInfo = () => {
         return `I am projectContainerObj.getInfo()
         _projectArr: ${_projectArr}
-        _projectContainerDiv: ${_projectContainerDiv}`
+        _projectContainerDiv: ${_projectContainerDiv}
+        _addButton: ${_addButton}`
     }
 
     const init = (newProjectArr, newProjectContainerDiv, newAddButton) => {
@@ -85,7 +86,7 @@ const projectContainerObj = () => {
         getProjectArr, setProjectArr, addProject, deleteProject,
         getProjectContainerDiv, setProjectContainerDiv,
         getAddButton, setAddButton, 
-        
+
 
 
 
@@ -94,3 +95,5 @@ const projectContainerObj = () => {
 
 
 }
+
+export default projectContainerObj;
