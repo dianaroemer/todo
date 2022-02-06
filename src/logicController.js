@@ -2,6 +2,7 @@
 
 import projectContainerObj from './projectContainerObj.js';
 import displayController from './displayController.js';
+import {eventController, attachAddButtonListener } from './eventController.js';
 
 const logicController = () => {
 
@@ -26,9 +27,11 @@ const logicController = () => {
         const projectContainerDivArr = _displayController.generateProjectContainerDiv();
 
         const projectContainerDiv = projectContainerDivArr[0]
-        const addbutton = projectContainerDivArr[1];
-        _projectContainer.init([], projectContainerDiv, addbutton);
+        const addButton = projectContainerDivArr[1];
+        _projectContainer.init([], projectContainerDiv, addButton);;
         // console.log(_projectContainer.getInfo());
+        console.log('here')
+        attachAddButtonListener(addButton);
 
         _contentDiv.appendChild(projectContainerDiv);
     }

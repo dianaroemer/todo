@@ -12,23 +12,46 @@ const eventController = () => {
         }
     }
 
-    const attachAddButtonListener = (div) => {
-        div.addEventListener('click', () => {
+    // const attachAddButtonListener = (div) => {
+    //     div.addEventListener('click', () => {
 
-            if(_menuOpen) {
-                return;
-            }
+    //         if(_menuOpen) {
+    //             return;
+    //         }
 
-            
+    //         alert(`You've clicked the projectContainerObj's addButton!`);
 
-        })
-    };
+    //         // openProjectContainerAddButtonMenu();
+
+    //     })
+    // };
 
 
     return {
-
+        _toggleMenuOpen,
+        // attachAddButtonListener,
     }
 
 }
 
+
+// const attachProjectContainerAddButtonListener = 
+
 export default eventController;
+export function attachAddButtonListener(div){
+    // console.log(div);
+    // console.log('whoop');
+    div.addEventListener('click', (() => {
+
+        console.log(`addButton's eventListener has been called!`);
+
+        // if(_menuOpen) {
+        //     return;
+        // }
+
+        alert(`You've clicked the projectContainerObj's addButton!`);
+
+        // openProjectContainerAddButtonMenu();
+
+    }))
+};
