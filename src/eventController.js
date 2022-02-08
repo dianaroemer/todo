@@ -1,6 +1,6 @@
 // I am eventController, I am an object that assigns event functions to div's that are passed to me via logicController.
 
-import logicController from "./logicController.js";
+// import logicController from "./logicController.js";
 
 const eventController = ( logicControllerReference ) => {
 
@@ -10,6 +10,7 @@ const eventController = ( logicControllerReference ) => {
     const _logicController = logicControllerReference;
 
     console.log("I am _logicController: " + _logicController);
+    console.log(_logicController);
 
 
     const _toggleMenuOpen = () => {
@@ -27,7 +28,8 @@ const eventController = ( logicControllerReference ) => {
                 return;
             }
 
-            // console.log(_logicController.getInfo());
+            console.log(_logicController.getInfo());
+            console.log(_logicController.getProjectContainer());
 
             alert(`You've clicked the projectContainerObj's addButton!`);
 
@@ -69,3 +71,5 @@ export default eventController;
 
 //     }))
 // };
+
+

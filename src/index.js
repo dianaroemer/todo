@@ -20,7 +20,7 @@ const nav = headerNav();
 
 document.body.appendChild(nav);
 
-let logicController = logicControllerObj();
+let logicController = new logicControllerObj();
 // console.log(logicController.getInfo());
 
 logicController.generateProjectContainerObj();
