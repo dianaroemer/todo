@@ -21,7 +21,6 @@ body {
 
  /* Nav Styling ------------------------------------------------------------- */
  nav {
-    /* height: 12%; */
     height: 100px;
     min-height: 100px;
     max-height: 150px;
@@ -118,3 +117,12 @@ nav ul li {
 }
 
 
+.project-container-add-menu {
+    
+    display: flex;
+    position: relative;
+
+    height: 400px;
+    width: 400px;
+    background-color: red;
+}

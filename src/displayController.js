@@ -22,10 +22,16 @@ const displayController = () => {
         addButton.classList.add('add-button')
         finishedDiv.appendChild(addButton);
 
-
-
-
         return [finishedDiv, addButton];
+    }
+
+    const generateProjectContainerAddButtonMenu = () => {
+
+        let finishedDiv = document.createElement('div');
+        finishedDiv.classList.add('project-container-add-menu');
+
+
+        return finishedDiv;
     }
 
 
@@ -34,6 +40,8 @@ const displayController = () => {
     return {
         getInfo,
         generateProjectContainerDiv,
+        generateProjectContainerAddButtonMenu,
+        
 
     }
 

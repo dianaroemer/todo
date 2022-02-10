@@ -1,10 +1,12 @@
 import './style.css';
-import headerNav from "./utils/header-nav.js";
 
 // import TodoObj from './todoObj.js';
 // import todoTest from './tests/todoTest.js';
 // import projectObjTest from './tests/projectObjTest.js';
+import headerNav from "./utils/header-nav.js";
+
 import logicControllerObj from './logicController.js';
+
 
 // function component() {
 //     const element = document.createElement('div');
@@ -14,18 +16,16 @@ import logicControllerObj from './logicController.js';
 // }
 // document.body.appendChild(component());
 
-// document.body.appendChild(headerNav());
 
+console.log('test')
 const nav = headerNav();
+document.body.insertBefore(nav, document.getElementById('content'));
 
-document.body.appendChild(nav);
 
 let logicController = new logicControllerObj();
-// console.log(logicController.getInfo());
-
 logicController.generateProjectContainerObj();
 
-document.body.appendChild(nav);
+
 
 
 

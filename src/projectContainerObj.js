@@ -6,19 +6,22 @@ const projectContainerObj = () => {
     let _projectArr = [];
     let _projectContainerDiv;
     let _addButton;
+    let _addButtonMenu = false;
 
 
     const getInfo = () => {
         return `I am projectContainerObj.getInfo()
         _projectArr: ${_projectArr}
         _projectContainerDiv: ${_projectContainerDiv}
-        _addButton: ${_addButton}`
+        _addButton: ${_addButton}
+        _addButtonMenu: ${_addButtonMenu}`
     }
 
-    const init = (newProjectArr, newProjectContainerDiv, newAddButton) => {
+    const init = (newProjectArr, newProjectContainerDiv, newAddButton, newAddButtonMenu) => {
         _projectArr = newProjectArr;
         _projectContainerDiv = newProjectContainerDiv
         _addButton = newAddButton;
+        _addButtonMenu = newAddButtonMenu;
     }
 
     const getProjectArr = () => {
@@ -80,12 +83,25 @@ const projectContainerObj = () => {
         return true;
     }
 
+    const getAddButtonMenu = () => {
+        return _addButtonMenu;
+    }
+
+    const toggleAddButtonMenu = () => {
+        if (_addButtonMenu) {
+            _addButtonMenu = false;
+        } else {
+            _addButtonMenu = true;
+        }
+    }
+
     return {
 
         getInfo, init,
         getProjectArr, setProjectArr, addProject, deleteProject,
         getProjectContainerDiv, setProjectContainerDiv,
         getAddButton, setAddButton, 
+        getAddButtonMenu, toggleAddButtonMenu,
 
 
 

@@ -8,9 +8,8 @@ const eventController = ( logicControllerReference ) => {
 
     let _menuOpen = false;
     const _logicController = logicControllerReference;
-
-    console.log("I am _logicController: " + _logicController);
-    console.log(_logicController);
+    // console.log("I am _logicController: " + _logicController);
+    // console.log(_logicController);
 
 
     const _toggleMenuOpen = () => {
@@ -21,19 +20,10 @@ const eventController = ( logicControllerReference ) => {
         }
     }
 
-    const attachAddButtonListener = (div) => {
+    const attachProjectContainerAddButtonListener = (div) => {
         div.addEventListener('click', () => {
 
-            if(_menuOpen) {
-                return;
-            }
-
-            console.log(_logicController.getInfo());
-            console.log(_logicController.getProjectContainer());
-
-            alert(`You've clicked the projectContainerObj's addButton!`);
-
-            // openProjectContainerAddButtonMenu();
+            _logicController._toggleProjectContainerAddButtonMenu();
 
         })
     };
@@ -41,35 +31,11 @@ const eventController = ( logicControllerReference ) => {
 
     return {
         _toggleMenuOpen,
-        attachAddButtonListener,
+        attachProjectContainerAddButtonListener,
     }
 
 }
 
 
-// const attachProjectContainerAddButtonListener = 
 
 export default eventController;
-// export function attachAddButtonListener(div){
-//     // console.log(div);
-//     // console.log('whoop');
-//     div.addEventListener('click', ((e) => {
-
-//         console.log(e.currentTarget);
-
-//         console.log(`addButton's eventListener has been called!`);
-
-//         console.log();
-
-//         // if(_menuOpen) {
-//         //     return;
-//         // }
-
-//         alert(`You've clicked the projectContainerObj's addButton!`);
-
-//         // openProjectContainerAddButtonMenu();
-
-//     }))
-// };
-
-

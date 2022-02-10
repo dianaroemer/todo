@@ -10,14 +10,10 @@ function logicController() {
 
     let _projectContainer = projectContainerObj();
     let _displayController = displayController();
-    // let self = this;
     let _contentDiv = document.getElementById('content'); //_contentDiv should have its own getters and setters for typechecking and safety, but is only invoked and instantiated once on page init to be populated with generateProjectContainer(), so it gets a pass here
-    // console.log(document.getElementById('content'));
-    // let _eventController = eventController.call(this);
     let _eventController = eventController(this);
-    // let boundEventController = eventController.bind(this, this);
-    // let _eventController = boundEventController();
-    // console.log(this._contentDiv);
+
+    
 
 
     const getInfo = () => {
@@ -36,12 +32,15 @@ function logicController() {
     }
 
     const generateProjectContainerObj = () => {
+
+        console.log('second test')
+
         const projectContainerDivArr = _displayController.generateProjectContainerDiv(); 
 
         const projectContainerDiv = projectContainerDivArr[0]
         const addButton = projectContainerDivArr[1];
-        _projectContainer.init([], projectContainerDiv, addButton);;
-        _eventController.attachAddButtonListener(addButton);
+        _projectContainer.init([], projectContainerDiv, addButton, false);;
+        _eventController.attachProjectContainerAddButtonListener(addButton);
 
         _contentDiv.appendChild(projectContainerDiv);
     }
@@ -55,6 +54,31 @@ function logicController() {
     const setProjectContainer = (newProjectContainer) => {
         _projectContainer = newProjectContainer;
     }
+    this.setProjectContainer = setProjectContainer;
+
+    const _toggleProjectContainerAddButtonMenu = () => {
+
+        console.log(`toggle projectContainerObj's addButtonMenu`);
+
+        console.log('Check if the menu is in a state to be opened');
+        if( !_projectContainer.getAddButtonMenu()) {
+            _projectContainer.toggleAddButtonMenu();
+            console.log(_projectContainer.getAddButtonMenu());
+
+            let _addMenu = _displayController.generateProjectContainerAddButtonMenu();
+            _projectContainer.getProjectContainerDiv().appendChild(_addMenu);
+
+
+            console.log('addButtonMenu is in a state to be opened, go to displayController and build the div necessary to populate the menu');
+
+        } else {
+            console.log('_projectContainerMenu is true, and is already open: _projectContainer._addButtonMenu: ' + _projectContainer.getAddButtonMenu());
+        }
+
+
+
+    }
+    this._toggleProjectContainerAddButtonMenu = _toggleProjectContainerAddButtonMenu;
 
     return {
         getInfo, init,
