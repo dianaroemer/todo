@@ -66,7 +66,9 @@ function logicController() {
             console.log(_projectContainer.getAddButtonMenu());
 
             let _addMenu = _displayController.generateProjectContainerAddButtonMenu();
-            _projectContainer.getProjectContainerDiv().appendChild(_addMenu);
+            _projectContainer.getProjectContainerDiv().appendChild(_addMenu[0]);
+
+            // Add event handlers to priority color slider, and buttons, keep reference of div objects referring to input.value
 
 
             console.log('addButtonMenu is in a state to be opened, go to displayController and build the div necessary to populate the menu');
