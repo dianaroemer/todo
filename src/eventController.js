@@ -28,10 +28,17 @@ const eventController = ( logicControllerReference ) => {
         })
     };
 
+    const attachAddProjectCancel = (div, parentMenuDiv) => {
+        div.addEventListener('click', () => {
+            _logicController._addProjectCancelButton(parentMenuDiv);
+        })
+    }
+
 
     return {
         _toggleMenuOpen,
         attachProjectContainerAddButtonListener,
+        attachAddProjectCancel,
     }
 
 }

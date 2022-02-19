@@ -73,14 +73,42 @@ function logicController() {
 
             console.log('addButtonMenu is in a state to be opened, go to displayController and build the div necessary to populate the menu');
 
+            // Adding Event listeners to appropriate objects in addButtonMenu
+            // return [finishedDiv, nameInput, priorityInput, priorityLabel, dueDateInput, creationDate, saveButton, cancelButton]
+            
+            console.log('Adding eventlistener to cancel button');
+            _eventController.attachAddProjectCancel(_addMenu[7], _addMenu[0]);
+
+
+
+
+
         } else {
             console.log('_projectContainerMenu is true, and is already open: _projectContainer._addButtonMenu: ' + _projectContainer.getAddButtonMenu());
         }
-
-
-
+        return true;
     }
     this._toggleProjectContainerAddButtonMenu = _toggleProjectContainerAddButtonMenu;
+
+    const _addProjectCancelButton = (div) => {
+        // Toggle menu bool to closed
+        // Close menu
+
+        if( _projectContainer.getAddButtonMenu() ) {
+
+            console.log(`Current state of ${_projectContainer.getAddButtonMenu()}`);
+            _projectContainer.toggleAddButtonMenu();
+
+            _projectContainer.getProjectContainerDiv().removeChild(div);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+    this._addProjectCancelButton = _addProjectCancelButton;
+    
+
 
     return {
         getInfo, init,
