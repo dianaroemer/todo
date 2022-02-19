@@ -68,8 +68,11 @@ const displayController = () => {
         priorityInput.max = 5;
         priorityInput.min = 1;
         priorityInput.value = 3;
-        priorityLabel.innerHTML += priorityInput.value;
-        priorityLabel.appendChild(priorityInput);
+                priorityLabel.appendChild(priorityInput);
+        let priorityOutput = document.createElement('output');
+        priorityOutput.value = priorityInput.value;
+        priorityInput.oninput = () => {priorityOutput.value = priorityInput.value};
+        priorityLabel.appendChild(priorityOutput);
 
         // newProjectFormContainer.innerHTML += `<br>`;
 

@@ -22,9 +22,7 @@ const eventController = ( logicControllerReference ) => {
 
     const attachProjectContainerAddButtonListener = (div) => {
         div.addEventListener('click', () => {
-
             _logicController._toggleProjectContainerAddButtonMenu();
-
         })
     };
 
@@ -32,6 +30,11 @@ const eventController = ( logicControllerReference ) => {
         div.addEventListener('click', () => {
             _logicController._addProjectCancelButton(parentMenuDiv);
         })
+    }
+
+    const attachAddProjectPrioritySlider = (div) => {
+        div.addEventListener('')
+        
     }
 
 

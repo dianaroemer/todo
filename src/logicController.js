@@ -76,8 +76,11 @@ function logicController() {
             // Adding Event listeners to appropriate objects in addButtonMenu
             // return [finishedDiv, nameInput, priorityInput, priorityLabel, dueDateInput, creationDate, saveButton, cancelButton]
             
-            console.log('Adding eventlistener to cancel button');
+            // console.log('Adding eventlistener to cancel button');
             _eventController.attachAddProjectCancel(_addMenu[7], _addMenu[0]);
+
+            console.log('Adding eventListener to priority slider');
+            // _eventController.attachAddProjectPrioritySlider();
 
 
 
@@ -93,14 +96,10 @@ function logicController() {
     const _addProjectCancelButton = (div) => {
         // Toggle menu bool to closed
         // Close menu
-
         if( _projectContainer.getAddButtonMenu() ) {
-
-            console.log(`Current state of ${_projectContainer.getAddButtonMenu()}`);
+            // console.log(`Current state of ${_projectContainer.getAddButtonMenu()}`);
             _projectContainer.toggleAddButtonMenu();
-
             _projectContainer.getProjectContainerDiv().removeChild(div);
-
             return true;
         } else {
             return false;
