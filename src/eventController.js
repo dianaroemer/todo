@@ -26,22 +26,33 @@ const eventController = ( logicControllerReference ) => {
         })
     };
 
+    const attachAddProjectPrioritySlider = (inputDiv, targetDiv) => {
+        inputDiv.addEventListener('input', () => {
+            _logicController._updatePriorityColor(targetDiv, inputDiv.value);
+        })
+    }
+
+    const attachAddProjectSave = (targetDiv, values) => {
+        console.log(values);
+        targetDiv.addEventListener('click', () => {
+            // console.log('you clicked save');
+            // console.log(values);
+            _logicController._addProjectSaveButton(values);
+        });
+    }
+
     const attachAddProjectCancel = (div, parentMenuDiv) => {
         div.addEventListener('click', () => {
             _logicController._addProjectCancelButton(parentMenuDiv);
         })
     }
 
-    const attachAddProjectPrioritySlider = (div) => {
-        div.addEventListener('')
-        
-    }
-
-
     return {
         _toggleMenuOpen,
         attachProjectContainerAddButtonListener,
         attachAddProjectCancel,
+        attachAddProjectPrioritySlider,
+        attachAddProjectSave,
     }
 
 }

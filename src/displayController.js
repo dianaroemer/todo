@@ -99,6 +99,8 @@ const displayController = () => {
         addProjectButtonContainer.classList.add('new-project-button-container')
         let saveButton = document.createElement('button');
         saveButton.innerHTML = `Save`;
+        // changing the button's type overrides the default Save Button functionality of the form element to NOT REDIRECT with the form element, aka reloading the page
+        saveButton.type = 'button';
         let cancelButton = document.createElement('button');
         cancelButton.innerHTML = `Cancel`;
         addProjectButtonContainer.appendChild(saveButton);

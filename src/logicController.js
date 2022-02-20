@@ -79,9 +79,11 @@ function logicController() {
             // console.log('Adding eventlistener to cancel button');
             _eventController.attachAddProjectCancel(_addMenu[7], _addMenu[0]);
 
-            console.log('Adding eventListener to priority slider');
-            // _eventController.attachAddProjectPrioritySlider();
+            // console.log('Adding eventListener to priority slider');
+            _eventController.attachAddProjectPrioritySlider(_addMenu[2], _addMenu[3]);
 
+            console.log('Adding functionality to save button');
+            _eventController.attachAddProjectSave(_addMenu[6], _addMenu);
 
 
 
@@ -92,6 +94,32 @@ function logicController() {
         return true;
     }
     this._toggleProjectContainerAddButtonMenu = _toggleProjectContainerAddButtonMenu;
+
+    const _addProjectSaveButton = (values) => {
+        
+        // get values from appropriate input fields
+        // Do thing to values
+        // close menu
+
+        // return [finishedDiv, nameInput, priorityInput, priorityLabel, dueDateInput, creationDate, saveButton, cancelButton]
+        
+        console.log(values);
+
+        console.log(`I am Save button, you clicked me. Here's what I am returning: 
+        nameInput: ${values[1].value}
+        priorityInput: ${values[2].value}
+        dueDateInput: ${values[4].value}
+        creationDate: ${values[5]}`)
+
+        // Do the thing to instantiate a new project here
+        //  ------- XXXUPDATEXXX -------
+
+        // Closing the addProject Menu
+        _projectContainer.toggleAddButtonMenu();
+        _projectContainer.getProjectContainerDiv().removeChild(values[0]);
+
+    }
+    this._addProjectSaveButton = _addProjectSaveButton;
 
     const _addProjectCancelButton = (div) => {
         // Toggle menu bool to closed
@@ -107,6 +135,28 @@ function logicController() {
     }
     this._addProjectCancelButton = _addProjectCancelButton;
     
+    const _updatePriorityColor = (targetDiv, newValue) => {
+        // console.log(newValue);
+        switch(newValue) {
+            case '1':
+                targetDiv.classList = "one";
+                break;
+            case '2':
+                targetDiv.classList = "two";
+                break;
+            case '3':
+                targetDiv.classList = "three";
+                break;
+            case '4':
+                targetDiv.classList = "four";
+                break;
+            case '5':
+                targetDiv.classList = "five";
+                break;
+        }
+
+    }
+    this._updatePriorityColor = _updatePriorityColor;
 
 
     return {
