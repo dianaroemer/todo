@@ -1,4 +1,6 @@
 
+import projectObj from './project.js';
+
 // I am projectContainerObj. I house an object that contains all of projectObs and also contain the <div> reference to relevant DOM elements for later manipulation by logicController
 
 const projectContainerObj = () => {
@@ -95,6 +97,32 @@ const projectContainerObj = () => {
         }
     }
 
+// projectName, todoList, creationDate, dueDate, projectPriority, projectDiv
+
+    const createProject = (projectNameInput, creationDateInput, dueDateInput, projectPriorityInput, projectDivInput, todoListInput) => {
+        let newProject = projectObj();
+        // Optional switch here, a project can be created without an active todoList, which instead generates an empty array
+        if( todoListInput ) {
+            newProject.init(projectNameInput, todoListInput, creationDateInput, dueDateInput, projectPriorityInput, projectDivInput);
+            console.log(newProject.getInfo());
+        } else {
+            newProject.init(projectNameInput, [], creationDateInput, dueDateInput, projectPriorityInput, projectDivInput);
+            console.log(newProject.getInfo());
+        }
+    }
+
+    const readProject = () => {
+
+    }
+
+    const updateProject = () => {
+
+    }
+
+    const destroyProject = () => {
+
+    }
+
     return {
 
         getInfo, init,
@@ -102,6 +130,7 @@ const projectContainerObj = () => {
         getProjectContainerDiv, setProjectContainerDiv,
         getAddButton, setAddButton, 
         getAddButtonMenu, toggleAddButtonMenu,
+        createProject,
 
 
 

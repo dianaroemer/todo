@@ -82,7 +82,7 @@ function logicController() {
             // console.log('Adding eventListener to priority slider');
             _eventController.attachAddProjectPrioritySlider(_addMenu[2], _addMenu[3]);
 
-            console.log('Adding functionality to save button');
+            // console.log('Adding functionality to save button');
             _eventController.attachAddProjectSave(_addMenu[6], _addMenu);
 
 
@@ -105,14 +105,40 @@ function logicController() {
         
         console.log(values);
 
+        let sampleDiv = document.createElement('div');
+        sampleDiv.classList.add('new-project');
+
+        const nameInput = values[1].value;
+        const priorityInput = values[2].value;
+        const dueDateInput = values[4].value;
+        const creationDateInput = values[5];
+        const projectDivInput = sampleDiv;
+
         console.log(`I am Save button, you clicked me. Here's what I am returning: 
-        nameInput: ${values[1].value}
-        priorityInput: ${values[2].value}
-        dueDateInput: ${values[4].value}
-        creationDate: ${values[5]}`)
+        nameInput: ${nameInput}
+        priorityInput: ${priorityInput}
+        dueDateInput: ${dueDateInput}
+        creationDate: ${creationDateInput}`)
 
         // Do the thing to instantiate a new project here
-        //  ------- XXXUPDATEXXX -------
+
+            // Generate appropriate projectPane div here
+            //  ------- XXXUPDATEXXX -------
+
+        // console.log(_projectContainer.getInfo());
+        _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, projectDivInput );
+
+
+// projectNameInput, creationDateInput, dueDateInput, projectPriorityInput, projectDivInput, todoListInput
+
+
+
+
+
+
+
+
+
 
         // Closing the addProject Menu
         _projectContainer.toggleAddButtonMenu();
@@ -158,6 +184,7 @@ function logicController() {
     }
     this._updatePriorityColor = _updatePriorityColor;
 
+    
 
     return {
         getInfo, init,

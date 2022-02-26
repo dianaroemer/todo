@@ -165,8 +165,6 @@ const projectObj = () => {
         getProjectDiv, setProjectDiv,
         getTodoList, setTodoList, addTodo, addTodoObj, removeTodo, reorderTodo,
         
-
-
     }
 
 }
