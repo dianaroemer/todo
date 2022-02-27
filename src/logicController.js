@@ -110,7 +110,15 @@ function logicController() {
 
         const nameInput = values[1].value;
         const priorityInput = values[2].value;
-        const dueDateInput = new Date(values[4].value);
+        console.log(values[4].value)
+        let dueDateInput;
+        if ( values[4].value ) {
+            dueDateInput = new Date(values[4].value);
+            dueDateInput.setDate(dueDateInput.getDate() + 1);
+        } else {
+            dueDateInput = new Date();
+        }
+        console.log(dueDateInput);
         const creationDateInput = values[5];
         // const projectDivInput = sampleDiv;
 

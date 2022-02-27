@@ -153,6 +153,31 @@ const displayController = () => {
         todoListContainer.classList.add('project-todo-element-container');
         finishedDiv.appendChild(todoListContainer);
 
+        const todoListButtonContiainer = document.createElement('div');
+        todoListButtonContiainer.classList.add('project-todo-button-container');
+        todoListContainer.appendChild(todoListButtonContiainer);
+
+        const projectTodoAddButton = document.createElement('button');
+        projectTodoAddButton.classList.add('project-todo-button');
+        projectTodoAddButton.innerHTML = `Add To-Do`;
+        todoListButtonContiainer.appendChild(projectTodoAddButton);
+
+        const projectTodoCancelButton = document.createElement('button');
+        projectTodoCancelButton.classList.add('project-todo-button');
+        projectTodoCancelButton.innerHTML = `Delete To-Do`;
+        todoListButtonContiainer.appendChild(projectTodoCancelButton);
+
+        const todoList = document.createElement('div');
+        todoList.classList.add('todo-list');
+        todoListContainer.appendChild(todoList);
+
+        todoListContainer.innerHTML += `--- Completed ---`;
+
+        const todoListCompleted = document.createElement('div')
+        todoListCompleted.classList.add('todo-list');
+        todoListCompleted.classList.add('todo-list-completed');
+        todoListContainer.appendChild(todoListCompleted);
+
 
         const dateContainer = document.createElement('div');
         dateContainer.classList.add('project-date-container');
@@ -178,7 +203,7 @@ const displayController = () => {
         dateContainer.appendChild(dueDate);
 
 
-        return [finishedDiv, projectEditButton, nameContainer];
+        return [finishedDiv, projectEditButton, nameContainer, projectTodoAddButton, projectTodoCancelButton, todoList, todoListCompleted];
 
     }
 

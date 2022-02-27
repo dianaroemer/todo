@@ -211,6 +211,8 @@ nav ul li {
 .project-container {
     display: flex;
     margin: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* -------------- Project Pane Styling -------------- */
@@ -219,12 +221,13 @@ nav ul li {
     flex-direction: column;
     justify-content: space-between;
     height: 400px;
-    width: 400px;
+    min-width: 400px;
     margin: 10px;
     background-color: rgb(218, 140, 140);
     border-radius: 5px;
     border: 2px solid rgb(92, 72, 72);
     box-shadow: 0 0 10px rgb(92, 72, 72);
+    text-align: center;
     
 }
 
@@ -258,10 +261,42 @@ nav ul li {
     /* border-radius: 10px; */
 }
 
+.project-todo-element-container {
+    background-color:rgb(240, 206, 206);
+    flex-grow:1;
+    margin: 5px 5px 4px 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(126, 105, 105);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.project-todo-button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.project-todo-button {
+    padding: 4px;
+    margin-top: 0px;
+    transform: scale(.9);
+}
+
+.todo-list {
+    flex-grow: 5;
+    background-color: grey;
+}
+
+.todo-list-completed {
+    flex-grow: 1;
+}
+
 
 
 .project-date-container {
     display: flex; 
     justify-content: space-between;
-    padding: 5px 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
 }
