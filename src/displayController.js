@@ -1,4 +1,6 @@
 
+import editButton from './assets/editButton.png';
+
 // This is the display controller. There is only one displayController, and it manages the CRUD of all html elements. This controller should only receive information from logicController (which sends commands to CRUD both displayController's html elements and the projectObj/todoObj information). displayController needs to generate a new element, then return that element back up to logicController, which should pass that element along to eventController for assigning new EventHandler's to div's that need them
 
 const displayController = () => {
@@ -119,6 +121,66 @@ const displayController = () => {
         return [finishedDiv, nameInput, priorityInput, priorityLabel, dueDateInput, creationDate, saveButton, cancelButton];
     }
 
+    const generateProjectPane = (nameInput, priorityInput, dueDateInput, creationDateInput, todoListInput) => {
+
+        let finishedDiv = document.createElement('div');
+        finishedDiv.classList.add('project-pane');
+
+        finishedDiv.innerHTML = ` I am a new ProjectPane, here are the values passed to me:
+        nameInput: ${nameInput}
+        priorityInput: ${priorityInput}
+        dueDateInput: ${dueDateInput}
+        creationDateInput: ${creationDateInput}
+        todoListInput: ${todoListInput}`;
+
+        let nameContainer = document.createElement('div');
+        nameContainer.classList.add('project-name-container');
+
+        let projectName = document.createElement('div');
+        projectName.classList.add('project-name');
+        projectName.innerHTML = `${nameInput}`;
+        nameContainer.appendChild(projectName);
+
+        let projectEditButton = document.createElement('img');
+        projectEditButton.src = editButton;
+        projectEditButton.classList.add('project-edit-button');
+        nameContainer.appendChild(projectEditButton);
+
+        finishedDiv.appendChild(nameContainer);
+
+        // todoList container and Elements
+        const todoListContainer = document.createElement('div');
+        todoListContainer.classList.add('project-todo-element-container');
+        finishedDiv.appendChild(todoListContainer);
+
+
+        const dateContainer = document.createElement('div');
+        dateContainer.classList.add('project-date-container');
+        finishedDiv.appendChild(dateContainer);
+
+        const creationDate = document.createElement('div')
+        creationDate.classList.add('project-creation-date');
+        // functionality converting creationDate to readable format
+        let readableCreationDateInput = creationDateInput.toDateString();
+        creationDate.innerHTML = readableCreationDateInput;
+        dateContainer.appendChild(creationDate);
+        
+        const age = document.createElement('div')
+        age.classList.add('project-age');
+        // functionality calculating age of project
+        dateContainer.appendChild(age);
+
+        const dueDate = document.createElement('div');
+        dueDate.classList.add('project-due-date');
+        // functionality converting dueDate to readable format
+        let readableDueDateInput = dueDateInput.toDateString();
+        dueDate.innerHTML = readableDueDateInput;
+        dateContainer.appendChild(dueDate);
+
+
+        return [finishedDiv, projectEditButton, nameContainer];
+
+    }
 
 
 
@@ -126,6 +188,7 @@ const displayController = () => {
         getInfo,
         generateProjectContainerDiv,
         generateProjectContainerAddButtonMenu,
+        generateProjectPane,
         
 
     }

@@ -96,49 +96,46 @@ function logicController() {
     this._toggleProjectContainerAddButtonMenu = _toggleProjectContainerAddButtonMenu;
 
     const _addProjectSaveButton = (values) => {
+        // values is the _addMenu array created in _toggleProjectContainerAddButtonMenu
         
         // get values from appropriate input fields
         // Do thing to values
         // close menu
 
-        // return [finishedDiv, nameInput, priorityInput, priorityLabel, dueDateInput, creationDate, saveButton, cancelButton]
-        
         console.log(values);
 
-        let sampleDiv = document.createElement('div');
-        sampleDiv.classList.add('new-project');
+        // let sampleDiv = document.createElement('div');
+        // sampleDiv.classList.add('project-pane');
+        // _projectContainer.getProjectContainerDiv().appendChild(sampleDiv);
 
         const nameInput = values[1].value;
         const priorityInput = values[2].value;
-        const dueDateInput = values[4].value;
+        const dueDateInput = new Date(values[4].value);
         const creationDateInput = values[5];
-        const projectDivInput = sampleDiv;
+        // const projectDivInput = sampleDiv;
 
         console.log(`I am Save button, you clicked me. Here's what I am returning: 
         nameInput: ${nameInput}
         priorityInput: ${priorityInput}
         dueDateInput: ${dueDateInput}
         creationDate: ${creationDateInput}`)
+        
+        _generateProject(nameInput, creationDateInput, dueDateInput, priorityInput, []);
+
 
         // Do the thing to instantiate a new project here
 
-            // Generate appropriate projectPane div here
-            //  ------- XXXUPDATEXXX -------
+        // // Generate appropriate projectPane div here
+        // //  ------- XXXUPDATEXXX -------
+               
+        // let todoListInput = [];
+        // let projectPaneValues = _displayController.generateProjectPane(nameInput, priorityInput, dueDateInput, creationDateInput, todoListInput);
 
-        // console.log(_projectContainer.getInfo());
-        _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, projectDivInput );
+        // // console.log(_projectContainer.getInfo());
+        // _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, projectDivInput );
 
 
 // projectNameInput, creationDateInput, dueDateInput, projectPriorityInput, projectDivInput, todoListInput
-
-
-
-
-
-
-
-
-
 
         // Closing the addProject Menu
         _projectContainer.toggleAddButtonMenu();
@@ -163,28 +160,69 @@ function logicController() {
     
     const _updatePriorityColor = (targetDiv, newValue) => {
         // console.log(newValue);
+
+        targetDiv.classList.remove("one");
+        targetDiv.classList.remove("two");
+        targetDiv.classList.remove("three");
+        targetDiv.classList.remove("four");
+        targetDiv.classList.remove("five");
+
         switch(newValue) {
             case '1':
-                targetDiv.classList = "one";
+                targetDiv.classList.add("one");
                 break;
             case '2':
-                targetDiv.classList = "two";
+                targetDiv.classList.add("two");
                 break;
             case '3':
-                targetDiv.classList = "three";
+                targetDiv.classList.add("three");
                 break;
             case '4':
-                targetDiv.classList = "four";
+                targetDiv.classList.add("four");
                 break;
             case '5':
-                targetDiv.classList = "five";
+                targetDiv.classList.add("five");
                 break;
         }
 
     }
     this._updatePriorityColor = _updatePriorityColor;
 
-    
+    const _generateProject = (nameInput, creationDateInput, dueDateInput, priorityInput, todoListInput) => {
+
+        // Generate projectPane Div
+        // Generate projectObj
+        // Attach functionality to appropriate Div elements, tying them to projectObj values
+
+        // Generate projectPane Div
+
+        let projectPaneDivValues = _displayController.generateProjectPane(nameInput, priorityInput, dueDateInput, creationDateInput, todoListInput);
+        _projectContainer.getProjectContainerDiv().appendChild(projectPaneDivValues[0]);
+
+        // updatePriority color of projectPane
+        _updatePriorityColor(projectPaneDivValues[2], priorityInput);
+
+        // Generate projectObj
+
+        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, todoListInput );
+
+
+        // Attach functionality to appropriate Div elements, tying them to projectObj values
+
+        // attach projectEditButton functionality
+        _eventController.attachProjectEditButton(projectPaneDivValues[1], newProject)
+
+
+
+    }
+    this._generateProject = _generateProject;
+
+    const _editProject = (targetProject) => {
+        console.log(`You clicked the edit Project button targeting the project:
+        ${targetProject.getInfo()}`);
+    }
+    this._editProject = _editProject;
+
 
     return {
         getInfo, init,

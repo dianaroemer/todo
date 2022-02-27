@@ -206,5 +206,49 @@ nav ul li {
 }
 
 
-/* -------------- Project Container Add Button Menu -------------- */
+/* -------------- Project Container Styling -------------- */
 
+.project-container {
+    display: flex;
+    margin: 10px;
+}
+
+/* -------------- Project Pane Styling -------------- */
+.project-pane {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 400px;
+    margin: 10px;
+    background-color: rgb(218, 140, 140);
+    border-radius: 5px;
+    border: 2px solid rgb(92, 72, 72);
+    box-shadow: 0 0 10px rgb(92, 72, 72);
+    
+}
+
+.project-name-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 5px 5px 5px 5px;
+}
+
+.project-name {
+    position: relative;
+    max-width: 350px;
+    text-align: center;
+    text-justify: center;
+    flex-grow: 1;
+}
+
+.project-edit-button {
+    height: 25px;
+}
+
+
+
+.project-date-container {
+    display: flex; 
+    justify-content: space-between;
+}

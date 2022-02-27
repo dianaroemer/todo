@@ -47,12 +47,19 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
+    const attachProjectEditButton = (targetDiv, targetObject) => {
+        targetDiv.addEventListener('click', () => {
+            _logicController._editProject(targetObject);
+        })
+    }
+
     return {
         _toggleMenuOpen,
         attachProjectContainerAddButtonListener,
         attachAddProjectCancel,
         attachAddProjectPrioritySlider,
         attachAddProjectSave,
+        attachProjectEditButton,
     }
 
 }
