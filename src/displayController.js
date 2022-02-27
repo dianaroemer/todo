@@ -126,12 +126,12 @@ const displayController = () => {
         let finishedDiv = document.createElement('div');
         finishedDiv.classList.add('project-pane');
 
-        finishedDiv.innerHTML = ` I am a new ProjectPane, here are the values passed to me:
-        nameInput: ${nameInput}
-        priorityInput: ${priorityInput}
-        dueDateInput: ${dueDateInput}
-        creationDateInput: ${creationDateInput}
-        todoListInput: ${todoListInput}`;
+        // finishedDiv.innerHTML = ` I am a new ProjectPane, here are the values passed to me:
+        // nameInput: ${nameInput}
+        // priorityInput: ${priorityInput}
+        // dueDateInput: ${dueDateInput}
+        // creationDateInput: ${creationDateInput}
+        // todoListInput: ${todoListInput}`;
 
         let nameContainer = document.createElement('div');
         nameContainer.classList.add('project-name-container');
