@@ -169,6 +169,47 @@ const displayController = () => {
 
         const todoList = document.createElement('div');
         todoList.classList.add('todo-list');
+        // todoList.innerHTML += `
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>
+        // 1
+        // <br>`
         todoListContainer.appendChild(todoList);
 
         todoListContainer.innerHTML += `--- Completed ---`;
@@ -176,6 +217,7 @@ const displayController = () => {
         const todoListCompleted = document.createElement('div')
         todoListCompleted.classList.add('todo-list');
         todoListCompleted.classList.add('todo-list-completed');
+        todoListCompleted.innerHTML += `You haven't completed any tasks!`
         todoListContainer.appendChild(todoListCompleted);
 
 
