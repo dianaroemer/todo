@@ -247,8 +247,6 @@ const displayController = () => {
         todoList.appendChild(newTodoElement2);
         todoList.appendChild(newTodoElement3);
         todoList.appendChild(newTodoElement4);
-
-
         // Test line here
 
 
@@ -260,7 +258,12 @@ const displayController = () => {
         todoListCompleted.classList.add('todo-list-completed');
         todoListCompleted.innerHTML += `You haven't completed any tasks!`
         todoListContainer.appendChild(todoListCompleted);
-        
+
+
+        // Test line here
+        todoListCompleted.appendChild(newTodoElement);
+        todoListCompleted.appendChild(newTodoElement4);
+        // Test line here        
 
 
         const dateContainer = document.createElement('div');
