@@ -172,11 +172,26 @@ const displayController = () => {
         todoListContainer0.classList.add('todo-list-container0');
 
         let sampleTodo = todoObj();
-        sampleTodo.init('sampleTodo with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        sampleTodo.init('sampleTodo with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
+        let sampleTodo2 = todoObj();
+        sampleTodo2.init('sampleTodo with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        let sampleTodo3 = todoObj();
+        sampleTodo3.init('12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        let sampleTodo4 = todoObj();
+        sampleTodo4.init('12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], true);
+
+
         // sampleTodo.init('sampleTodo', 'description', new Date(), new Date(), 5, 'notes', [], false);
         console.log(sampleTodo.getInfo());
+        
         let newTodoElement = generateTodoDiv(sampleTodo);
         newTodoElement.classList.add('todo-element-container');
+        let newTodoElement2 = generateTodoDiv(sampleTodo2);
+        newTodoElement2.classList.add('todo-element-container');
+        let newTodoElement3 = generateTodoDiv(sampleTodo3);
+        newTodoElement3.classList.add('todo-element-container');
+        let newTodoElement4 = generateTodoDiv(sampleTodo4);
+        newTodoElement4.classList.add('todo-element-container');
 
 
         
@@ -229,6 +244,11 @@ const displayController = () => {
 
         // Test line here
         todoList.appendChild(newTodoElement);
+        todoList.appendChild(newTodoElement2);
+        todoList.appendChild(newTodoElement3);
+        todoList.appendChild(newTodoElement4);
+
+
         // Test line here
 
 
@@ -273,6 +293,13 @@ const displayController = () => {
 
     const generateTodoDiv = (todo) => {
         const todoDiv = document.createElement('div'); 
+
+        if(todo.getComplete()) {
+            todoDiv.classList.add('todo-completed');
+        } else {
+            todoDiv.classList.add('todo-incomplete');
+        }
+
         // If todo.completed == true, set classlist of new div element
         // set todoDiv name length to cap at maximum length of viewport area
         console.log(todo.getTitle());
@@ -300,9 +327,9 @@ const displayController = () => {
         } else {
             newTitle = title;
         }
-
         todoDivName.innerHTML = newTitle;
         todoDiv.appendChild(todoDivName);
+
 
         let todoEditButton = document.createElement('img');
         todoEditButton.src = editButton;

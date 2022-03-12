@@ -303,14 +303,15 @@ nav ul li {
 
 .todo-div-name {
     max-width: 340px;    
+    padding: 2px;
 }
 
 .todo-edit-button {
     height: 17px;
-    /* justify-self: flex-end; */
     margin-left: auto;
-    margin-right: 5px;
+    margin-right: 2px;
 }
+
 
 .todo-list-completed {
     position: relative;
@@ -320,7 +321,10 @@ nav ul li {
     padding-top: 0px;
 }
 
-
+.todo-completed {
+    opacity: 40%;
+    text-decoration: line-through;
+}
 
 .project-date-container {
     display: flex; 
