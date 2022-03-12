@@ -1,5 +1,6 @@
 
 import editButton from './assets/editButton.png';
+import todoObj from './todoObj';
 
 // This is the display controller. There is only one displayController, and it manages the CRUD of all html elements. This controller should only receive information from logicController (which sends commands to CRUD both displayController's html elements and the projectObj/todoObj information). displayController needs to generate a new element, then return that element back up to logicController, which should pass that element along to eventController for assigning new EventHandler's to div's that need them
 
@@ -167,6 +168,18 @@ const displayController = () => {
         projectTodoCancelButton.innerHTML = `Delete To-Do`;
         todoListButtonContiainer.appendChild(projectTodoCancelButton);
 
+        const todoListContainer0 = document.createElement('div');
+        todoListContainer0.classList.add('todo-list-container0');
+
+        let sampleTodo = todoObj();
+        sampleTodo.init('sampleTodo with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        // sampleTodo.init('sampleTodo', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        console.log(sampleTodo.getInfo());
+        let newTodoElement = generateTodoDiv(sampleTodo);
+        newTodoElement.classList.add('todo-element-container');
+
+
+        
         const todoList = document.createElement('div');
         todoList.classList.add('todo-list');
         // todoList.innerHTML += `
@@ -211,6 +224,14 @@ const displayController = () => {
         // 1
         // <br>`
         todoListContainer.appendChild(todoList);
+        
+
+
+        // Test line here
+        todoList.appendChild(newTodoElement);
+        // Test line here
+
+
 
         todoListContainer.innerHTML += `--- Completed ---`;
 
@@ -219,6 +240,7 @@ const displayController = () => {
         todoListCompleted.classList.add('todo-list-completed');
         todoListCompleted.innerHTML += `You haven't completed any tasks!`
         todoListContainer.appendChild(todoListCompleted);
+        
 
 
         const dateContainer = document.createElement('div');
@@ -249,6 +271,49 @@ const displayController = () => {
 
     }
 
+    const generateTodoDiv = (todo) => {
+        const todoDiv = document.createElement('div'); 
+        // If todo.completed == true, set classlist of new div element
+        // set todoDiv name length to cap at maximum length of viewport area
+        console.log(todo.getTitle());
+        const checkbox = document.createElement('input');
+        checkbox.classList.add('todo-div-checkbox');
+        checkbox.type = 'checkbox';
+        // console.log(todo.getComplete());
+        if(todo.getComplete()) {
+            checkbox.setAttribute('checked', "");
+        }
+        todoDiv.appendChild(checkbox);
+
+        const todoDivName = document.createElement('label');
+        todoDivName.classList.add('todo-div-name');
+
+        // Checking title length and trimming down. Had significant difficulty getting overflow-x: hidden to work in CSS, so decided to just manually trim title down and add "..." to end to indicate a longer title
+        let title = todo.getTitle();
+        let newTitle = "";
+        if(title.length > 34){
+            newTitle = "";
+            for (let i = 0; i < 34; i++) {
+                newTitle += title.charAt(i);
+            }
+            newTitle += "...";
+        } else {
+            newTitle = title;
+        }
+
+        todoDivName.innerHTML = newTitle;
+        todoDiv.appendChild(todoDivName);
+
+        let todoEditButton = document.createElement('img');
+        todoEditButton.src = editButton;
+        todoEditButton.classList.add('project-edit-button', 'todo-edit-button')
+        todoDiv.appendChild(todoEditButton);
+
+
+        return todoDiv;
+
+    }
+
 
 
     return {
@@ -256,6 +321,7 @@ const displayController = () => {
         generateProjectContainerDiv,
         generateProjectContainerAddButtonMenu,
         generateProjectPane,
+        generateTodoDiv,
         
 
     }

@@ -227,7 +227,7 @@ function logicController() {
 
     const _editProject = (targetProject) => {
         console.log(`You clicked the edit Project button targeting the project:
-        ${targetProject.getInfo()}`);
+${targetProject.getInfo()}`);
     }
     this._editProject = _editProject;
 

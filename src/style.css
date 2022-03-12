@@ -221,7 +221,7 @@ nav ul li {
     flex-direction: column;
     justify-content: space-between;
     height: 400px;
-    min-width: 400px;
+    width: 400px;
     margin: 10px;
     background-color: rgb(218, 140, 140);
     border-radius: 5px;
@@ -270,6 +270,7 @@ nav ul li {
     max-height: 81%;
     display: flex;
     flex-direction: column;
+    max-width: 94%;
 }
 
 .project-todo-button-container {
@@ -285,9 +286,30 @@ nav ul li {
 
 .todo-list {
     flex-grow: 6;
-    background-color: grey;
+    /* background-color: grey; */
     overflow-y: auto;
+    padding-top: 5px;
+}
+
+.todo-element-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: inherit;
+    overflow: hidden;
     
+
+}
+
+.todo-div-name {
+    max-width: 340px;    
+}
+
+.todo-edit-button {
+    height: 17px;
+    /* justify-self: flex-end; */
+    margin-left: auto;
+    margin-right: 5px;
 }
 
 .todo-list-completed {
@@ -295,6 +317,7 @@ nav ul li {
     flex-grow: 1;
     min-height: 20px;
     max-height: 45px;
+    padding-top: 0px;
 }
 
 
