@@ -284,6 +284,12 @@ nav ul li {
     transform: scale(.9);
 }
 
+.project-todo-list {
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+}
+
 .todo-list {
     flex-grow: 6;
     /* background-color: grey; */
@@ -291,15 +297,18 @@ nav ul li {
     padding-top: 5px;
 }
 
+
+
 .todo-element-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: inherit;
     overflow: hidden;
-    
-
 }
+
+
+
 
 .todo-div-name {
     max-width: 340px;    

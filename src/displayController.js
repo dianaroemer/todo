@@ -168,80 +168,73 @@ const displayController = () => {
         projectTodoCancelButton.innerHTML = `Delete To-Do`;
         todoListButtonContiainer.appendChild(projectTodoCancelButton);
 
-        const todoListContainer0 = document.createElement('div');
-        todoListContainer0.classList.add('todo-list-container0');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         let sampleTodo = todoObj();
-        sampleTodo.init('sampleTodo with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
+        sampleTodo.init('sampleTrue with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
         let sampleTodo2 = todoObj();
-        sampleTodo2.init('sampleTodo with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        sampleTodo2.init('sampleFalse with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
         let sampleTodo3 = todoObj();
-        sampleTodo3.init('12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        sampleTodo3.init('False12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], false);
         let sampleTodo4 = todoObj();
-        sampleTodo4.init('12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], true);
+        sampleTodo4.init('True12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], true);
+     
+
+        let sampleTodoList = [sampleTodo,sampleTodo2, sampleTodo3, sampleTodo4];
 
 
-        // sampleTodo.init('sampleTodo', 'description', new Date(), new Date(), 5, 'notes', [], false);
-        console.log(sampleTodo.getInfo());
-        
+
+
+
+
+
+
+        let projectTodoList = generateTodoListContainer(sampleTodoList);
+        todoListContainer.appendChild(projectTodoList[0]);
+        const todoListUncompleted = projectTodoList[1];
+        const todoListCompleted = projectTodoList[2];
+        console.log(projectTodoList[0]);
+        console.log(projectTodoList[1]);
+        console.log(projectTodoList[2]);
+
+
+
+
+
+/*
+       
+
+        // XXXUPDATEXXX This line to be replaced by a generated Div from generateTodoDivContainer
+        const projectTodoContainer = document.createElement('div');
+        projectTodoContainer.classList.add('project-todo-list');
+        todoListContainer.appendChild(projectTodoContainer);
+        // XXXUPDATEXXX This line to be replaced by a generated Div from generateTodoDivContainer
+      
         let newTodoElement = generateTodoDiv(sampleTodo);
-        newTodoElement.classList.add('todo-element-container');
+        // newTodoElement.classList.add('todo-element-container');
         let newTodoElement2 = generateTodoDiv(sampleTodo2);
-        newTodoElement2.classList.add('todo-element-container');
+        // newTodoElement2.classList.add('todo-element-container');
         let newTodoElement3 = generateTodoDiv(sampleTodo3);
-        newTodoElement3.classList.add('todo-element-container');
+        // newTodoElement3.classList.add('todo-element-container');
         let newTodoElement4 = generateTodoDiv(sampleTodo4);
-        newTodoElement4.classList.add('todo-element-container');
-
-
-        
+        // newTodoElement4.classList.add('todo-element-container');
+    
         const todoList = document.createElement('div');
         todoList.classList.add('todo-list');
-        // todoList.innerHTML += `
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>
-        // 1
-        // <br>`
-        todoListContainer.appendChild(todoList);
+        projectTodoContainer.appendChild(todoList);
         
-
-
         // Test line here
         todoList.appendChild(newTodoElement);
         todoList.appendChild(newTodoElement2);
@@ -249,21 +242,42 @@ const displayController = () => {
         todoList.appendChild(newTodoElement4);
         // Test line here
 
-
-
-        todoListContainer.innerHTML += `--- Completed ---`;
+        projectTodoContainer.innerHTML += `--- Completed ---`;
 
         const todoListCompleted = document.createElement('div')
         todoListCompleted.classList.add('todo-list');
         todoListCompleted.classList.add('todo-list-completed');
         todoListCompleted.innerHTML += `You haven't completed any tasks!`
-        todoListContainer.appendChild(todoListCompleted);
+        projectTodoContainer.appendChild(todoListCompleted);
 
 
         // Test line here
         todoListCompleted.appendChild(newTodoElement);
         todoListCompleted.appendChild(newTodoElement4);
         // Test line here        
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         const dateContainer = document.createElement('div');
@@ -290,12 +304,17 @@ const displayController = () => {
         dateContainer.appendChild(dueDate);
 
 
-        return [finishedDiv, projectEditButton, nameContainer, projectTodoAddButton, projectTodoCancelButton, todoList, todoListCompleted];
+        return [finishedDiv, projectEditButton, nameContainer, projectTodoAddButton, projectTodoCancelButton, todoListUncompleted, todoListCompleted];
 
     }
 
     const generateTodoDiv = (todo) => {
         const todoDiv = document.createElement('div'); 
+        todoDiv.classList.add('todo-element-container');
+
+
+        console.log(todo.getTitle());
+
 
         if(todo.getComplete()) {
             todoDiv.classList.add('todo-completed');
@@ -305,7 +324,6 @@ const displayController = () => {
 
         // If todo.completed == true, set classlist of new div element
         // set todoDiv name length to cap at maximum length of viewport area
-        console.log(todo.getTitle());
         const checkbox = document.createElement('input');
         checkbox.classList.add('todo-div-checkbox');
         checkbox.type = 'checkbox';
@@ -341,6 +359,61 @@ const displayController = () => {
 
 
         return todoDiv;
+    }
+
+    // Takes a todoList[] of todoObj's and creates a suitable, finished, project-todo-list
+    const generateTodoListContainer = (todoListArray) => {
+
+        const projectTodoList = document.createElement('div');
+        projectTodoList.classList.add('project-todo-list');
+
+        const todoList = document.createElement('div');
+        todoList.classList.add('todo-list');
+        
+        const todoListCompleted = document.createElement('div');
+        todoListCompleted.classList.add('todo-list', 'todo-list-completed');
+
+
+
+        // Logic for creating and parsing todoListArray elements, using 
+        if(todoListArray) {
+            // console.log('-------------------------------------------------------------------------------------------------------------------')
+            // console.log('-------------------------------------------------------------------------------------------------------------------')
+            // console.log('-------------------------------------------------------------------------------------------------------------------')
+
+
+            todoListArray.forEach(element => {
+                // console.log('-------------------------------')
+                // console.log('-------------------------------')
+                // console.log('-------------------------------')
+
+                
+                // console.log(`Testing generateTodoListContainer: passing ${element} into foreach`);
+                // console.log(element.getInfo());
+
+                let tempDiv = generateTodoDiv(element);
+
+               
+
+                if(element.getComplete()){
+                    // console.log("Element's getComplete() returned True");
+                    todoListCompleted.appendChild(tempDiv);
+                } else {
+                    // console.log("Element's getComplete returned False")
+                    todoList.appendChild(tempDiv);
+                }
+            });
+        }
+
+
+
+        projectTodoList.appendChild(todoList);
+        projectTodoList.innerHTML += '--- Completed ---';
+        projectTodoList.appendChild(todoListCompleted);
+
+
+        return [projectTodoList, todoList, todoListCompleted];
+
 
     }
 
@@ -352,6 +425,7 @@ const displayController = () => {
         generateProjectContainerAddButtonMenu,
         generateProjectPane,
         generateTodoDiv,
+        generateTodoListContainer,
         
 
     }
