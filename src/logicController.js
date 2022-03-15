@@ -229,7 +229,14 @@ function logicController() {
 ${targetProject.getInfo()}`);
 
         // Toggle menuOpen
-        targetProject.toggleProjectMenuOpen();
+
+        if(targetProject.getProjectMenuOpen()) {
+            console.log("Error! Edit Project menu is returning true, and is already open!");
+            return;
+        } else {
+            targetProject.toggleProjectMenuOpen();
+        }
+        
 
         // Generate editProjectPane
         const editPane = _displayController.generateProjectEditPane(targetProject);

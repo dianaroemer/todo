@@ -347,10 +347,15 @@ nav ul li {
 .project-edit-pane {
     position: absolute;
     display:flex;
-    background-color: red;
+    background-color: rgb(218, 140, 140);
     height: 380px;
-    width: 380px;
+    width: 375px;
     /* bottom: 5px; */
     /* top: 5px; */
-    margin: 9px 10px 5px 9px;
+    margin: 8px 0px 5px 10px;
+
+    border-radius: 5px;
+    border: 2px solid rgb(92, 72, 72);
+    box-shadow: 0 0 10px rgb(92, 72, 72);
 }
+
