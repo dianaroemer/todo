@@ -10,6 +10,7 @@ const projectObj = () => {
     let _dueDate;
     let _projectPriority;
     let _projectDiv;
+    let _projectMenuOpen = false;
 
     const getInfo = () => {
         return `        _projectName: ${_projectName}
@@ -17,16 +18,18 @@ const projectObj = () => {
         _projectCreationDateDate: ${_projectCreationDate}
         _dueDate: ${_dueDate}
         _projectPriority: ${_projectPriority}
-        _projectDiv: ${_projectDiv}`
+        _projectDiv: ${_projectDiv}
+        _projectMenuOpen: ${_projectMenuOpen}`
     }
 
-    const init = (projectName, todoList, creationDate, dueDate, projectPriority, projectDiv) => {
+    const init = (projectName, todoList, creationDate, dueDate, projectPriority, projectDiv, projectMenuOpen) => {
         _projectName = projectName;
         _todoList = todoList;
         _projectCreationDate = creationDate;
         _dueDate = dueDate;
         _projectPriority = projectPriority;
         _projectDiv = projectDiv;
+        _projectMenuOpen = projectMenuOpen;
         return true;
     }
 
@@ -93,6 +96,28 @@ const projectObj = () => {
     const setProjectDiv = (newDiv) => {
         _projectDiv = newDiv;
         return true;
+    }
+
+    const getProjectMenuOpen = () => {
+        return _projectMenuOpen;
+    }
+
+    const setProjectMenuOpen = (menuOpen) => {
+        if (typeof menuOpen === "boolean") {
+            _projectMenuOpen = menuOpen;
+            return _projectMenuOpen;
+        } else {
+            console.log("ERROR in setProjectMenuOpen! Tried to pass a non-boolean!")
+            return;
+        }
+    }
+
+    const toggleProjectMenuOpen = () => {
+        if (_projectMenuOpen) {
+            _projectMenuOpen = false;
+        } else {
+            _projectMenuOpen = true;
+        }
     }
 
     const getTodoList = () => {
@@ -163,6 +188,7 @@ const projectObj = () => {
         getProjectDueDate, setProjectDueDate,
         getProjectPriority, setProjectPriority,
         getProjectDiv, setProjectDiv,
+        getProjectMenuOpen, setProjectMenuOpen, toggleProjectMenuOpen,
         getTodoList, setTodoList, addTodo, addTodoObj, removeTodo, reorderTodo,
         
     }

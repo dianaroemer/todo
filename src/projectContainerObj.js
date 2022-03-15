@@ -103,11 +103,11 @@ const projectContainerObj = () => {
         let newProject = projectObj();
         // Optional switch here, a project can be created without an active todoList, which instead generates an empty array
         if( todoListInput ) {
-            newProject.init(projectNameInput, todoListInput, creationDateInput, dueDateInput, projectPriorityInput, projectDivInput);
+            newProject.init(projectNameInput, todoListInput, creationDateInput, dueDateInput, projectPriorityInput, projectDivInput, false);
             // console.log(newProject.getInfo());
             return newProject;
         } else {
-            newProject.init(projectNameInput, [], creationDateInput, dueDateInput, projectPriorityInput, projectDivInput);
+            newProject.init(projectNameInput, [], creationDateInput, dueDateInput, projectPriorityInput, projectDivInput, false);
             // console.log(newProject.getInfo());
             return newProject;
         }

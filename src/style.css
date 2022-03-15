@@ -340,3 +340,17 @@ nav ul li {
     justify-content: space-between;
     padding: 0px 5px 0px 5px;
 }
+
+
+/* -------------- Project Edit Pane Styling -------------- */
+
+.project-edit-pane {
+    position: absolute;
+    display:flex;
+    background-color: red;
+    height: 380px;
+    width: 380px;
+    /* bottom: 5px; */
+    /* top: 5px; */
+    margin: 9px 10px 5px 9px;
+}

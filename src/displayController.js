@@ -182,6 +182,7 @@ const displayController = () => {
 
 
 
+
         let sampleTodo = todoObj();
         sampleTodo.init('sampleTrue with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
         let sampleTodo2 = todoObj();
@@ -195,90 +196,15 @@ const displayController = () => {
         let sampleTodoList = [sampleTodo,sampleTodo2, sampleTodo3, sampleTodo4];
 
 
-
-
-
-
-
-
+        // XXXUPDATEXXX change sampleTodoList to take todoListInput
         let projectTodoList = generateTodoListContainer(sampleTodoList);
         todoListContainer.appendChild(projectTodoList[0]);
         const todoListUncompleted = projectTodoList[1];
         const todoListCompleted = projectTodoList[2];
-        console.log(projectTodoList[0]);
-        console.log(projectTodoList[1]);
-        console.log(projectTodoList[2]);
+        // XXXUPDATEXXX
 
 
-
-
-
-/*
-       
-
-        // XXXUPDATEXXX This line to be replaced by a generated Div from generateTodoDivContainer
-        const projectTodoContainer = document.createElement('div');
-        projectTodoContainer.classList.add('project-todo-list');
-        todoListContainer.appendChild(projectTodoContainer);
-        // XXXUPDATEXXX This line to be replaced by a generated Div from generateTodoDivContainer
-      
-        let newTodoElement = generateTodoDiv(sampleTodo);
-        // newTodoElement.classList.add('todo-element-container');
-        let newTodoElement2 = generateTodoDiv(sampleTodo2);
-        // newTodoElement2.classList.add('todo-element-container');
-        let newTodoElement3 = generateTodoDiv(sampleTodo3);
-        // newTodoElement3.classList.add('todo-element-container');
-        let newTodoElement4 = generateTodoDiv(sampleTodo4);
-        // newTodoElement4.classList.add('todo-element-container');
-    
-        const todoList = document.createElement('div');
-        todoList.classList.add('todo-list');
-        projectTodoContainer.appendChild(todoList);
-        
-        // Test line here
-        todoList.appendChild(newTodoElement);
-        todoList.appendChild(newTodoElement2);
-        todoList.appendChild(newTodoElement3);
-        todoList.appendChild(newTodoElement4);
-        // Test line here
-
-        projectTodoContainer.innerHTML += `--- Completed ---`;
-
-        const todoListCompleted = document.createElement('div')
-        todoListCompleted.classList.add('todo-list');
-        todoListCompleted.classList.add('todo-list-completed');
-        todoListCompleted.innerHTML += `You haven't completed any tasks!`
-        projectTodoContainer.appendChild(todoListCompleted);
-
-
-        // Test line here
-        todoListCompleted.appendChild(newTodoElement);
-        todoListCompleted.appendChild(newTodoElement4);
-        // Test line here        
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
 
         const dateContainer = document.createElement('div');
         dateContainer.classList.add('project-date-container');
@@ -313,7 +239,7 @@ const displayController = () => {
         todoDiv.classList.add('todo-element-container');
 
 
-        console.log(todo.getTitle());
+        // console.log(todo.getTitle());
 
 
         if(todo.getComplete()) {
@@ -357,6 +283,9 @@ const displayController = () => {
         todoEditButton.classList.add('project-edit-button', 'todo-edit-button')
         todoDiv.appendChild(todoEditButton);
 
+        // Attach a reference to its completed div within each todoObj that get's parsed in this method (which should be all of them)
+        todo.setTodoDiv(todoDiv);
+
 
         return todoDiv;
     }
@@ -373,49 +302,50 @@ const displayController = () => {
         const todoListCompleted = document.createElement('div');
         todoListCompleted.classList.add('todo-list', 'todo-list-completed');
 
+        projectTodoList.appendChild(todoList);
+        projectTodoList.innerHTML += '--- Completed ---';
+        projectTodoList.appendChild(todoListCompleted);
 
+        // Reinstantiating the reference to todoList via querySelector - using innerHTML flushes the references 
+        const todoListReference = projectTodoList.querySelector('.todo-list');
 
         // Logic for creating and parsing todoListArray elements, using 
         if(todoListArray) {
-            // console.log('-------------------------------------------------------------------------------------------------------------------')
-            // console.log('-------------------------------------------------------------------------------------------------------------------')
-            // console.log('-------------------------------------------------------------------------------------------------------------------')
-
 
             todoListArray.forEach(element => {
-                // console.log('-------------------------------')
-                // console.log('-------------------------------')
-                // console.log('-------------------------------')
-
-                
-                // console.log(`Testing generateTodoListContainer: passing ${element} into foreach`);
-                // console.log(element.getInfo());
 
                 let tempDiv = generateTodoDiv(element);
-
-               
-
+            
                 if(element.getComplete()){
                     // console.log("Element's getComplete() returned True");
                     todoListCompleted.appendChild(tempDiv);
                 } else {
                     // console.log("Element's getComplete returned False")
-                    todoList.appendChild(tempDiv);
+                    // console.log(todoListReference);
+                    todoListReference.appendChild(tempDiv);
                 }
             });
         }
 
 
+        console.log(todoListReference);
 
-        projectTodoList.appendChild(todoList);
-        projectTodoList.innerHTML += '--- Completed ---';
-        projectTodoList.appendChild(todoListCompleted);
-
-
-        return [projectTodoList, todoList, todoListCompleted];
-
+        return [projectTodoList, todoListReference, todoListCompleted];
 
     }
+
+    const generateProjectEditPane = (targetProject) => {
+
+        const editPane = document.createElement('div');
+        editPane.classList.add('project-edit-pane');
+
+        editPane.innerHTML = targetProject.getInfo();
+
+
+        return editPane;
+
+    }
+
 
 
 
@@ -426,8 +356,8 @@ const displayController = () => {
         generateProjectPane,
         generateTodoDiv,
         generateTodoListContainer,
+        generateProjectEditPane,
         
-
     }
 
 }

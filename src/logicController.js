@@ -203,7 +203,6 @@ function logicController() {
         // Attach functionality to appropriate Div elements, tying them to projectObj values
 
         // Generate projectPane Div
-
         let projectPaneDivValues = _displayController.generateProjectPane(nameInput, priorityInput, dueDateInput, creationDateInput, todoListInput);
         _projectContainer.getProjectContainerDiv().appendChild(projectPaneDivValues[0]);
 
@@ -211,11 +210,11 @@ function logicController() {
         _updatePriorityColor(projectPaneDivValues[2], priorityInput);
 
         // Generate projectObj
-
         let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, todoListInput );
 
 
         // Attach functionality to appropriate Div elements, tying them to projectObj values
+        newProject.setProjectDiv(projectPaneDivValues[0]);
 
         // attach projectEditButton functionality
         _eventController.attachProjectEditButton(projectPaneDivValues[1], newProject)
@@ -228,6 +227,16 @@ function logicController() {
     const _editProject = (targetProject) => {
         console.log(`You clicked the edit Project button targeting the project:
 ${targetProject.getInfo()}`);
+
+        // Toggle menuOpen
+        targetProject.toggleProjectMenuOpen();
+
+        // Generate editProjectPane
+        const editPane = _displayController.generateProjectEditPane(targetProject);
+
+        targetProject.getProjectDiv().appendChild(editPane);
+
+
     }
     this._editProject = _editProject;
 
