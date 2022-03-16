@@ -26,9 +26,9 @@ const eventController = ( logicControllerReference ) => {
         })
     };
 
-    const attachAddProjectPrioritySlider = (inputDiv, targetDiv) => {
-        inputDiv.addEventListener('input', () => {
-            _logicController._updatePriorityColor(targetDiv, inputDiv.value);
+    const attachAddProjectPrioritySlider = (inputDivValue, targetDiv) => {
+        inputDivValue.addEventListener('input', () => {
+            _logicController._updatePriorityColor(targetDiv, inputDivValue.value);
         })
     }
 

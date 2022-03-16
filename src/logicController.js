@@ -241,7 +241,16 @@ ${targetProject.getInfo()}`);
         // Generate editProjectPane
         const editPane = _displayController.generateProjectEditPane(targetProject);
 
-        targetProject.getProjectDiv().appendChild(editPane);
+        targetProject.getProjectDiv().appendChild(editPane[0]);
+
+        // Assign initial Priority Slider Color
+        _updatePriorityColor(editPane[2], targetProject.getProjectPriority());
+
+        // Attach Priority Slider functionality
+        _eventController.attachAddProjectPrioritySlider(editPane[1], editPane[2]);
+
+        _updatePriorityColor(editPane[0], targetProject.getProjectPriority());
+
 
 
     }

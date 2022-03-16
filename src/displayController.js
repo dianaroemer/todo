@@ -40,15 +40,6 @@ const displayController = () => {
 
         // name, due date, priority
 
-        // let nameContainer = document.createElement('div');
-        // nameContainer.classList.add('new-project-name-container');
-        // nameContainer.innerHTML = `New Project Name: `;
-
-        // let nameField = document.createElement('form');
-        // nameField.classList.add('new-project-name-field');
-
-        // nameContainer.appendChild(nameField);
-        // addButtonContainer.appendChild(nameContainer);
 
         let newProjectFormContainer = document.createElement('form');
         newProjectFormContainer.classList.add('new-project-form-container');
@@ -59,8 +50,6 @@ const displayController = () => {
         let nameInput = document.createElement('input');
         nameInput.value = 'New Project Name';
         nameLabel.appendChild(nameInput);
-
-        // newProjectFormContainer.innerHTML += `<br>`;
 
         let priorityLabel = document.createElement('label');
         priorityLabel.innerHTML = `Priority: `;
@@ -77,8 +66,6 @@ const displayController = () => {
         priorityInput.oninput = () => {priorityOutput.value = priorityInput.value};
         priorityLabel.appendChild(priorityOutput);
 
-        // newProjectFormContainer.innerHTML += `<br>`;
-
         let dueDateLabel = document.createElement('label');
         dueDateLabel.innerHTML = `Due Date: `;
         newProjectFormContainer.appendChild(dueDateLabel);
@@ -87,16 +74,12 @@ const displayController = () => {
         dueDateInput.required = true;
         dueDateLabel.appendChild(dueDateInput);
 
-        // newProjectFormContainer.innerHTML += `<br>`;
-
         let creationDateLabel = document.createElement('label');
         creationDateLabel.innerHTML = `Created On: `;
         newProjectFormContainer.appendChild(creationDateLabel);
         let creationDate = new Date()
         creationDateLabel.innerHTML += `${creationDate.toDateString()}`;
 
-        // newProjectFormContainer.innerHTML += `<br>`;
-        // newProjectFormContainer.innerHTML += `<br>`;
 
         let addProjectButtonContainer = document.createElement('div');
         addProjectButtonContainer.classList.add('new-project-button-container')
@@ -114,9 +97,7 @@ const displayController = () => {
         // creationDateLabel.appendChild(creationDateInput);
         // <input type="date" value="2017-06-01">
 
-        addButtonContainer.appendChild(newProjectFormContainer
-            );
-
+        addButtonContainer.appendChild(newProjectFormContainer);
 
 
         return [finishedDiv, nameInput, priorityInput, priorityLabel, dueDateInput, creationDate, saveButton, cancelButton];
@@ -339,10 +320,129 @@ const displayController = () => {
         const editPane = document.createElement('div');
         editPane.classList.add('project-edit-pane');
 
-        editPane.innerHTML = targetProject.getInfo();
+        // editPane.innerHTML = targetProject.getInfo();
+
+        const editTitle = document.createElement('p');
+        editTitle.classList.add('edit-project-title-text');
+        editTitle.innerHTML = `Edit Project`;
+        editPane.appendChild(editTitle);
+
+        // Header Text
+        const editProjectNameContainer = document.createElement('div');
+        editProjectNameContainer.classList.add('edit-project-name-container');
+        editPane.appendChild(editProjectNameContainer);
+
+        // Name Input
+        let nameLabel = document.createElement('label');
+        nameLabel.innerHTML = `Name: `;
+        editProjectNameContainer.appendChild(nameLabel);
+        let nameInput = document.createElement('input');
+        nameInput.value = targetProject.getProjectName();
+        nameLabel.appendChild(nameInput);
+
+        // Priority Slider
+        let priorityLabel = document.createElement('label');
+        priorityLabel.innerHTML = `Priority: `;
+        priorityLabel.classList.add ("edit-project-priority-input");
+        editPane.appendChild(priorityLabel);
+        let priorityInput = document.createElement('input');
+        priorityInput.type = 'range';
+        priorityInput.max = 5;
+        priorityInput.min = 1;
+        priorityInput.value = targetProject.getProjectPriority();
+        priorityLabel.appendChild(priorityInput);
+        let priorityOutput = document.createElement('output');
+        priorityOutput.value = priorityInput.value;
+        priorityInput.oninput = () => {priorityOutput.value = priorityInput.value};
+        priorityLabel.appendChild(priorityOutput);
+
+        // Due Date
+        let dueDateLabel = document.createElement('label');
+        dueDateLabel.innerHTML = `Due Date: `;
+        editPane.appendChild(dueDateLabel);
+        let dueDateInput = document.createElement('input');
+        dueDateInput.type = 'date';
+        dueDateInput.required = true;
+        // dueDateInput.value = "2021-02-02";
+        let tempDueDate = targetProject.getProjectDueDate()
+        tempDueDate.setDate(tempDueDate.getDate() -1)
+        dueDateInput.valueAsDate = tempDueDate;
+        dueDateLabel.appendChild(dueDateInput);
+
+        // Creation Date
+        let creationDateLabel = document.createElement('label');
+        creationDateLabel.innerHTML = `Created On: `;
+        editPane.appendChild(creationDateLabel);
+        let creationDateInput = document.createElement('input')
+        creationDateInput.type = 'date';
+        creationDateInput.required = true;
+        let tempCreationDate = targetProject.getProjectCreationDate();
+        creationDateInput.valueAsDate = tempCreationDate;
+        creationDateLabel.appendChild(creationDateInput);
+
+        
+        // Age
+        let ageLabel = document.createElement('label');
+        ageLabel.innerHTML = `Age: `;
+        editPane.appendChild(ageLabel)
+
+        const ageMillis = (Date.now() - targetProject.getProjectCreationDate());
+        // console.log(`ageMillis: ${ageMillis}`);
+        const seconds = ageMillis / 1000;
+        // console.log(`Seconds: ${seconds}`);
+        let totalMinutes = seconds / 60;
+        // console.log(`TotalMinutes: ${totalMinutes}`)
+        // console.log(`TotalMinutes.toFixed: ${totalMinutes.toFixed()}`);
+        let days = totalMinutes.toFixed() / (60*24);
+        // console.log(`Days: ${days}`);
+        // console.log(`Days.toFixed: ${days.toFixed()}`);
+        totalMinutes -= ((60*24) * days.toFixed());
+        // console.log(`new TotalMinutes: ${totalMinutes}`);
+        // console.log(`new TotalMinutes.toFixed: ${totalMinutes.toFixed()}`);
+        let hours = totalMinutes / 60;
+        // console.log(`Hours: ${hours}`);
+        // console.log(`Hours.toFixed: ${hours.toFixed()}`);
+        totalMinutes -= (hours.toFixed() * 60); 
+        // console.log(`newNEW TotalMinutes: ${totalMinutes}`);
+        // Adjusting to readable strings
+        days = days.toFixed();
+        hours = hours.toFixed();
+        totalMinutes = totalMinutes.toFixed();       
+
+        // console.log(`----------------`);
+        // console.log(ageMillis);
+        // console.log(`Seconds: ${seconds}`);
+        // console.log(`TotalMinutes: ${totalMinutes}`);
+        // console.log(`Hours: ${hours}`);
+        // console.log(`Days: ${days}`);
+        // console.log(`----------------`)
+
+        const age = days + " Days, " + hours + " Hours, " + totalMinutes + " Minutes";
+        ageLabel.innerHTML += age;
+
+        // Save, Cancel, Delete Buttons
+        let editProjectButtonContainer = document.createElement('div');
+        editProjectButtonContainer.classList.add('edit-project-button-container')
+        let saveButton = document.createElement('button');
+        saveButton.innerHTML = `Save`;
+        // changing the button's type overrides the default Save Button functionality of the form element to NOT REDIRECT with the form element, aka reloading the page
+        saveButton.type = 'button';
+        let cancelButton = document.createElement('button');
+        cancelButton.innerHTML = `Cancel`;
+        editProjectButtonContainer.appendChild(saveButton);
+        editProjectButtonContainer.appendChild(cancelButton);
+        editPane.appendChild(editProjectButtonContainer);
+
+        let deleteProjectButton = document.createElement('button');
+        deleteProjectButton.innerHTML = 'Delete';
+        deleteProjectButton.classList.add('delete-button');
+        deleteProjectButton.type = 'button';
+        editPane.appendChild(deleteProjectButton);
 
 
-        return editPane;
+        
+
+        return [editPane, priorityInput, priorityLabel ] ;
 
     }
 
