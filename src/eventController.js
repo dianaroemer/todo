@@ -53,6 +53,24 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
+    const attachProjectEditSaveButton = (targetDiv, targetProject) => {
+        targetDiv.addEventListener('click', () => {
+            _logicController._editProjectSaveButton(targetProject);
+        });
+    }
+
+    const attachProjectEditCancelButton = (targetDiv, targetProject) => {
+        targetDiv.addEventListener('click', () => {
+            _logicController._editProjectCancelButton(targetProject);
+        });
+    }
+
+    const attachProjectEditDeleteButton = (targetDiv, targetProject) => {
+        targetDiv.addEventListener('click', () => {
+            _logicController._editProjectDeleteButton(targetProject);
+        });
+    }
+
     return {
         _toggleMenuOpen,
         attachProjectContainerAddButtonListener,
@@ -60,6 +78,9 @@ const eventController = ( logicControllerReference ) => {
         attachAddProjectPrioritySlider,
         attachAddProjectSave,
         attachProjectEditButton,
+        attachProjectEditSaveButton,
+        attachProjectEditCancelButton,
+        attachProjectEditDeleteButton,
     }
 
 }

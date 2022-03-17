@@ -442,7 +442,7 @@ const displayController = () => {
 
         
 
-        return [editPane, priorityInput, priorityLabel ] ;
+        return [editPane, priorityInput, priorityLabel, saveButton, cancelButton, deleteProjectButton ] ;
 
     }
 

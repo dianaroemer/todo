@@ -212,6 +212,9 @@ function logicController() {
         // Generate projectObj
         let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, todoListInput );
 
+        // Attach projectObj to _projectContainer._projectArr[]
+        _projectContainer.addProject(newProject);
+
 
         // Attach functionality to appropriate Div elements, tying them to projectObj values
         newProject.setProjectDiv(projectPaneDivValues[0]);
@@ -229,7 +232,6 @@ function logicController() {
 ${targetProject.getInfo()}`);
 
         // Toggle menuOpen
-
         if(targetProject.getProjectMenuOpen()) {
             console.log("Error! Edit Project menu is returning true, and is already open!");
             return;
@@ -241,6 +243,8 @@ ${targetProject.getInfo()}`);
         // Generate editProjectPane
         const editPane = _displayController.generateProjectEditPane(targetProject);
 
+
+
         targetProject.getProjectDiv().appendChild(editPane[0]);
 
         // Assign initial Priority Slider Color
@@ -248,14 +252,70 @@ ${targetProject.getInfo()}`);
 
         // Attach Priority Slider functionality
         _eventController.attachAddProjectPrioritySlider(editPane[1], editPane[2]);
+        // _updatePriorityColor(editPane[0], targetProject.getProjectPriority());
 
-        _updatePriorityColor(editPane[0], targetProject.getProjectPriority());
+
+        // Attach eventListeners to Save, Cancel and Delete buttons
+        const editProjectSaveButton = editPane[3];
+        const editProjectCancelButton = editPane[4];
+        const editProjectDeleteButton = editPane[5];
+        _eventController.attachProjectEditSaveButton(editProjectSaveButton, targetProject);
+        _eventController.attachProjectEditCancelButton(editProjectCancelButton, targetProject);
+        _eventController.attachProjectEditDeleteButton(editProjectDeleteButton, targetProject);
+
 
 
 
     }
     this._editProject = _editProject;
 
+    const _editProjectSaveButton = (targetProject) => {
+        console.log(`You clicked the Save button on the EDIT page of the following project: `);
+        console.log(targetProject.getInfo());
+    }
+    this._editProjectSaveButton = _editProjectSaveButton
+
+    const _editProjectCancelButton = (targetProject) => {
+        // console.log(`You clicked the Cancel button on the EDIT page of the following project: `);
+        // console.log(targetProject.getInfo());
+        // console.log(targetProject.getProjectDiv());
+
+        let editPane = targetProject.getProjectDiv().querySelector('.project-edit-pane');
+
+        // Remove the editPane div Child element from the targetProject
+        targetProject.getProjectDiv().removeChild(editPane);
+        // Toggle projectMenuOpen to false, so that the editMenu can be re-opened
+        targetProject.toggleProjectMenuOpen();
+
+    }
+    this._editProjectCancelButton = _editProjectCancelButton;
+
+
+    const _editProjectDeleteButton = (targetProject) => {
+        // console.log(`You clicked the Delete button on the EDIT page of the following project: `);
+        // console.log(targetProject.getInfo());
+        // console.log(_projectContainer.getProjectArr()[0].getInfo());
+        // console.log(_projectContainer.getInfo());
+        // console.log(_projectContainer.getProjectArr());
+        
+
+        // Target Project Container and find it's index reference for targetProject
+        const projectContainerArr = _projectContainer.getProjectArr();
+        let index = 0;
+        for (index; index < projectContainerArr.length; index++ ){
+            // console.log(`Searching for targetProject (${targetProject.getProjectName()}) at index ${index}`);
+            if(projectContainerArr[index] === targetProject) {
+                // console.log(`You've found the project at index: ${index}. Do the thing to delete targetProject from _projectContainer._projectArr[]`);
+                _projectContainer.deleteProject(index);
+                _projectContainer.getProjectContainerDiv().removeChild(targetProject.getProjectDiv());
+                break;
+            } 
+        }
+
+
+
+    }
+    this._editProjectDeleteButton = _editProjectDeleteButton;
 
     return {
         getInfo, init,

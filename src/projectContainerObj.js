@@ -40,9 +40,9 @@ const projectContainerObj = () => {
         }
     }
 
-    const addProject = (newProjectArr) => {
-        if(typeof newProjectArr === "object") {
-            _projectArr.push(newProjectArr);
+    const addProject = (newProjectObj) => {
+        if(typeof newProjectObj === "object") {
+            _projectArr.push(newProjectObj);
             return true;
         } else {
             console.log('projectContainerObj._addProjectArr Error! tried to pass a non-object to push into _projectArr!');
