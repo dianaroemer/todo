@@ -53,9 +53,9 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
-    const attachProjectEditSaveButton = (targetDiv, targetProject) => {
+    const attachProjectEditSaveButton = (targetDiv, targetProject, savedInputs) => {
         targetDiv.addEventListener('click', () => {
-            _logicController._editProjectSaveButton(targetProject);
+            _logicController._editProjectSaveButton(targetProject, savedInputs);
         });
     }
 

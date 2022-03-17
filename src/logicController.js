@@ -259,7 +259,8 @@ ${targetProject.getInfo()}`);
         const editProjectSaveButton = editPane[3];
         const editProjectCancelButton = editPane[4];
         const editProjectDeleteButton = editPane[5];
-        _eventController.attachProjectEditSaveButton(editProjectSaveButton, targetProject);
+        const savedInputs = editPane[6];
+        _eventController.attachProjectEditSaveButton(editProjectSaveButton, targetProject, savedInputs);
         _eventController.attachProjectEditCancelButton(editProjectCancelButton, targetProject);
         _eventController.attachProjectEditDeleteButton(editProjectDeleteButton, targetProject);
 
@@ -269,9 +270,37 @@ ${targetProject.getInfo()}`);
     }
     this._editProject = _editProject;
 
-    const _editProjectSaveButton = (targetProject) => {
+    const _editProjectSaveButton = (targetProject, savedValues) => {
         console.log(`You clicked the Save button on the EDIT page of the following project: `);
         console.log(targetProject.getInfo());
+
+        // On project save, close editPane, write new values to projectObj, update DOM values to match new projectObj values, toggleProjectMenuOpen()
+
+        console.log(`I have savedValues! Those are : `);
+        console.log(`Name: ${savedValues[0].value}`);
+        console.log(`Priority: ${savedValues[1].value}`);
+        console.log(`Due Date: ${new Date(savedValues[2].value)}`);
+        console.log(`Creation Date: ${new Date(savedValues[3].value)}`);
+
+        // Write new values 
+        targetProject.setProjectName(savedValues[0].value);
+        targetProject.setProjectPriority((Number(savedValues[1].value)));
+        targetProject.setProjectDueDate(new Date(savedValues[2].value));
+        targetProject.setProjectCreationDate(new Date(savedValues[3].value));
+        console.log(` ----------- targetProject's new Data is: -------------`)
+        console.log(targetProject.getInfo());
+
+        // Update DOM values to match new projectObj values
+        let targetProjectDiv = targetProject.getProjectDiv();
+
+
+
+        // Close editPane and toggleProjectMenuOpen()
+        let editPane = targetProject.getProjectDiv().querySelector('.project-edit-pane');
+        targetProject.getProjectDiv().removeChild(editPane);
+        targetProject.toggleProjectMenuOpen();
+
+
     }
     this._editProjectSaveButton = _editProjectSaveButton
 
@@ -311,8 +340,6 @@ ${targetProject.getInfo()}`);
                 break;
             } 
         }
-
-
 
     }
     this._editProjectDeleteButton = _editProjectDeleteButton;

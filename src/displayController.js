@@ -317,6 +317,9 @@ const displayController = () => {
 
     const generateProjectEditPane = (targetProject) => {
 
+        console.log(`You clicked the editProject button targeting the project: `);
+        console.log(targetProject.getInfo());
+
         const editPane = document.createElement('div');
         editPane.classList.add('project-edit-pane');
 
@@ -440,9 +443,11 @@ const displayController = () => {
         editPane.appendChild(deleteProjectButton);
 
 
+        let savedInputs = [nameInput, priorityInput, dueDateInput, creationDateInput];
+        console.log(savedInputs);
         
 
-        return [editPane, priorityInput, priorityLabel, saveButton, cancelButton, deleteProjectButton ] ;
+        return [editPane, priorityInput, priorityLabel, saveButton, cancelButton, deleteProjectButton, savedInputs ] ;
 
     }
 
