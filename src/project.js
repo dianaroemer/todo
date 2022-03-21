@@ -80,7 +80,8 @@ const projectObj = () => {
     }
 
     const setProjectPriority = (newPriority) => {
-        if( typeof newPriority === "number" ) {
+        // This is a bit filthy. Should take numbers, 1,2,3,4,5, or string representation of these same numbers. XXXUPDATEXXX Clean this.
+        if( typeof newPriority === "number" || typeof newPriority === "string" ) {
             _projectPriority = newPriority; 
             return true;
         } else {

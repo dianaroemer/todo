@@ -4,6 +4,7 @@ import projectContainerObj from './projectContainerObj.js';
 import displayController from './displayController.js';
 // import {eventController, attachAddButtonListener } from './eventController.js';
 import eventController from './eventController.js';
+import { te } from 'date-fns/locale';
 
 
 function logicController() {
@@ -168,6 +169,12 @@ function logicController() {
     
     const _updatePriorityColor = (targetDiv, newValue) => {
         // console.log(newValue);
+        // console.log(`I am _updatePriorityColor! I have been called on targetDiv: ${targetDiv} with newValue: ${newValue}`)
+        // console.log(typeof newValue);
+
+        // Typechanging newValue to a string to hit the switch statement's strict type checking
+        // let newValueString = '';
+        // newValueString = newValueString + newValue;
 
         targetDiv.classList.remove("one");
         targetDiv.classList.remove("two");
@@ -228,8 +235,8 @@ function logicController() {
     this._generateProject = _generateProject;
 
     const _editProject = (targetProject) => {
-        console.log(`You clicked the edit Project button targeting the project:
-${targetProject.getInfo()}`);
+        console.log(`You clicked the _editProject button targeting the project: `);
+        console.log(targetProject.getInfo());
 
         // Toggle menuOpen
         if(targetProject.getProjectMenuOpen()) {
@@ -278,15 +285,56 @@ ${targetProject.getInfo()}`);
 
         console.log(`I have savedValues! Those are : `);
         console.log(`Name: ${savedValues[0].value}`);
-        console.log(`Priority: ${savedValues[1].value}`);
-        console.log(`Due Date: ${new Date(savedValues[2].value)}`);
-        console.log(`Creation Date: ${new Date(savedValues[3].value)}`);
+        console.log(`Priority: ${toString(savedValues[1].value)}`);
+        console.log(`Due Date: ${savedValues[2].valueAsDate}`);
+        console.log(`Creation Date: ${savedValues[3].valueAsDate}`);
+
+        console.log('------------')
+        // console.log(`Due Date: ${savedValues[2].value}`);
+
+        
+        // let tempDueDate = savedValues[2].value;
+        // let nowDate = new Date()
+        // tempDueDate += `T${nowDate.getHours()}:${nowDate.getMinutes()}:${nowDate.getSeconds()}`
+        // console.log(tempDueDate);
+
+
+
+        
+        // ReWriting Date Changing: If Date input differs from date of targetProject, then adjust date of object
+        let newDueDate = savedValues[2].value;
+        console.log(`newDueDate: ${newDueDate}`); // format "2022-03-21"
+        let oldDueDate = targetProject.getProjectDueDate();
+        console.log(`oldDueDate: ${oldDueDate}`);
+        let oldDueDateString = `${oldDueDate.getFullYear()}-`
+        if(oldDueDate.getMonth() + 1 < 10) {
+            oldDueDateString += `0${oldDueDate.getMonth() + 1}-`
+        } else {
+            oldDueDateString += `${oldDueDate.getMonth() + 1}-`
+        }
+        if(oldDueDate.getDate() < 10) {
+            oldDueDateString += `0${oldDueDate.getDate()}`
+        } else {
+            oldDueDateString += `${oldDueDate.getDate()}`
+        }
+
+        console.log(`oldDueDateString: ${oldDueDateString}`);
+
+        console.log(`newDueDate: ${newDueDate} vs ${oldDueDateString}: oldDueDateString`);
+        console.log( newDueDate != oldDueDateString);
+        if (newDueDate !== oldDueDateString ) {
+            console.log(`newDueDate !== oldDueDateString!`);
+            console.log(`Set new due date to ${newDueDate} with current time filled in!`);
+        }
+
+        console.log('------------')
+
 
         // Write new values 
         targetProject.setProjectName(savedValues[0].value);
-        targetProject.setProjectPriority((Number(savedValues[1].value)));
-        targetProject.setProjectDueDate(new Date(savedValues[2].value));
-        targetProject.setProjectCreationDate(new Date(savedValues[3].value));
+        targetProject.setProjectPriority(savedValues[1].value);
+        targetProject.setProjectDueDate(savedValues[2].valueAsNumber);
+        targetProject.setProjectCreationDate(savedValues[3].valueAsDate);
         console.log(` ----------- targetProject's new Data is: -------------`)
         console.log(targetProject.getInfo());
 
@@ -299,6 +347,7 @@ ${targetProject.getInfo()}`);
         let editPane = targetProject.getProjectDiv().querySelector('.project-edit-pane');
         targetProject.getProjectDiv().removeChild(editPane);
         targetProject.toggleProjectMenuOpen();
+
 
 
     }

@@ -317,8 +317,8 @@ const displayController = () => {
 
     const generateProjectEditPane = (targetProject) => {
 
-        console.log(`You clicked the editProject button targeting the project: `);
-        console.log(targetProject.getInfo());
+        // console.log(`You clicked the editProject button targeting the project: `);
+        // console.log(targetProject.getInfo());
 
         const editPane = document.createElement('div');
         editPane.classList.add('project-edit-pane');
@@ -368,8 +368,9 @@ const displayController = () => {
         dueDateInput.required = true;
         // dueDateInput.value = "2021-02-02";
         let tempDueDate = targetProject.getProjectDueDate()
-        tempDueDate.setDate(tempDueDate.getDate() -1)
-        dueDateInput.valueAsDate = tempDueDate;
+        // tempDueDate.setDate(tempDueDate.getDate() - 1);
+        tempDueDate = tempDueDate.getTime();
+        dueDateInput.valueAsNumber = tempDueDate;
         dueDateLabel.appendChild(dueDateInput);
 
         // Creation Date
