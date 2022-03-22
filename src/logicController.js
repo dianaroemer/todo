@@ -284,33 +284,16 @@ function logicController() {
     this._editProject = _editProject;
 
     const _editProjectSaveButton = (targetProject, savedValues) => {
-        console.log(`You clicked the Save button on the EDIT page of the following project: `);
-        console.log(targetProject.getInfo());
+        // console.log(`You clicked the Save button on the EDIT page of the following project: `);
+        // console.log(targetProject.getInfo());
 
         // On project save, close editPane, write new values to projectObj, update DOM values to match new projectObj values, toggleProjectMenuOpen()
 
-        console.log(`I have savedValues! Those are : `);
-        console.log(`Name: ${savedValues[0].value}`);
-        console.log(`Priority: ${toString(savedValues[1].value)}`);
-        console.log(`Due Date: ${savedValues[2].valueAsDate}`);
-        console.log(`Creation Date: ${savedValues[3].valueAsDate}`);
-
-        console.log('------------')
-        // console.log(`Due Date: ${savedValues[2].value}`);
-
-        
-        // let tempDueDate = savedValues[2].value;
-        // let nowDate = new Date()
-        // tempDueDate += `T${nowDate.getHours()}:${nowDate.getMinutes()}:${nowDate.getSeconds()}`
-        // console.log(tempDueDate);
-
-
-
-        
-        // ReWriting Date Changing: If Date input differs from date of targetProject, then adjust date of object
-
-
-        console.log('------------')
+        // console.log(`I have savedValues! Those are : `);
+        // console.log(`Name: ${savedValues[0].value}`);
+        // console.log(`Priority: ${toString(savedValues[1].value)}`);
+        // console.log(`Due Date: ${savedValues[2].valueAsDate}`);
+        // console.log(`Creation Date: ${savedValues[3].valueAsDate}`);
 
 
         // Write new values 
@@ -367,17 +350,60 @@ function logicController() {
                 // console.log(`Set new due date to ${newCreationDate} with current time filled in!`);
                 targetProject.setProjectCreationDate(new Date(newCreationDate));
             }
+       
+        // console.log(` ----------- targetProject's new Data is: -------------`)
+        // console.log(targetProject.getInfo());
 
 
-        
-        // targetProject.setProjectCreationDate(savedValues[3].valueAsDate);
-        console.log(` ----------- targetProject's new Data is: -------------`)
-        console.log(targetProject.getInfo());
 
         // Update DOM values to match new projectObj values
         let targetProjectDiv = targetProject.getProjectDiv();
+        // console.log(targetProjectDiv);
+            // Targeting name plate and adjusting nameplate priority
+            let namePlateDiv = targetProjectDiv.firstChild
+            // console.log(namePlateDiv);
+            _updatePriorityColor(namePlateDiv, targetProject.getProjectPriority());
+            let namePlateContentDiv = namePlateDiv.firstChild;
+            // console.log(namePlateContentDiv);
+            namePlateContentDiv.innerText = targetProject.getProjectName();
+
+            // Targeting Project Date container 
+            let projectDateContainerDiv = namePlateDiv.nextSibling.nextSibling;
+            // console.log(projectDateContainerDiv);
+            let projectCreationDateDiv = projectDateContainerDiv.firstChild;
+            // Only change displayed date if the dates actually changed
+            if (newCreationDate !== oldCreationDateString ) {
+                
+                let localizedCreationDate = targetProject.getProjectCreationDate();
+                // console.log(localizedDueDate);
+                // console.log(localizedDueDate.getTime());
+                let timezoneOffset = localizedCreationDate.getTimezoneOffset();
+                // console.log(timezoneOffset);
+                // console.log(timezoneOffset * 60000);
+                let newLocalizedCreationDate = localizedCreationDate.getTime() + (timezoneOffset * 60000);
+
+                projectCreationDateDiv.innerText = (new Date(newLocalizedCreationDate)).toDateString();
+            }
+            let projectDueDateDiv = projectDateContainerDiv.lastChild;
+            // Only change displayed date if the dates actually changed
+            if (newDueDate !== oldDueDateString ) {
+                 
+                let localizedDueDate = targetProject.getProjectDueDate();
+                // console.log(localizedDueDate);
+                // console.log(localizedDueDate.getTime());
+                let timezoneOffset = localizedDueDate.getTimezoneOffset();
+                // console.log(timezoneOffset);
+                // console.log(timezoneOffset * 60000);
+                let newLocalizedDueDate = localizedDueDate.getTime() + (timezoneOffset * 60000);
+                // console.log(newLocalizedDueDate);
+                // console.log(new Date(newLocalizedDueDate));
+
+                projectDueDateDiv.innerText = (new Date(newLocalizedDueDate)).toDateString();
+
+            }
 
 
+            // Problem - assigning new dates text to the text are losing 8 hours to GMT, making days show as 1 day older than they are
 
         // Close editPane and toggleProjectMenuOpen()
         let editPane = targetProject.getProjectDiv().querySelector('.project-edit-pane');
