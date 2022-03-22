@@ -1,5 +1,11 @@
 // I am the logicController, I decide logic whenever events are fired by their eventHandler
 
+// Lessons learned from using Dates in my project
+// 1. Don't use Dates
+// 2. If you have to use dates, don't use them in input forms
+// 3. If you have to use them in input forms, use everything in milliseconds and only convert to year/month/day for display purposes
+// 4. Do you really have to use Dates? Really? Can we just... not?
+
 import projectContainerObj from './projectContainerObj.js';
 import displayController from './displayController.js';
 // import {eventController, attachAddButtonListener } from './eventController.js';
@@ -123,11 +129,11 @@ function logicController() {
         const creationDateInput = values[5];
         // const projectDivInput = sampleDiv;
 
-        console.log(`I am Save button, you clicked me. Here's what I am returning: 
-        nameInput: ${nameInput}
-        priorityInput: ${priorityInput}
-        dueDateInput: ${dueDateInput}
-        creationDate: ${creationDateInput}`)
+        // console.log(`I am Save button, you clicked me. Here's what I am returning: 
+        // nameInput: ${nameInput}
+        // priorityInput: ${priorityInput}
+        // dueDateInput: ${dueDateInput}
+        // creationDate: ${creationDateInput}`)
         
         _generateProject(nameInput, creationDateInput, dueDateInput, priorityInput, []);
 
@@ -235,8 +241,8 @@ function logicController() {
     this._generateProject = _generateProject;
 
     const _editProject = (targetProject) => {
-        console.log(`You clicked the _editProject button targeting the project: `);
-        console.log(targetProject.getInfo());
+        // console.log(`You clicked the _editProject button targeting the project: `);
+        // console.log(targetProject.getInfo());
 
         // Toggle menuOpen
         if(targetProject.getProjectMenuOpen()) {
@@ -302,30 +308,7 @@ function logicController() {
 
         
         // ReWriting Date Changing: If Date input differs from date of targetProject, then adjust date of object
-        let newDueDate = savedValues[2].value;
-        console.log(`newDueDate: ${newDueDate}`); // format "2022-03-21"
-        let oldDueDate = targetProject.getProjectDueDate();
-        console.log(`oldDueDate: ${oldDueDate}`);
-        let oldDueDateString = `${oldDueDate.getFullYear()}-`
-        if(oldDueDate.getMonth() + 1 < 10) {
-            oldDueDateString += `0${oldDueDate.getMonth() + 1}-`
-        } else {
-            oldDueDateString += `${oldDueDate.getMonth() + 1}-`
-        }
-        if(oldDueDate.getDate() < 10) {
-            oldDueDateString += `0${oldDueDate.getDate()}`
-        } else {
-            oldDueDateString += `${oldDueDate.getDate()}`
-        }
 
-        console.log(`oldDueDateString: ${oldDueDateString}`);
-
-        console.log(`newDueDate: ${newDueDate} vs ${oldDueDateString}: oldDueDateString`);
-        console.log( newDueDate != oldDueDateString);
-        if (newDueDate !== oldDueDateString ) {
-            console.log(`newDueDate !== oldDueDateString!`);
-            console.log(`Set new due date to ${newDueDate} with current time filled in!`);
-        }
 
         console.log('------------')
 
@@ -333,8 +316,61 @@ function logicController() {
         // Write new values 
         targetProject.setProjectName(savedValues[0].value);
         targetProject.setProjectPriority(savedValues[1].value);
-        targetProject.setProjectDueDate(savedValues[2].valueAsNumber);
-        targetProject.setProjectCreationDate(savedValues[3].valueAsDate);
+
+
+            // Write new dueDate if new dueDate !== oldDueDate values
+            let newDueDate = savedValues[2].value;
+            // console.log(`newDueDate: ${newDueDate}`); // format "2022-03-21"
+            let oldDueDate = targetProject.getProjectDueDate();
+            // console.log(`oldDueDate: ${oldDueDate}`);
+            let oldDueDateString = `${oldDueDate.getFullYear()}-`
+            if(oldDueDate.getMonth() + 1 < 10) {
+                oldDueDateString += `0${oldDueDate.getMonth() + 1}-`
+            } else {
+                oldDueDateString += `${oldDueDate.getMonth() + 1}-`
+            }
+            if(oldDueDate.getDate() < 10) {
+                oldDueDateString += `0${oldDueDate.getDate()}`
+            } else {
+                oldDueDateString += `${oldDueDate.getDate()}`
+            }
+            // console.log(`oldDueDateString: ${oldDueDateString}`);
+            // console.log(`newDueDate: ${newDueDate} vs ${oldDueDateString}: oldDueDateString`);
+            // console.log( newDueDate != oldDueDateString);
+            if (newDueDate !== oldDueDateString ) {
+                // console.log(`newDueDate !== oldDueDateString!`);
+                // console.log(`Set new due date to ${newDueDate} with current time filled in!`);
+                targetProject.setProjectDueDate(new Date(newDueDate));
+            }
+
+            // Write new creationDate if new creationDate !== oldCreationDate values
+            let newCreationDate = savedValues[3].value;
+            // console.log(`newCreationDate: ${newCreationDate}`); // format "2022-03-21"
+            let oldCreationDate = targetProject.getProjectCreationDate();
+            // console.log(`oldCreationDate: ${oldCreationDate}`);
+            let oldCreationDateString = `${oldCreationDate.getFullYear()}-`
+            if(oldCreationDate.getMonth() + 1 < 10) {
+                oldCreationDateString += `0${oldCreationDate.getMonth() + 1}-`
+            } else {
+                oldCreationDateString += `${oldCreationDate.getMonth() + 1}-`
+            }
+            if(oldCreationDate.getDate() < 10) {
+                oldCreationDateString += `0${oldCreationDate.getDate()}`
+            } else {
+                oldCreationDateString += `${oldCreationDate.getDate()}`
+            }
+            // console.log(`oldCreationDateString: ${oldCreationDateString}`);
+            // console.log(`newCreationDate: ${newCreationDate} vs ${oldCreationDateString}: oldCreationDateString`);
+            // console.log( newCreationDate != oldCreationDateString);
+            if (newCreationDate !== oldCreationDateString ) {
+                // console.log(`newCreationDate !== oldCreationDateString!`);
+                // console.log(`Set new due date to ${newCreationDate} with current time filled in!`);
+                targetProject.setProjectCreationDate(new Date(newCreationDate));
+            }
+
+
+        
+        // targetProject.setProjectCreationDate(savedValues[3].valueAsDate);
         console.log(` ----------- targetProject's new Data is: -------------`)
         console.log(targetProject.getInfo());
 

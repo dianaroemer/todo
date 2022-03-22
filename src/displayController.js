@@ -421,7 +421,13 @@ const displayController = () => {
         // console.log(`Days: ${days}`);
         // console.log(`----------------`)
 
-        const age = days + " Days, " + hours + " Hours, " + totalMinutes + " Minutes";
+        let age;
+        if (ageMillis > 86400000 ) {
+            age = (days - 1) + " Days"; // Days - 1 because the above days = days.toFixed() rounds up. This way, you don't create a project yesterday that's already 2 days old, when viewed today
+        } else {
+            age = hours + " Hours, " + totalMinutes + " Minutes";
+        }
+        
         ageLabel.innerHTML += age;
 
         // Save, Cancel, Delete Buttons
@@ -445,7 +451,7 @@ const displayController = () => {
 
 
         let savedInputs = [nameInput, priorityInput, dueDateInput, creationDateInput];
-        console.log(savedInputs);
+        // console.log(savedInputs);
         
 
         return [editPane, priorityInput, priorityLabel, saveButton, cancelButton, deleteProjectButton, savedInputs ] ;
