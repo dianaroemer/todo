@@ -90,6 +90,18 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
+    const attachProjectAddTodoSaveButton = (targetSaveButton) => {
+        targetSaveButton.addEventListener('click', () => {
+            _logicController._projectAddTodoSaveButton();
+        })
+    }
+
+    const attachProjectAddTodoCancelButton = (targetCancelButton, targetProject, addTodoPane) => {
+        targetCancelButton.addEventListener('click', () => {
+            _logicController._projectAddTodoCancelButton(targetProject, addTodoPane);
+        })
+    }
+
     return {
         _toggleMenuOpen,
         attachProjectContainerAddButtonListener,
@@ -103,6 +115,9 @@ const eventController = ( logicControllerReference ) => {
         attachProjectEditDeleteButton,
         attachProjectTodoAddButton,
         attachProjectTodoDeleteButton,
+        attachProjectAddTodoSaveButton,
+        attachProjectAddTodoCancelButton,
+
     }
 
 }

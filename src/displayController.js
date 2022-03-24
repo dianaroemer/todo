@@ -150,20 +150,6 @@ const displayController = () => {
         todoListButtonContiainer.appendChild(projectTodoDeleteButton);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         let sampleTodo = todoObj();
         sampleTodo.init('sampleTrue with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
         let sampleTodo2 = todoObj();
@@ -470,6 +456,7 @@ const displayController = () => {
         addTodoPane.appendChild(titleLabel);
         const titleInput = document.createElement('input');
         titleInput.classList.add('project-add-todo-name-input');
+        titleInput.maxLength = "30";
         titleLabel.appendChild(titleInput);
 
         // Description
@@ -479,12 +466,13 @@ const displayController = () => {
         addTodoPane.appendChild(descriptionLabel);
         const descriptionInput = document.createElement('input');
         descriptionInput.classList.add('project-add-todo-description-input');
+        descriptionInput.maxLength = "24";
         descriptionLabel.appendChild(descriptionInput);
         
         // Priority
         let priorityLabel = document.createElement('label');
         priorityLabel.innerText = `Priority: `;
-        priorityLabel.id = "projct-add-todo-priority-input";
+        priorityLabel.id = "project-add-todo-priority-label";
         addTodoPane.appendChild(priorityLabel);
         let priorityInput = document.createElement('input');
         priorityInput.type = 'range';
@@ -497,12 +485,48 @@ const displayController = () => {
         priorityInput.oninput = () => {priorityOutput.value = priorityInput.value};
         priorityLabel.appendChild(priorityOutput);
 
+        // Notes
+        const notesLabel = document.createElement('label');
+        notesLabel.innerText = "Notes:                     ";
+        notesLabel.classList.add('project-add-todo-notes-label');
+        addTodoPane.appendChild(notesLabel);
+        const notesInput = document.createElement('textarea');
+        notesInput.classList.add('project-add-todo-notes-input');
+        notesLabel.appendChild(notesInput);
 
-        // addTodoPane.innerHTML += targetProject.getInfo();
+        // Due Date
+        let dueDateLabel = document.createElement('label');
+        dueDateLabel.innerHTML = `Due Date: `;
+        dueDateLabel.classList.add('project-add-todo-date-label');
+        addTodoPane.appendChild(dueDateLabel);
+        let dueDateInput = document.createElement('input');
+        dueDateInput.type = 'date';
+        dueDateLabel.appendChild(dueDateInput);
 
 
+        // Creation Date
+        let creationDateLabel = document.createElement('label');
+        creationDateLabel.innerHTML = `Created On: `;
+        creationDateLabel.classList.add('project-add-todo-date-label');
+        addTodoPane.appendChild(creationDateLabel);
+        let creationDate = new Date()
+        creationDateLabel.innerText += `${creationDate.toDateString()}`;
 
-        return [addTodoPane, titleInput, descriptionInput, priorityLabel, priorityInput];
+        // Buttons
+        const addTodoButtonContainer = document.createElement('div');
+        addTodoButtonContainer.classList.add('project-add-todo-button-container');
+        let saveButton = document.createElement('button');
+        saveButton.innerHTML = `Save new To-Do`;
+        // changing the button's type overrides the default Save Button functionality of the form element to NOT REDIRECT with the form element, aka reloading the page
+        saveButton.type = 'button';
+        let cancelButton = document.createElement('button');
+        cancelButton.innerHTML = `Cancel new To-Do`;
+        cancelButton.type = 'button';
+        addTodoButtonContainer.appendChild(saveButton);
+        addTodoButtonContainer.appendChild(cancelButton);
+        addTodoPane.appendChild(addTodoButtonContainer);
+
+        return [addTodoPane, titleInput, descriptionInput, priorityLabel, priorityInput, notesInput, dueDateInput, creationDate, saveButton, cancelButton];
 
     }
 

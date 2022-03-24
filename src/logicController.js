@@ -515,16 +515,16 @@ function logicController() {
         // Add todo Menu
         const addTodoPaneValues = _displayController.generateProjectAddTodoPane(targetProject);
         const addTodoPane = addTodoPaneValues[0];
-
+        const addTodoTitle = addTodoPaneValues[1];
+        const addTodoDescription = addTodoPaneValues[2];
         const addTodoPriorityLabel = addTodoPaneValues[3];
         const addTodoPriorityValue = addTodoPaneValues[4];
-        // console.log(addTodoPriorityLabel);
-        // console.log(addTodoPriorityValue);
-
-
-        // Attach priority slider functionality
-        _eventController.attachAddProjectPrioritySlider(addTodoPriorityValue, addTodoPriorityLabel);
-
+        const addTodoNotesInput = addTodoPaneValues[5];
+        const addTodoDueDateInput = addTodoPaneValues[6];
+        const addTodoCreationDateInput = addTodoPaneValues[7];
+        // Save and cancel buttons
+        const addTodoSaveButton = addTodoPaneValues[8];
+        const addTodoCancelButton = addTodoPaneValues[9];
 
         // Append Add Todo Menu to existing projectPane div
         const projectPane = targetProject.getProjectDiv();
@@ -532,13 +532,42 @@ function logicController() {
         const projectTodoElementContainer = projectNameContainer.nextSibling;
         projectTodoElementContainer.appendChild(addTodoPane);
 
+        // Attach priority slider functionality
+        _eventController.attachAddProjectPrioritySlider(addTodoPriorityValue, addTodoPriorityLabel);
         
-        
+        // Attach saveButton and cancelButton functionality        
+        _eventController.attachProjectAddTodoSaveButton(addTodoSaveButton);
+        _eventController.attachProjectAddTodoCancelButton(addTodoCancelButton, targetProject, addTodoPane);
 
 
 
     }
     this._projectAddTodoButton = _projectAddTodoButton;
+
+    const _projectAddTodoSaveButton = () => {
+        console.log(`You've click the save button on the add Todo Pane`)
+    }
+    this._projectAddTodoSaveButton = _projectAddTodoSaveButton;
+
+    const _projectAddTodoCancelButton = (targetProject, addTodoPane) => {
+        // console.log(`You've click the cancel button on the add Todo Pane`);
+        // Target div and delete it
+        // console.log(targetProject.getProjectDiv());
+        // console.log(addTodoPane);
+
+        const todoElementContainer = targetProject.getProjectDiv().childNodes[1];
+        // console.log(todoElementContainer);
+        todoElementContainer.removeChild(addTodoPane);
+        // Toggle projectMenuOpen to false
+        targetProject.toggleProjectMenuOpen();
+
+    }
+    this._projectAddTodoCancelButton = _projectAddTodoCancelButton;
+
+
+
+
+
 
     const _projectDeleteTodoButton = (targetProject) => {
 

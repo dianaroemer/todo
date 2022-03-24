@@ -385,16 +385,63 @@ nav ul li {
     height: 310px;
     background-color:rgb(218, 140, 140);
     padding: 5px;
+    justify-content: start;
+    align-items: flex-start;
 
     border-radius: 5px;
     border: 2px solid rgb(92, 72, 72);
 
 }
 
-.project-add-todo-name-container {
-    display: flex;
-    width: fit-content;
+.project-add-todo-name-label {
+    display: flex; 
+    width: 98%;
 }
+
+.project-add-todo-name-input {
+    width: 85%;
+}
+
+.project-add-todo-description-label {
+    display: flex;
+    width: 98%;
+}
+
+.project-add-todo-description-input {
+    width: 85%;
+}
+
+
+
+#project-add-todo-priority-label {
+    border-radius: 5px;
+    border: 2px solid rgb(92, 72, 72);
+    width: 230px;
+    align-self: center;
+}
+
+.project-add-todo-notes-label {
+    width: 95%;
+    height: 300%;
+    /* align-self: flex-start; */
+}
+
+.project-add-todo-notes-input {
+    width: 98%;
+    height: 80%;
+    resize: none;
+}
+
+.project-add-todo-date-label {
+    align-self: center
+}
+
+.project-add-todo-button-container {
+    align-self: center;
+    margin: 10px;
+}
+
+
 
 
 .project-delete-todo-pane {
