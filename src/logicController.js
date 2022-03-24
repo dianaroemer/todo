@@ -5,6 +5,7 @@
 // 2. If you have to use dates, don't use them in input forms
 // 3. If you have to use them in input forms, use everything in milliseconds and only convert to year/month/day for display purposes
 // 4. Do you really have to use Dates? Really? Can we just... not?
+// 5. For timezone inconsistencies when constructing Dates without specific times, try to use getTime() for milliseconds baseline, and adjust for getTimezoneOffset() when necessary
 
 import projectContainerObj from './projectContainerObj.js';
 import displayController from './displayController.js';
@@ -234,6 +235,10 @@ function logicController() {
 
         // attach projectEditButton functionality
         _eventController.attachProjectEditButton(projectPaneDivValues[1], newProject)
+
+        // Attach todoButton functionality
+        _eventController.attachProjectTodoAddButton(projectPaneDivValues[3], newProject);
+        _eventController.attachProjectTodoDeleteButton(projectPaneDivValues[4], newProject);
 
 
 

@@ -71,6 +71,20 @@ const eventController = ( logicControllerReference ) => {
         });
     }
 
+    const attachProjectTodoAddButton = (targetDiv, targetProject ) => {
+        targetDiv.addEventListener('click', () => {
+            console.log(`You've click on the Add To-Do Button from targetProject:`);
+            console.log(targetProject.getInfo());
+        })
+    }
+
+    const attachProjectTodoDeleteButton = (targetDiv, targetProject ) => {
+        targetDiv.addEventListener('click', () => {
+            console.log(`You've click on the Delete To-Do Button from targetProject:`);
+            console.log(targetProject.getInfo());
+        })
+    }
+
     return {
         _toggleMenuOpen,
         attachProjectContainerAddButtonListener,
@@ -81,6 +95,8 @@ const eventController = ( logicControllerReference ) => {
         attachProjectEditSaveButton,
         attachProjectEditCancelButton,
         attachProjectEditDeleteButton,
+        attachProjectTodoAddButton,
+        attachProjectTodoDeleteButton,
     }
 
 }

@@ -144,10 +144,10 @@ const displayController = () => {
         projectTodoAddButton.innerHTML = `Add To-Do`;
         todoListButtonContiainer.appendChild(projectTodoAddButton);
 
-        const projectTodoCancelButton = document.createElement('button');
-        projectTodoCancelButton.classList.add('project-todo-button');
-        projectTodoCancelButton.innerHTML = `Delete To-Do`;
-        todoListButtonContiainer.appendChild(projectTodoCancelButton);
+        const projectTodoDeleteButton = document.createElement('button');
+        projectTodoDeleteButton.classList.add('project-todo-button');
+        projectTodoDeleteButton.innerHTML = `Delete To-Do`;
+        todoListButtonContiainer.appendChild(projectTodoDeleteButton);
 
 
 
@@ -211,7 +211,7 @@ const displayController = () => {
         dateContainer.appendChild(dueDate);
 
 
-        return [finishedDiv, projectEditButton, nameContainer, projectTodoAddButton, projectTodoCancelButton, todoListUncompleted, todoListCompleted];
+        return [finishedDiv, projectEditButton, nameContainer, projectTodoAddButton, projectTodoDeleteButton, todoListUncompleted, todoListCompleted];
 
     }
 
@@ -423,7 +423,7 @@ const displayController = () => {
 
         let age;
         if (ageMillis > 86400000 ) {
-            age = (days - 1) + " Days"; // Days - 1 because the above days = days.toFixed() rounds up. This way, you don't create a project yesterday that's already 2 days old, when viewed today
+            age = (days - 1) + " Days"; // Days - 1 because the above line days = days.toFixed() rounds up. This way, you don't create a project yesterday that's already 2 days old when viewed today
         } else {
             age = hours + " Hours, " + totalMinutes + " Minutes";
         }
