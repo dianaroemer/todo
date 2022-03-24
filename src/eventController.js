@@ -32,6 +32,12 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
+    const attachProjectTodoPrioritySlider = (inputDivValue, targetDiv) => {
+        inputDivValue.addEventListener('input', () => {
+            _logicController._updateTodoPriorityColor(targetDiv, inputDivValue.value);
+        })
+    }
+
     const attachAddProjectSave = (targetDiv, values) => {
         console.log(values);
         targetDiv.addEventListener('click', () => {
@@ -73,15 +79,14 @@ const eventController = ( logicControllerReference ) => {
 
     const attachProjectTodoAddButton = (targetDiv, targetProject ) => {
         targetDiv.addEventListener('click', () => {
-            console.log(`You've click on the Add To-Do Button from targetProject:`);
-            console.log(targetProject.getInfo());
+            _logicController._projectAddTodoButton(targetProject);
         })
     }
 
     const attachProjectTodoDeleteButton = (targetDiv, targetProject ) => {
         targetDiv.addEventListener('click', () => {
-            console.log(`You've click on the Delete To-Do Button from targetProject:`);
-            console.log(targetProject.getInfo());
+            _logicController._projectDeleteTodoButton(targetProject);
+
         })
     }
 
@@ -90,6 +95,7 @@ const eventController = ( logicControllerReference ) => {
         attachProjectContainerAddButtonListener,
         attachAddProjectCancel,
         attachAddProjectPrioritySlider,
+        attachProjectTodoPrioritySlider,
         attachAddProjectSave,
         attachProjectEditButton,
         attachProjectEditSaveButton,

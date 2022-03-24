@@ -210,6 +210,42 @@ function logicController() {
     }
     this._updatePriorityColor = _updatePriorityColor;
 
+    const _updateTodoPriorityColor = (targetDiv, newValue) => {
+        // console.log(newValue);
+        // console.log(`I am _updatePriorityColor! I have been called on targetDiv: ${targetDiv} with newValue: ${newValue}`)
+        // console.log(typeof newValue);
+
+        // Typechanging newValue to a string to hit the switch statement's strict type checking
+        // let newValueString = '';
+        // newValueString = newValueString + newValue;
+
+        targetDiv.classList.remove("one-todo");
+        targetDiv.classList.remove("two-todo");
+        targetDiv.classList.remove("three-todo");
+        targetDiv.classList.remove("four-todo");
+        targetDiv.classList.remove("five-todo");
+
+        switch(newValue) {
+            case '1':
+                targetDiv.classList.add("one-todo");
+                break;
+            case '2':
+                targetDiv.classList.add("two-todo");
+                break;
+            case '3':
+                targetDiv.classList.add("three-todo");
+                break;
+            case '4':
+                targetDiv.classList.add("four-todo");
+                break;
+            case '5':
+                targetDiv.classList.add("five-todo");
+                break;
+        }
+
+    }
+    this._updateTodoPriorityColor = _updateTodoPriorityColor;
+
     const _generateProject = (nameInput, creationDateInput, dueDateInput, priorityInput, todoListInput) => {
 
         // Generate projectPane Div
@@ -459,6 +495,79 @@ function logicController() {
 
     }
     this._editProjectDeleteButton = _editProjectDeleteButton;
+
+    const _projectAddTodoButton = (targetProject) => {
+
+        console.log(`I'm in logicController, add todo button`);
+
+        console.log(`test if this project can open a menu, then open the Add toto menu targeting this project`);
+
+        
+        if(targetProject.getProjectMenuOpen()) {
+            console.log(`TargetProject is NOT in a state to open a new menu, returning to cancel addTodoButton function`);
+            return;
+           
+        }
+
+        console.log(`targetProject is in a state to open a menu, toggling and opening add todo menu`);
+        targetProject.toggleProjectMenuOpen();
+
+        // Add todo Menu
+        const addTodoPaneValues = _displayController.generateProjectAddTodoPane(targetProject);
+        const addTodoPane = addTodoPaneValues[0];
+
+        const addTodoPriorityLabel = addTodoPaneValues[3];
+        const addTodoPriorityValue = addTodoPaneValues[4];
+        // console.log(addTodoPriorityLabel);
+        // console.log(addTodoPriorityValue);
+
+
+        // Attach priority slider functionality
+        _eventController.attachAddProjectPrioritySlider(addTodoPriorityValue, addTodoPriorityLabel);
+
+
+        // Append Add Todo Menu to existing projectPane div
+        const projectPane = targetProject.getProjectDiv();
+        const projectNameContainer = projectPane.firstChild;
+        const projectTodoElementContainer = projectNameContainer.nextSibling;
+        projectTodoElementContainer.appendChild(addTodoPane);
+
+        
+        
+
+
+
+    }
+    this._projectAddTodoButton = _projectAddTodoButton;
+
+    const _projectDeleteTodoButton = (targetProject) => {
+
+        console.log(`I'm in logicController, delete todo button`);
+
+        console.log(`Test if this project can open a menu, then open the delete todo menu targeting this project`)
+
+        if(targetProject.getProjectMenuOpen()) {
+            console.log(`TargetProject is NOT in a state to open a new menu, returning to cancel deleteTodoButton function`);
+            return;
+           
+        }
+
+        console.log(`targetProject is in a state to open a menu, toggling and opening deleteTodoMenu`);
+        targetProject.toggleProjectMenuOpen();
+
+        // Add todo Menu
+        const deleteTodoPane = _displayController.generateProjectDeleteTodoPane(targetProject);
+
+        // Append Add Todo Menu to existing projectPane div
+        const projectPane = targetProject.getProjectDiv();
+        const projectNameContainer = projectPane.firstChild;
+        const projectTodoElementContainer = projectNameContainer.nextSibling;
+        projectTodoElementContainer.appendChild(deleteTodoPane);
+        
+
+
+    }
+    this._projectDeleteTodoButton = _projectDeleteTodoButton;
 
     return {
         getInfo, init,

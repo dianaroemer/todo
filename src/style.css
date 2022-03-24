@@ -374,3 +374,38 @@ nav ul li {
     width: 230px;
     margin-top: 5px;
 }
+
+/* -------------- Project Add Todo Pane Styling -------------- */
+
+.project-add-todo-pane {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 363px;
+    height: 310px;
+    background-color:rgb(218, 140, 140);
+    padding: 5px;
+
+    border-radius: 5px;
+    border: 2px solid rgb(92, 72, 72);
+
+}
+
+.project-add-todo-name-container {
+    display: flex;
+    width: fit-content;
+}
+
+
+.project-delete-todo-pane {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 373px;
+    height: 320px;
+    background-color:rgb(218, 140, 140);
+
+    border-radius: 5px;
+    border: 2px solid rgb(92, 72, 72);
+
+}

@@ -458,6 +458,65 @@ const displayController = () => {
 
     }
 
+    const generateProjectAddTodoPane = (targetProject) => {
+
+        const addTodoPane = document.createElement('div');
+        addTodoPane.classList.add('project-add-todo-pane');
+        
+        // Title
+        const titleLabel = document.createElement('label');
+        titleLabel.innerHTML = 'Name: ';
+        titleLabel.classList.add('project-add-todo-name-label');
+        addTodoPane.appendChild(titleLabel);
+        const titleInput = document.createElement('input');
+        titleInput.classList.add('project-add-todo-name-input');
+        titleLabel.appendChild(titleInput);
+
+        // Description
+        const descriptionLabel = document.createElement('label');
+        descriptionLabel.innerHTML = `Description: `;
+        descriptionLabel.classList.add('project-add-todo-description-label');
+        addTodoPane.appendChild(descriptionLabel);
+        const descriptionInput = document.createElement('input');
+        descriptionInput.classList.add('project-add-todo-description-input');
+        descriptionLabel.appendChild(descriptionInput);
+        
+        // Priority
+        let priorityLabel = document.createElement('label');
+        priorityLabel.innerText = `Priority: `;
+        priorityLabel.id = "projct-add-todo-priority-input";
+        addTodoPane.appendChild(priorityLabel);
+        let priorityInput = document.createElement('input');
+        priorityInput.type = 'range';
+        priorityInput.max = 5;
+        priorityInput.min = 1;
+        priorityInput.value = 3;
+        priorityLabel.appendChild(priorityInput);
+        let priorityOutput = document.createElement('output');
+        priorityOutput.value = priorityInput.value;
+        priorityInput.oninput = () => {priorityOutput.value = priorityInput.value};
+        priorityLabel.appendChild(priorityOutput);
+
+
+        // addTodoPane.innerHTML += targetProject.getInfo();
+
+
+
+        return [addTodoPane, titleInput, descriptionInput, priorityLabel, priorityInput];
+
+    }
+
+    const generateProjectDeleteTodoPane = (targetProject) => {
+        const deleteTodoPane = document.createElement('div');
+        deleteTodoPane.classList.add('project-delete-todo-pane');
+        
+        
+        deleteTodoPane.innerHTML = targetProject.getInfo();
+
+
+
+        return deleteTodoPane;
+    }
 
 
 
@@ -469,6 +528,8 @@ const displayController = () => {
         generateTodoDiv,
         generateTodoListContainer,
         generateProjectEditPane,
+        generateProjectAddTodoPane,
+        generateProjectDeleteTodoPane,
         
     }
 
