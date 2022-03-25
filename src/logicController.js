@@ -68,12 +68,12 @@ function logicController() {
 
     const _toggleProjectContainerAddButtonMenu = () => {
 
-        console.log(`toggle projectContainerObj's addButtonMenu`);
+        // console.log(`toggle projectContainerObj's addButtonMenu`);
 
-        console.log('Check if the menu is in a state to be opened');
+        // console.log('Check if the menu is in a state to be opened');
         if( !_projectContainer.getAddButtonMenu()) {
             _projectContainer.toggleAddButtonMenu();
-            console.log(_projectContainer.getAddButtonMenu());
+            // console.log(_projectContainer.getAddButtonMenu());
 
             let _addMenu = _displayController.generateProjectContainerAddButtonMenu();
             _projectContainer.getProjectContainerDiv().appendChild(_addMenu[0]);
@@ -81,7 +81,7 @@ function logicController() {
             // Add event handlers to priority color slider, and buttons, keep reference of div objects referring to input.value
 
 
-            console.log('addButtonMenu is in a state to be opened, go to displayController and build the div necessary to populate the menu');
+            // console.log('addButtonMenu is in a state to be opened, go to displayController and build the div necessary to populate the menu');
 
             // Adding Event listeners to appropriate objects in addButtonMenu
             // return [finishedDiv, nameInput, priorityInput, priorityLabel, dueDateInput, creationDate, saveButton, cancelButton]
@@ -112,7 +112,7 @@ function logicController() {
         // Do thing to values
         // close menu
 
-        console.log(values);
+        // console.log(values);
 
         // let sampleDiv = document.createElement('div');
         // sampleDiv.classList.add('project-pane');
@@ -120,7 +120,7 @@ function logicController() {
 
         const nameInput = values[1].value;
         const priorityInput = values[2].value;
-        console.log(values[4].value)
+        // console.log(values[4].value)
         let dueDateInput;
         if ( values[4].value ) {
             dueDateInput = new Date(values[4].value);
@@ -128,7 +128,7 @@ function logicController() {
         } else {
             dueDateInput = new Date();
         }
-        console.log(dueDateInput);
+        // console.log(dueDateInput);
         const creationDateInput = values[5];
         // const projectDivInput = sampleDiv;
 
@@ -279,7 +279,7 @@ function logicController() {
 
        
         // Generate projectObj
-        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, sampleTodoList );
+        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput,projectPaneDivValues[0], sampleTodoList );
 
         // Attach projectObj to _projectContainer._projectArr[]
         _projectContainer.addProject(newProject);
@@ -515,9 +515,9 @@ function logicController() {
 
     const _projectAddTodoButton = (targetProject) => {
 
-        console.log(`I'm in logicController, add todo button`);
+        // console.log(`I'm in logicController, add todo button`);
 
-        console.log(`test if this project can open a menu, then open the Add toto menu targeting this project`);
+        // console.log(`test if this project can open a menu, then open the Add toto menu targeting this project`);
 
         
         if(targetProject.getProjectMenuOpen()) {
@@ -526,7 +526,7 @@ function logicController() {
            
         }
 
-        console.log(`targetProject is in a state to open a menu, toggling and opening add todo menu`);
+        // console.log(`targetProject is in a state to open a menu, toggling and opening add todo menu`);
         targetProject.toggleProjectMenuOpen();
 
         // Add todo Menu
@@ -566,8 +566,8 @@ function logicController() {
         // console.log(`You've click the save button on the add Todo Pane`)
 
         // Save values of new todoObj to targetProject
-        console.log(savedValues);
-        console.log(savedValues[0].value);
+        // console.log(savedValues);
+        // console.log(savedValues[0].value);
         const title = savedValues[0].value;
         const description = savedValues[1].value;
         const priority = savedValues[2].value;
@@ -576,16 +576,16 @@ function logicController() {
         const creationDate = savedValues[5];
 
         if( dueDate == "") {
-            console.log(`default dueDate, overwriting with current date`);
+            // console.log(`default dueDate, overwriting with current date`);
             dueDate = new Date();
         }
 
-        console.log(`title: ${title}
-        description: ${description}
-        priority: ${priority}
-        notes: ${notes}
-        dueDate: ${dueDate}
-        creationDate: ${creationDate}`)
+        // console.log(`title: ${title}
+        // description: ${description}
+        // priority: ${priority}
+        // notes: ${notes}
+        // dueDate: ${dueDate}
+        // creationDate: ${creationDate}`)
 
         let newTodo = todoObj();
         newTodo.init(title, description, dueDate, creationDate, priority, notes, [], false);
@@ -596,7 +596,7 @@ function logicController() {
         targetProject.addTodoObj(newTodo);
         // console.log(targetProject.getTodoList());
         // console.log(` -------------------------- targetProject.getTodoList()[0].getInfo()`);
-        console.log(targetProject.getTodoList()[0].getInfo());
+        // console.log(targetProject.getTodoList()[0].getInfo());
 
 
         // Update targetProject's project-todo-list div appropriately
@@ -627,16 +627,11 @@ function logicController() {
     }
     this._projectAddTodoCancelButton = _projectAddTodoCancelButton;
 
-
-
-
-
-
     const _projectDeleteTodoButton = (targetProject) => {
 
-        console.log(`I'm in logicController, delete todo button`);
+        // console.log(`I'm in logicController, delete todo button`);
 
-        console.log(`Test if this project can open a menu, then open the delete todo menu targeting this project`)
+        // console.log(`Test if this project can open a menu, then open the delete todo menu targeting this project`)
 
         if(targetProject.getProjectMenuOpen()) {
             console.log(`TargetProject is NOT in a state to open a new menu, returning to cancel deleteTodoButton function`);
@@ -644,23 +639,126 @@ function logicController() {
            
         }
 
-        console.log(`targetProject is in a state to open a menu, toggling and opening deleteTodoMenu`);
+        // console.log(`targetProject is in a state to open a menu, toggling and opening deleteTodoMenu`);
         targetProject.toggleProjectMenuOpen();
 
         // Add todo Menu
         const deleteTodoPaneValues = _displayController.generateProjectDeleteTodoPane(targetProject);
         const deleteTodoPane = deleteTodoPaneValues[0];
+        const deleteSelectedButton = deleteTodoPaneValues[1];
+        const cancelButton = deleteTodoPaneValues[2];
+        const deleteCompletedButton = deleteTodoPaneValues[3];
+        const todoPaneList = deleteTodoPaneValues[4];
+        const todoPaneListCompleted = deleteTodoPaneValues[5];
+        const todoPaneListDivs = deleteTodoPaneValues[6];
 
         // Append Add Todo Menu to existing projectPane div
         const projectPane = targetProject.getProjectDiv();
         const projectNameContainer = projectPane.firstChild;
         const projectTodoElementContainer = projectNameContainer.nextSibling;
         projectTodoElementContainer.appendChild(deleteTodoPane);
-        
+
+        // Attach functionality to buttons
+        _eventController.attachProjectDeleteSelectedButton(deleteSelectedButton, targetProject, deleteTodoPane,todoPaneList);
+        _eventController.attachProjectDeleteCancelButton(cancelButton, targetProject, deleteTodoPane);
+        _eventController.attachProjectDeleteCompletedButton(deleteCompletedButton, targetProject, deleteTodoPane);
+
+        // Attach functionality to todoPaneList
+        todoPaneListDivs.forEach( element => {
+            _eventController.attachSelectTodoForDeletion(element);
+        })
+
+
 
 
     }
     this._projectDeleteTodoButton = _projectDeleteTodoButton;
+
+    const _toggleSelectedDivForDeletion = (targetTodoDiv) => {
+        console.log(`You clicked a div element to target for deletion! Modifying its class to denote selection`);
+        targetTodoDiv.classList.toggle('marked-for-deletion');
+    }
+    this._toggleSelectedDivForDeletion = _toggleSelectedDivForDeletion;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const _projectDeleteTodoSelectedButton = (targetProject, deleteTodoPane, todoPaneList) => {
+
+        console.log('here');
+
+        let projectTodoElementContainer = targetProject.getProjectDiv().querySelector('.project-todo-element-container');
+
+        console.log(todoPaneList);
+
+
+
+
+
+
+        // Remove the deleteTodoPane div Child element from the targetProject
+        projectTodoElementContainer.removeChild(deleteTodoPane);
+        // Toggle projectMenuOpen to false, so that the editMenu can be re-opened
+        targetProject.toggleProjectMenuOpen();
+
+    }
+    this._projectDeleteTodoSelectedButton = _projectDeleteTodoSelectedButton;
+
+
+
+
+
+
+
+
+    const _projectDeleteTodoCancelButton = (targetProject, deleteTodoPane) => {
+
+        let projectTodoElementContainer = targetProject.getProjectDiv().querySelector('.project-todo-element-container');
+
+        // Remove the deleteTodoPane div Child element from the targetProject
+        projectTodoElementContainer.removeChild(deleteTodoPane);
+        // Toggle projectMenuOpen to false, so that the editMenu can be re-opened
+        targetProject.toggleProjectMenuOpen();
+
+    }
+    this._projectDeleteTodoCancelButton = _projectDeleteTodoCancelButton;
+    
+    const _projectDeleteTodoCompletedButton = (targetProject, deleteTodoPane) => {
+
+        let projectTodoElementContainer = targetProject.getProjectDiv().querySelector('.project-todo-element-container');
+
+        // Remove the deleteTodoPane div Child element from the targetProject
+        projectTodoElementContainer.removeChild(deleteTodoPane);
+        // Toggle projectMenuOpen to false, so that the editMenu can be re-opened
+        targetProject.toggleProjectMenuOpen();
+
+
+    }
+    this._projectDeleteTodoCompletedButton = _projectDeleteTodoCompletedButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return {
         getInfo, init,

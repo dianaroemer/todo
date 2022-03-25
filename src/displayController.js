@@ -276,8 +276,6 @@ const displayController = () => {
         }
 
 
-        console.log(todoListReference);
-
         return [projectTodoList, todoListReference, todoListCompleted];
 
     }
@@ -519,8 +517,32 @@ const displayController = () => {
         todoPane.classList.add('project-delete-todo-list');
         deleteTodoPane.appendChild(todoPane);
 
+        const targetProjectTodoList = targetProject.getTodoList();
+        
+        let todoPaneList = [];
+        let todoPaneListCompleted = [];
+        let todoPaneListDivs = [];
+
+        targetProjectTodoList.forEach( element => {
+            let todoElementDiv = generateProjectDeleteTodoDiv(element);
+
+            todoPane.appendChild(todoElementDiv);
+            todoPaneList.push(element);
+
+            if( element.getComplete() ){
+                todoPaneListCompleted.push(element);
+            }
+            todoPaneListDivs.push(todoElementDiv);
+
+        });
+
+
+
+
         // Example of tracing from targetProject to all todo elements
         // console.log(targetProject.getTodoList()[0].getInfo());
+
+
 
         // Buttons
         const deleteTodoButtonContainer = document.createElement('div');
@@ -544,9 +566,39 @@ const displayController = () => {
         deleteTodoButtonContainer.appendChild(deleteCompletedButton);
 
 
-        return [deleteTodoPane, deleteSelectedButton, cancelButton, deleteCompletedButton];
+        return [deleteTodoPane, deleteSelectedButton, cancelButton, deleteCompletedButton, todoPaneList, todoPaneListCompleted, todoPaneListDivs];
     }
 
+    const generateProjectDeleteTodoDiv = (todoObject) => {
+
+        const todoPane = document.createElement('div');
+
+        if( todoObject.getComplete() ){
+            // console.log(`${todoObject.getTitle()} is complete: ${todoObject.getComplete()}`)
+            todoPane.classList.add('todo-completed');
+        }
+        todoPane.classList.add('project-delete-todo-div')
+
+
+        // Trimming down long title strings that escape name.maxLength
+        const titleText = todoObject.getTitle();
+        // console.log(titleText);
+        let newTitle = "";
+        if (titleText.length > 32) {
+            for (let i = 0; i < 34; i++) {
+                newTitle += titleText.charAt(i);
+            }
+            newTitle += "...";
+        } else {
+            newTitle = titleText;
+        }
+        // console.log(newTitle);
+        todoPane.innerText += newTitle;
+
+        return todoPane;
+
+
+    }
 
 
     return {
@@ -559,6 +611,7 @@ const displayController = () => {
         generateProjectEditPane,
         generateProjectAddTodoPane,
         generateProjectDeleteTodoPane,
+        generateProjectDeleteTodoDiv,
         
     }
 

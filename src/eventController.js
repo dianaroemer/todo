@@ -39,7 +39,7 @@ const eventController = ( logicControllerReference ) => {
     }
 
     const attachAddProjectSave = (targetDiv, values) => {
-        console.log(values);
+        // console.log(values);
         targetDiv.addEventListener('click', () => {
             // console.log('you clicked save');
             // console.log(values);
@@ -97,10 +97,47 @@ const eventController = ( logicControllerReference ) => {
     }
 
     const attachProjectAddTodoCancelButton = (targetCancelButton, targetProject, addTodoPane) => {
+        console.log('here');
         targetCancelButton.addEventListener('click', () => {
             _logicController._projectAddTodoCancelButton(targetProject, addTodoPane);
         })
     }
+
+    const attachSelectTodoForDeletion = (targetTodo) => {
+        targetTodo.addEventListener('click', () => {
+            // console.log('You clicked a todo Div in the delete pane!');
+            _logicController._toggleSelectedDivForDeletion(targetTodo)
+        })
+    }
+
+    const attachProjectDeleteSelectedButton = (targetDeleteSelectedButton, targetProject, deleteTodoPane, todoPaneList) => {
+        targetDeleteSelectedButton.addEventListener('click', () => {
+            console.log(`You cliked the Delete Selected button from project: `)
+            console.log(targetProject.getProjectName());
+            _logicController._projectDeleteTodoSelectedButton(targetProject, deleteTodoPane, todoPaneList);
+        })
+    }
+
+    const attachProjectDeleteCancelButton = (targetDeleteCancel, targetProject, deleteTodoPane) => {
+        targetDeleteCancel.addEventListener('click', () => {
+
+            
+            _logicController._projectDeleteTodoCancelButton(targetProject, deleteTodoPane);
+
+            // _logicController._projectAddTodoCancelButton(targetProject, addTodoPane);
+        })
+    }
+
+    const attachProjectDeleteCompletedButton = (targetDeleteCompletedButton, targetProject, deleteTodoPane) => {
+        targetDeleteCompletedButton.addEventListener('click', () => {
+            console.log(`You cliked the Delete Completed button from project: `)
+            console.log(targetProject.getProjectName());
+            
+            // _logicController._projectAddTodoCancelButton(targetProject, addTodoPane);
+        })
+    }
+
+
 
     return {
         _toggleMenuOpen,
@@ -117,6 +154,12 @@ const eventController = ( logicControllerReference ) => {
         attachProjectTodoDeleteButton,
         attachProjectAddTodoSaveButton,
         attachProjectAddTodoCancelButton,
+        attachSelectTodoForDeletion,
+        attachProjectDeleteSelectedButton,
+        attachProjectDeleteCancelButton,
+        attachProjectDeleteCompletedButton,
+
+
 
     }
 

@@ -442,7 +442,9 @@ nav ul li {
     margin: 10px;
 }
 
-
+.marked-for-deletion {
+    background-color:rgba(189, 28, 28, 0.7);
+}
 
 
 .project-delete-todo-pane {
@@ -458,10 +460,29 @@ nav ul li {
 }
 
 .project-delete-todo-list {
-    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f4f4;
     height: 75%;
+    max-height: 75%;
+    overflow-y: auto;
     width: 97%;
     padding: 5px;
+
+
+    border-radius: 5px;
+    border: 1px solid rgb(92, 72, 72);
+
+}
+
+.project-delete-todo-div {
+    align-self: flex-start;
+    padding: 3px;
+    padding-left: 3px;
+}
+
+.delete-todo-div-completed {
+
 }
 
 .project-delete-todo-completed-button {
