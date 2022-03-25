@@ -90,9 +90,9 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
-    const attachProjectAddTodoSaveButton = (targetSaveButton) => {
+    const attachProjectAddTodoSaveButton = (targetSaveButton, targetProject, addTodoPane, savedValues) => {
         targetSaveButton.addEventListener('click', () => {
-            _logicController._projectAddTodoSaveButton();
+            _logicController._projectAddTodoSaveButton(targetProject, addTodoPane, savedValues);
         })
     }
 

@@ -10,7 +10,6 @@ const displayController = () => {
 
     const getInfo = () => {
         return `I am displayController. My functions are as follows: 
-        generateProjectContainerDiv
 
         `; 
     }
@@ -149,29 +148,11 @@ const displayController = () => {
         projectTodoDeleteButton.innerHTML = `Delete To-Do`;
         todoListButtonContiainer.appendChild(projectTodoDeleteButton);
 
-
-        let sampleTodo = todoObj();
-        sampleTodo.init('sampleTrue with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
-        let sampleTodo2 = todoObj();
-        sampleTodo2.init('sampleFalse with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
-        let sampleTodo3 = todoObj();
-        sampleTodo3.init('False12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], false);
-        let sampleTodo4 = todoObj();
-        sampleTodo4.init('True12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], true);
-     
-
-        let sampleTodoList = [sampleTodo,sampleTodo2, sampleTodo3, sampleTodo4];
-
-
-        // XXXUPDATEXXX change sampleTodoList to take todoListInput
-        let projectTodoList = generateTodoListContainer(sampleTodoList);
+        // Generate todoListDivs from todoListInput and populate appropriately
+        let projectTodoList = generateTodoListContainer(todoListInput);
         todoListContainer.appendChild(projectTodoList[0]);
         const todoListUncompleted = projectTodoList[1];
         const todoListCompleted = projectTodoList[2];
-        // XXXUPDATEXXX
-
-
-   
 
         const dateContainer = document.createElement('div');
         dateContainer.classList.add('project-date-container');
@@ -534,12 +515,36 @@ const displayController = () => {
         const deleteTodoPane = document.createElement('div');
         deleteTodoPane.classList.add('project-delete-todo-pane');
         
-        
-        deleteTodoPane.innerHTML = targetProject.getInfo();
+        const todoPane = document.createElement('div');
+        todoPane.classList.add('project-delete-todo-list');
+        deleteTodoPane.appendChild(todoPane);
+
+        // Example of tracing from targetProject to all todo elements
+        // console.log(targetProject.getTodoList()[0].getInfo());
+
+        // Buttons
+        const deleteTodoButtonContainer = document.createElement('div');
+        deleteTodoButtonContainer.classList.add('project-delete-todo-button-container');
+        let deleteSelectedButton = document.createElement('button');
+        deleteSelectedButton.innerHTML = `Delete Selected`;
+        // changing the button's type overrides the default Save Button functionality of the form element to NOT REDIRECT with the form element, aka reloading the page
+        deleteSelectedButton.type = 'button';
+
+        let cancelButton = document.createElement('button');
+        cancelButton.innerHTML = `Cancel`;
+        cancelButton.type = 'button';
+        deleteTodoButtonContainer.appendChild(deleteSelectedButton);
+        deleteTodoButtonContainer.appendChild(cancelButton);
+        deleteTodoPane.appendChild(deleteTodoButtonContainer);
+
+        const deleteCompletedButton = document.createElement('button');
+        deleteCompletedButton.innerHTML = `Delete Completed To-do's`;
+        deleteCompletedButton.classList.add('project-delete-todo-completed-button')
+        deleteCompletedButton.type = 'button';
+        deleteTodoButtonContainer.appendChild(deleteCompletedButton);
 
 
-
-        return deleteTodoPane;
+        return [deleteTodoPane, deleteSelectedButton, cancelButton, deleteCompletedButton];
     }
 
 

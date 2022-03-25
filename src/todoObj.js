@@ -14,8 +14,8 @@ const todoObj = () => {
     let _todoDiv;
 
     const getInfo = () => {
-        console.log('_checklist contents: ');
-        console.log(getChecklist());
+        // console.log('_checklist contents: ');
+        // console.log(getChecklist());
         return `                _title: ${_title}
                 _description: ${_description}
                 _dueDate: ${_dueDate}

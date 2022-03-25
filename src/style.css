@@ -299,6 +299,7 @@ nav ul li {
     /* background-color: grey; */
     overflow-y: auto;
     padding-top: 5px;
+    max-height: 223px;
 }
 
 
@@ -454,5 +455,16 @@ nav ul li {
 
     border-radius: 5px;
     border: 2px solid rgb(92, 72, 72);
+}
 
+.project-delete-todo-list {
+    background-color: grey;
+    height: 75%;
+    width: 97%;
+    padding: 5px;
+}
+
+.project-delete-todo-completed-button {
+    width: 250px;
+    align-self: center;
 }

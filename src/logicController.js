@@ -12,6 +12,8 @@ import displayController from './displayController.js';
 // import {eventController, attachAddButtonListener } from './eventController.js';
 import eventController from './eventController.js';
 import { te } from 'date-fns/locale';
+import todoObj from './todoObj.js';
+// import projectObj from './project.js';
 
 
 function logicController() {
@@ -252,15 +254,32 @@ function logicController() {
         // Generate projectObj
         // Attach functionality to appropriate Div elements, tying them to projectObj values
 
+        // Sample todoList for use in test - XXXUPDATEXXX
+        let sampleTodo = todoObj();
+        sampleTodo.init('sampleTrue with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
+        let sampleTodo2 = todoObj();
+        sampleTodo2.init('sampleFalse with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        let sampleTodo3 = todoObj();
+        sampleTodo3.init('False12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        let sampleTodo4 = todoObj();
+        sampleTodo4.init('True12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], true);
+
+
+        let sampleTodoList = [sampleTodo,sampleTodo2, sampleTodo3, sampleTodo4];
+
+
+        // XXXUPDATEXXX projectPaneDivValues to take todoListInput instead of sampleTodoList
         // Generate projectPane Div
-        let projectPaneDivValues = _displayController.generateProjectPane(nameInput, priorityInput, dueDateInput, creationDateInput, todoListInput);
+        let projectPaneDivValues = _displayController.generateProjectPane(nameInput, priorityInput, dueDateInput, creationDateInput, sampleTodoList);
         _projectContainer.getProjectContainerDiv().appendChild(projectPaneDivValues[0]);
+        // XXXUPDATEXXX See above
 
         // updatePriority color of projectPane
         _updatePriorityColor(projectPaneDivValues[2], priorityInput);
 
+       
         // Generate projectObj
-        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, todoListInput );
+        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput, sampleTodoList );
 
         // Attach projectObj to _projectContainer._projectArr[]
         _projectContainer.addProject(newProject);
@@ -444,8 +463,6 @@ function logicController() {
             }
 
 
-            // Problem - assigning new dates text to the text are losing 8 hours to GMT, making days show as 1 day older than they are
-
         // Close editPane and toggleProjectMenuOpen()
         let editPane = targetProject.getProjectDiv().querySelector('.project-edit-pane');
         targetProject.getProjectDiv().removeChild(editPane);
@@ -535,8 +552,9 @@ function logicController() {
         // Attach priority slider functionality
         _eventController.attachAddProjectPrioritySlider(addTodoPriorityValue, addTodoPriorityLabel);
         
-        // Attach saveButton and cancelButton functionality        
-        _eventController.attachProjectAddTodoSaveButton(addTodoSaveButton);
+        // Attach saveButton and cancelButton functionality     
+        let savedValues = [addTodoTitle, addTodoDescription, addTodoPriorityValue, addTodoNotesInput, addTodoDueDateInput, addTodoCreationDateInput];
+        _eventController.attachProjectAddTodoSaveButton(addTodoSaveButton, targetProject, addTodoPane, savedValues);
         _eventController.attachProjectAddTodoCancelButton(addTodoCancelButton, targetProject, addTodoPane);
 
 
@@ -544,19 +562,64 @@ function logicController() {
     }
     this._projectAddTodoButton = _projectAddTodoButton;
 
-    const _projectAddTodoSaveButton = () => {
-        console.log(`You've click the save button on the add Todo Pane`)
+    const _projectAddTodoSaveButton = (targetProject, addTodoPane, savedValues) => {
+        // console.log(`You've click the save button on the add Todo Pane`)
+
+        // Save values of new todoObj to targetProject
+        console.log(savedValues);
+        console.log(savedValues[0].value);
+        const title = savedValues[0].value;
+        const description = savedValues[1].value;
+        const priority = savedValues[2].value;
+        const notes = savedValues[3].value;
+        let dueDate = savedValues[4].value;
+        const creationDate = savedValues[5];
+
+        if( dueDate == "") {
+            console.log(`default dueDate, overwriting with current date`);
+            dueDate = new Date();
+        }
+
+        console.log(`title: ${title}
+        description: ${description}
+        priority: ${priority}
+        notes: ${notes}
+        dueDate: ${dueDate}
+        creationDate: ${creationDate}`)
+
+        let newTodo = todoObj();
+        newTodo.init(title, description, dueDate, creationDate, priority, notes, [], false);
+        // console.log(` --------- newTodo.getInfo() ---------- `)
+        // console.log(newTodo.getInfo());
+        // console.log(` --- targetproject.getTodoList() --- `)
+        // console.log(targetProject.getTodoList());
+        targetProject.addTodoObj(newTodo);
+        // console.log(targetProject.getTodoList());
+        // console.log(` -------------------------- targetProject.getTodoList()[0].getInfo()`);
+        console.log(targetProject.getTodoList()[0].getInfo());
+
+
+        // Update targetProject's project-todo-list div appropriately
+        const newTodoDiv = _displayController.generateTodoDiv(newTodo);
+        const todoListContainer = targetProject.getProjectDiv().childNodes[1].childNodes[1].childNodes[0]; // This is positively filthy for stack-tracing.
+        todoListContainer.appendChild(newTodoDiv);
+        
+
+        // Remove addTodoMenu from targetProject's project-pane div
+        const todoElementContainer = targetProject.getProjectDiv().childNodes[1];
+        todoElementContainer.removeChild(addTodoPane);
+        // Toggle projectMenuOpen to false
+        targetProject.toggleProjectMenuOpen();
+
+        // Stack tracing example from the top of logic controller to each todo child
+        // console.log(_projectContainer.getProjectArr()[0].getTodoList()[0].getInfo());
+
     }
     this._projectAddTodoSaveButton = _projectAddTodoSaveButton;
 
     const _projectAddTodoCancelButton = (targetProject, addTodoPane) => {
-        // console.log(`You've click the cancel button on the add Todo Pane`);
         // Target div and delete it
-        // console.log(targetProject.getProjectDiv());
-        // console.log(addTodoPane);
-
         const todoElementContainer = targetProject.getProjectDiv().childNodes[1];
-        // console.log(todoElementContainer);
         todoElementContainer.removeChild(addTodoPane);
         // Toggle projectMenuOpen to false
         targetProject.toggleProjectMenuOpen();
@@ -585,7 +648,8 @@ function logicController() {
         targetProject.toggleProjectMenuOpen();
 
         // Add todo Menu
-        const deleteTodoPane = _displayController.generateProjectDeleteTodoPane(targetProject);
+        const deleteTodoPaneValues = _displayController.generateProjectDeleteTodoPane(targetProject);
+        const deleteTodoPane = deleteTodoPaneValues[0];
 
         // Append Add Todo Menu to existing projectPane div
         const projectPane = targetProject.getProjectDiv();
