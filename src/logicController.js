@@ -780,6 +780,35 @@ function logicController() {
     }
     this._projectDeleteTodoCompletedButton = _projectDeleteTodoCompletedButton;
 
+
+    const _toggleSelectedTodo = (targetTodo) => {
+
+        console.log(`You clicked toggleSelectedTodo targeting: ${targetTodo}`);
+
+        const targetTodoDiv = targetTodo.getTodoDiv();
+        targetTodoDiv.classList.toggle('todo-completed');
+        targetTodoDiv.classList.toggle('todo-incomplete');
+
+        // Generating div references for easy docing of next if statement deciding functionality
+        const projectTodoList = targetTodoDiv.parentNode.parentNode;
+        const todoList = projectTodoList.firstChild;
+        const todoListCompleted = projectTodoList.querySelector('.todo-list-completed');
+        
+        let isComplete = targetTodo.getComplete();
+        if( isComplete ) {
+            targetTodoDiv.firstChild.checked = false;
+            targetTodo.setComplete(false);
+            todoList.appendChild(targetTodoDiv);
+        } else {
+            targetTodoDiv.firstChild.checked = true;
+            targetTodo.setComplete(true);
+            todoListCompleted.appendChild(targetTodoDiv);
+        }
+
+    }
+    this._toggleSelectedTodo = _toggleSelectedTodo;
+
+
     return {
         getInfo, init,
         getProjectContainer, setProjectContainer,
