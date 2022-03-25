@@ -126,12 +126,12 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
-    const attachProjectDeleteCompletedButton = (targetDeleteCompletedButton, targetProject, deleteTodoPane) => {
+    const attachProjectDeleteCompletedButton = (targetDeleteCompletedButton, targetProject, deleteTodoPane, todoPaneList) => {
         targetDeleteCompletedButton.addEventListener('click', () => {
             console.log(`You cliked the Delete Completed button from project: `)
             console.log(targetProject.getProjectName());
             
-            // _logicController._projectAddTodoCancelButton(targetProject, addTodoPane);
+            _logicController._projectDeleteTodoCompletedButton(targetProject, deleteTodoPane, todoPaneList);
         })
     }
 

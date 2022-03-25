@@ -565,7 +565,7 @@ const displayController = () => {
         deleteTodoButtonContainer.appendChild(deleteCompletedButton);
 
 
-        return [deleteTodoPane, deleteSelectedButton, cancelButton, deleteCompletedButton, todoPaneList, todoPaneListCompleted, todoPaneListDivs];
+        return [deleteTodoPane, deleteSelectedButton, cancelButton, deleteCompletedButton, todoPaneList];
     }
 
     const generateProjectDeleteTodoDiv = (todoObject) => {

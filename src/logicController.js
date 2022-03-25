@@ -650,7 +650,6 @@ function logicController() {
         const deleteCompletedButton = deleteTodoPaneValues[3];
         const todoPaneList = deleteTodoPaneValues[4];
         const todoPaneListCompleted = deleteTodoPaneValues[5];
-        const todoPaneListDivs = deleteTodoPaneValues[6];
 
         // Append Add Todo Menu to existing projectPane div
         const projectPane = targetProject.getProjectDiv();
@@ -661,7 +660,7 @@ function logicController() {
         // Attach functionality to buttons
         _eventController.attachProjectDeleteSelectedButton(deleteSelectedButton, targetProject, deleteTodoPane,todoPaneList);
         _eventController.attachProjectDeleteCancelButton(cancelButton, targetProject, deleteTodoPane);
-        _eventController.attachProjectDeleteCompletedButton(deleteCompletedButton, targetProject, deleteTodoPane);
+        _eventController.attachProjectDeleteCompletedButton(deleteCompletedButton, targetProject, deleteTodoPane, todoPaneList);
 
         // Attach functionality to todoPaneList
         todoPaneList.forEach( element => {
@@ -680,24 +679,9 @@ function logicController() {
     }
     this._toggleSelectedDivForDeletion = _toggleSelectedDivForDeletion;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const _projectDeleteTodoSelectedButton = (targetProject, deleteTodoPane, todoPaneList) => {
 
         let projectTodoElementContainer = targetProject.getProjectDiv().querySelector('.project-todo-element-container');
-
         let todoList = projectTodoElementContainer.querySelector('.todo-list');
         let todoListCompleted = projectTodoElementContainer.querySelector('.todo-list-completed');
 
@@ -733,13 +717,6 @@ function logicController() {
     }
     this._projectDeleteTodoSelectedButton = _projectDeleteTodoSelectedButton;
 
-
-
-
-
-
-
-
     const _projectDeleteTodoCancelButton = (targetProject, deleteTodoPane) => {
 
         let projectTodoElementContainer = targetProject.getProjectDiv().querySelector('.project-todo-element-container');
@@ -752,9 +729,35 @@ function logicController() {
     }
     this._projectDeleteTodoCancelButton = _projectDeleteTodoCancelButton;
     
-    const _projectDeleteTodoCompletedButton = (targetProject, deleteTodoPane) => {
+    const _projectDeleteTodoCompletedButton = (targetProject, deleteTodoPane, todoPaneList) => {
 
         let projectTodoElementContainer = targetProject.getProjectDiv().querySelector('.project-todo-element-container');
+        let todoListCompleted = projectTodoElementContainer.querySelector('.todo-list-completed');
+
+        let markedForDeletion = []
+        todoPaneList.forEach( element => {
+            let todoClass = element.getTodoDeletionDiv().classList.contains("todo-completed");
+            if(todoClass) {
+                markedForDeletion.push(element);
+            }
+        })
+
+        console.log(`The follow to-do elements are marked for deletion: `);
+        console.log(markedForDeletion);
+        markedForDeletion.forEach(element => {
+            console.log(`Deleting the following todo: ${element.getTitle()}
+            from targetProject: ${targetProject.getProjectName()}`)
+            targetProject.removeTargetTodo(element);
+            todoListCompleted.removeChild(element.getTodoDiv());
+        })
+
+        console.log(targetProject.getTodoList());
+
+
+
+
+
+
 
         // Remove the deleteTodoPane div Child element from the targetProject
         projectTodoElementContainer.removeChild(deleteTodoPane);
