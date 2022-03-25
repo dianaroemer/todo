@@ -436,6 +436,8 @@ const displayController = () => {
         const titleInput = document.createElement('input');
         titleInput.classList.add('project-add-todo-name-input');
         titleInput.maxLength = "30";
+        titleInput.value = "New To-Do";
+        titleInput.minLength = "1";
         titleLabel.appendChild(titleInput);
 
         // Description
@@ -520,19 +522,11 @@ const displayController = () => {
         const targetProjectTodoList = targetProject.getTodoList();
         
         let todoPaneList = [];
-        let todoPaneListCompleted = [];
-        let todoPaneListDivs = [];
 
         targetProjectTodoList.forEach( element => {
             let todoElementDiv = generateProjectDeleteTodoDiv(element);
-
             todoPane.appendChild(todoElementDiv);
             todoPaneList.push(element);
-            todoPaneListDivs.push(todoElementDiv);
-            if( element.getComplete() ){
-                todoPaneListCompleted.push(element);
-            }
-
         });
 
 

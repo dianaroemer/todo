@@ -135,6 +135,18 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
+    const attachTodoListeners = (targetTodo) => {
+        const targetTodoDiv = targetTodo.getTodoDiv();
+        targetTodoDiv.firstChild.addEventListener('click', () => {
+            console.log(`You clicked the first child of ${targetTodoDiv}`)
+        })
+        targetTodoDiv.firstChild.nextSibling.addEventListener('click', () => {
+            console.log(`You clicked the second child of ${targetTodoDiv}`)
+        })
+        targetTodoDiv.lastChild.addEventListener('click', () => {
+            console.log(`You clicked the last child of ${targetTodoDiv}`)
+        })
+    }
 
 
     return {
@@ -156,6 +168,7 @@ const eventController = ( logicControllerReference ) => {
         attachProjectDeleteSelectedButton,
         attachProjectDeleteCancelButton,
         attachProjectDeleteCompletedButton,
+        attachTodoListeners,
 
 
 

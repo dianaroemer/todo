@@ -280,6 +280,7 @@ function logicController() {
        
         // Generate projectObj
         let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput,projectPaneDivValues[0], sampleTodoList );
+        // XXXUPDATEXXX Remove sampleTodoList and replace with todoListInput when ready
 
         // Attach projectObj to _projectContainer._projectArr[]
         _projectContainer.addProject(newProject);
@@ -294,6 +295,17 @@ function logicController() {
         // Attach todoButton functionality
         _eventController.attachProjectTodoAddButton(projectPaneDivValues[3], newProject);
         _eventController.attachProjectTodoDeleteButton(projectPaneDivValues[4], newProject);
+
+        // Attach todoDiv Functionality
+        console.log(sampleTodoList);
+        sampleTodoList.forEach(element => {
+            _eventController.attachTodoListeners(element);
+        })
+        // XXXUPDATEXXX Replace the above function to take toDo elements from below
+        // todoListInput.forEach(element => {
+        //     _eventController.attachTodoListeners(element);
+        // })
+
 
 
 
@@ -568,7 +580,7 @@ function logicController() {
         // Save values of new todoObj to targetProject
         // console.log(savedValues);
         // console.log(savedValues[0].value);
-        const title = savedValues[0].value;
+        let title = savedValues[0].value;
         const description = savedValues[1].value;
         const priority = savedValues[2].value;
         const notes = savedValues[3].value;
@@ -578,6 +590,9 @@ function logicController() {
         if( dueDate == "") {
             // console.log(`default dueDate, overwriting with current date`);
             dueDate = new Date();
+        }
+        if (title == "") {
+            title = "New To-Do";
         }
 
         // console.log(`title: ${title}
@@ -604,6 +619,8 @@ function logicController() {
         const todoListContainer = targetProject.getProjectDiv().childNodes[1].childNodes[1].childNodes[0]; // This is positively filthy for stack-tracing.
         todoListContainer.appendChild(newTodoDiv);
         
+        // Attach eventListeners to newly created toDo
+        _eventController.attachTodoListeners(newTodo);
 
         // Remove addTodoMenu from targetProject's project-pane div
         const todoElementContainer = targetProject.getProjectDiv().childNodes[1];
@@ -636,7 +653,6 @@ function logicController() {
         if(targetProject.getProjectMenuOpen()) {
             console.log(`TargetProject is NOT in a state to open a new menu, returning to cancel deleteTodoButton function`);
             return;
-           
         }
 
         // console.log(`targetProject is in a state to open a menu, toggling and opening deleteTodoMenu`);
@@ -649,7 +665,6 @@ function logicController() {
         const cancelButton = deleteTodoPaneValues[2];
         const deleteCompletedButton = deleteTodoPaneValues[3];
         const todoPaneList = deleteTodoPaneValues[4];
-        const todoPaneListCompleted = deleteTodoPaneValues[5];
 
         // Append Add Todo Menu to existing projectPane div
         const projectPane = targetProject.getProjectDiv();
@@ -666,9 +681,6 @@ function logicController() {
         todoPaneList.forEach( element => {
             _eventController.attachSelectTodoForDeletion(element.getTodoDeletionDiv());
         });
-
-
-
 
     }
     this._projectDeleteTodoButton = _projectDeleteTodoButton;
@@ -767,19 +779,6 @@ function logicController() {
 
     }
     this._projectDeleteTodoCompletedButton = _projectDeleteTodoCompletedButton;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     return {
         getInfo, init,

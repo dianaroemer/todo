@@ -318,6 +318,8 @@ nav ul li {
 .todo-div-name {
     max-width: 340px;    
     padding: 2px;
+    width: 90%;
+    text-align: start;
 }
 
 .todo-edit-button {
@@ -479,6 +481,8 @@ nav ul li {
     align-self: flex-start;
     padding: 3px;
     padding-left: 3px;
+    width: 90%;
+    text-align: start;
 }
 
 .project-delete-todo-completed-button {
