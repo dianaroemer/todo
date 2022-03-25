@@ -426,6 +426,7 @@ nav ul li {
 .project-add-todo-notes-label {
     width: 95%;
     height: 300%;
+    text-align: start;
     /* align-self: flex-start; */
 }
 

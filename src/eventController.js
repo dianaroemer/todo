@@ -138,13 +138,12 @@ const eventController = ( logicControllerReference ) => {
     const attachTodoListeners = (targetTodo) => {
         const targetTodoDiv = targetTodo.getTodoDiv();
         targetTodoDiv.firstChild.addEventListener('click', () => {
-            console.log(`You clicked the first child of ${targetTodoDiv}`)
-            _logicController._toggleSelectedTodo(targetTodo);
+            // console.log(`You clicked the first child of ${targetTodoDiv}`)
+            _logicController._toggleCompletedTodo(targetTodo);
         })
         targetTodoDiv.firstChild.nextSibling.addEventListener('click', () => {
-            console.log(`You clicked the second child of ${targetTodoDiv}`)
-            _logicController._toggleSelectedTodo(targetTodo);
-
+            // console.log(`You clicked the second child of ${targetTodoDiv}`)
+            _logicController._toggleCompletedTodo(targetTodo);
         })
         targetTodoDiv.lastChild.addEventListener('click', () => {
             console.log(`You clicked the last child of ${targetTodoDiv}`)

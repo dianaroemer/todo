@@ -781,9 +781,9 @@ function logicController() {
     this._projectDeleteTodoCompletedButton = _projectDeleteTodoCompletedButton;
 
 
-    const _toggleSelectedTodo = (targetTodo) => {
+    const _toggleCompletedTodo = (targetTodo) => {
 
-        console.log(`You clicked toggleSelectedTodo targeting: ${targetTodo}`);
+        // console.log(`You clicked toggleSelectedTodo targeting: ${targetTodo}`);
 
         const targetTodoDiv = targetTodo.getTodoDiv();
         targetTodoDiv.classList.toggle('todo-completed');
@@ -804,9 +804,8 @@ function logicController() {
             targetTodo.setComplete(true);
             todoListCompleted.appendChild(targetTodoDiv);
         }
-
     }
-    this._toggleSelectedTodo = _toggleSelectedTodo;
+    this._toggleCompletedTodo = _toggleCompletedTodo;
 
 
     return {
