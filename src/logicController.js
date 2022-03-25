@@ -664,9 +664,9 @@ function logicController() {
         _eventController.attachProjectDeleteCompletedButton(deleteCompletedButton, targetProject, deleteTodoPane);
 
         // Attach functionality to todoPaneList
-        todoPaneListDivs.forEach( element => {
-            _eventController.attachSelectTodoForDeletion(element);
-        })
+        todoPaneList.forEach( element => {
+            _eventController.attachSelectTodoForDeletion(element.getTodoDeletionDiv());
+        });
 
 
 
@@ -675,7 +675,7 @@ function logicController() {
     this._projectDeleteTodoButton = _projectDeleteTodoButton;
 
     const _toggleSelectedDivForDeletion = (targetTodoDiv) => {
-        console.log(`You clicked a div element to target for deletion! Modifying its class to denote selection`);
+        // console.log(`You clicked a div element to target for deletion! Modifying its class to denote selection`);
         targetTodoDiv.classList.toggle('marked-for-deletion');
     }
     this._toggleSelectedDivForDeletion = _toggleSelectedDivForDeletion;
@@ -696,16 +696,34 @@ function logicController() {
 
     const _projectDeleteTodoSelectedButton = (targetProject, deleteTodoPane, todoPaneList) => {
 
-        console.log('here');
-
         let projectTodoElementContainer = targetProject.getProjectDiv().querySelector('.project-todo-element-container');
 
-        console.log(todoPaneList);
+        let todoList = projectTodoElementContainer.querySelector('.todo-list');
+        let todoListCompleted = projectTodoElementContainer.querySelector('.todo-list-completed');
 
+        let markedForDeletion = []
+        todoPaneList.forEach( element => {
+            let todoClass = element.getTodoDeletionDiv().classList.contains("marked-for-deletion");
+            if(todoClass) {
+                markedForDeletion.push(element);
+            }
+        })
 
+        console.log(`The follow to-do elements are marked for deletion: `);
+        console.log(markedForDeletion);
+        markedForDeletion.forEach(element => {
+            console.log(`Deleting the following todo: ${element.getTitle()}
+            from targetProject: ${targetProject.getProjectName()}`)
+            targetProject.removeTargetTodo(element);
+            
+            if( element.getComplete() ){
+                todoListCompleted.removeChild(element.getTodoDiv());
+            } else {
+                todoList.removeChild(element.getTodoDiv());
+            }
+        })
 
-
-
+        console.log(targetProject.getTodoList());
 
         // Remove the deleteTodoPane div Child element from the targetProject
         projectTodoElementContainer.removeChild(deleteTodoPane);

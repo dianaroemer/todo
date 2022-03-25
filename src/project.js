@@ -1,5 +1,6 @@
 
 import {format, toDate, isDate} from 'date-fns';
+import { formatRelativeWithOptions } from 'date-fns/fp';
 import todoObj from './todoObj';
 
 const projectObj = () => {
@@ -166,6 +167,17 @@ const projectObj = () => {
         }
     }
 
+    const removeTargetTodo = (targetTodo) => {
+        if(_todoList.length > 0) {
+            let _newList = _todoList.filter(element => element != targetTodo);
+            _todoList = _newList;
+            return true;
+        } else {
+            console.log('projectObj.removeTargetTodo Error! tried to remove an element from an empty _todoList!');
+            return false;
+        }
+    }
+
     const reorderTodo = (target, destination) => {
         if(target < _todoList.length && destination < _todoList.length) {
             // console.log('For Debugging: Console log of OLD _todoList: ');
@@ -190,7 +202,7 @@ const projectObj = () => {
         getProjectPriority, setProjectPriority,
         getProjectDiv, setProjectDiv,
         getProjectMenuOpen, setProjectMenuOpen, toggleProjectMenuOpen,
-        getTodoList, setTodoList, addTodo, addTodoObj, removeTodo, reorderTodo,
+        getTodoList, setTodoList, addTodo, addTodoObj, removeTodo, removeTargetTodo, reorderTodo,
         
     }
 

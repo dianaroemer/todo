@@ -12,6 +12,7 @@ const todoObj = () => {
     let _checklist;
     let _complete;
     let _todoDiv;
+    let _todoDeletionDiv;
 
     const getInfo = () => {
         // console.log('_checklist contents: ');
@@ -203,6 +204,14 @@ const todoObj = () => {
         return true;
     }
 
+    const getTodoDeletionDiv = () => {
+        return _todoDeletionDiv;
+    }
+
+    const setTodoDeletionDiv = (newDiv) => {
+        _todoDeletionDiv = newDiv;
+        return true;
+    }
 
     return {
         getInfo,
@@ -216,6 +225,7 @@ const todoObj = () => {
         getChecklist, setChecklist, addItemToChecklist, deleteItemOffChecklist, toggleItemInChecklist,
         getComplete, setComplete,
         getTodoDiv, setTodoDiv,
+        getTodoDeletionDiv, setTodoDeletionDiv,
 
 
         

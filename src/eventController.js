@@ -103,17 +103,15 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
-    const attachSelectTodoForDeletion = (targetTodo) => {
-        targetTodo.addEventListener('click', () => {
+    const attachSelectTodoForDeletion = (targetTodoDiv) => {
+        targetTodoDiv.addEventListener('click', () => {
             // console.log('You clicked a todo Div in the delete pane!');
-            _logicController._toggleSelectedDivForDeletion(targetTodo)
+            _logicController._toggleSelectedDivForDeletion(targetTodoDiv)
         })
     }
 
     const attachProjectDeleteSelectedButton = (targetDeleteSelectedButton, targetProject, deleteTodoPane, todoPaneList) => {
         targetDeleteSelectedButton.addEventListener('click', () => {
-            console.log(`You cliked the Delete Selected button from project: `)
-            console.log(targetProject.getProjectName());
             _logicController._projectDeleteTodoSelectedButton(targetProject, deleteTodoPane, todoPaneList);
         })
     }

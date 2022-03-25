@@ -528,11 +528,10 @@ const displayController = () => {
 
             todoPane.appendChild(todoElementDiv);
             todoPaneList.push(element);
-
+            todoPaneListDivs.push(todoElementDiv);
             if( element.getComplete() ){
                 todoPaneListCompleted.push(element);
             }
-            todoPaneListDivs.push(todoElementDiv);
 
         });
 
@@ -595,6 +594,8 @@ const displayController = () => {
         // console.log(newTitle);
         todoPane.innerText += newTitle;
 
+
+        todoObject.setTodoDeletionDiv(todoPane);
         return todoPane;
 
 
