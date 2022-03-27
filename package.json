@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/dominicroemer/todo/issues"
   },
-  "homepage": "https://github.com/dominicroemer/todo#readme",
+  "homepage": "https://dominicroemer.github.io/todo/",
   "devDependencies": {
     "css-loader": "^6.5.1",
     "date-fns": "^2.28.0",
