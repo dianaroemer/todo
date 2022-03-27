@@ -1,6 +1,13 @@
 # todo
 Personal to-do list and project management platform
 
+Github Pages Link found at https://dominicroemer.github.io/todo/
+
+
+
+
+
+
 
 Building project workspace
 
