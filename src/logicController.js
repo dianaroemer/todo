@@ -258,11 +258,11 @@ function logicController() {
         let sampleTodo = todoObj();
         sampleTodo.init('sampleTrue with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], true);
         let sampleTodo2 = todoObj();
-        sampleTodo2.init('sampleFalse with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        sampleTodo2.init('sampleFalse with a really long name that is supposed to overflow onto the next line, I really hope that everything works out okay, trim it correctly please!', 'description', new Date(), new Date(), 4, 'notes', [], false);
         let sampleTodo3 = todoObj();
-        sampleTodo3.init('False12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], false);
+        sampleTodo3.init('False12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 2, 'notes', [], false);
         let sampleTodo4 = todoObj();
-        sampleTodo4.init('True12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 5, 'notes', [], true);
+        sampleTodo4.init('True12345678901234567890124567890123456789012345678901234578901234567890', 'description', new Date(), new Date(), 1, 'notes', [], true);
 
 
         let sampleTodoList = [sampleTodo,sampleTodo2, sampleTodo3, sampleTodo4];
@@ -297,13 +297,13 @@ function logicController() {
         _eventController.attachProjectTodoDeleteButton(projectPaneDivValues[4], newProject);
 
         // Attach todoDiv Functionality
-        console.log(sampleTodoList);
-        sampleTodoList.forEach(element => {
-            _eventController.attachTodoListeners(element);
+        console.log(newProject.getTodoList());
+        newProject.getTodoList().forEach(element => {
+            _eventController.attachTodoListeners(element, newProject);
         })
         // XXXUPDATEXXX Replace the above function to take toDo elements from below
         // todoListInput.forEach(element => {
-        //     _eventController.attachTodoListeners(element);
+        //     _eventController.attachTodoListeners(element, newProject);
         // })
 
 
@@ -620,7 +620,7 @@ function logicController() {
         todoListContainer.appendChild(newTodoDiv);
         
         // Attach eventListeners to newly created toDo
-        _eventController.attachTodoListeners(newTodo);
+        _eventController.attachTodoListeners(newTodo, targetProject);
 
         // Remove addTodoMenu from targetProject's project-pane div
         const todoElementContainer = targetProject.getProjectDiv().childNodes[1];
@@ -806,6 +806,55 @@ function logicController() {
         }
     }
     this._toggleCompletedTodo = _toggleCompletedTodo;
+
+    const _editTodoPane = (targetTodo, targetProject) => {
+
+        console.log(`You clicked the edit button target todo: ${targetTodo.getTitle()}`);
+
+        // Toggle projectMenuOpen, generate editTodoPane, appendEditTodoPane, attach eventListeners to appropriate fields and buttons
+
+        if(targetProject.getProjectMenuOpen()) {
+            console.log(`TargetProject is NOT in a state to open a new menu, returning to cancel addTodoButton function`);
+            return;
+        }
+        // console.log(`targetProject is in a state to open a menu, toggling and opening add todo menu`);
+        targetProject.toggleProjectMenuOpen();
+
+
+
+        let editTodoPaneValues = _displayController.generateEditTodoPane(targetTodo);
+        let editTodoPaneDiv = editTodoPaneValues[0];
+        let editTodoTitleInput = editTodoPaneValues[1]
+        let editTodoDescriptionInput = editTodoPaneValues[2]
+        let editTodoPriorityLabel = editTodoPaneValues[3]
+        let editTodoPriorityInput = editTodoPaneValues[4];
+
+        // Update and attach priority slider functionality
+        
+
+        _updatePriorityColor(editTodoPriorityLabel, editTodoPriorityInput.value);
+
+        console.log('here');
+
+
+        console.log(editTodoPriorityLabel);
+        console.log(editTodoPriorityInput);
+        console.log(editTodoPriorityInput.value);
+
+        // Attach Priority Slider functionality
+        _eventController.attachAddProjectPrioritySlider(editTodoPriorityInput, editTodoPriorityLabel);
+        
+        console.log('here');
+
+        const todoList = targetTodo.getTodoDiv().parentNode;
+        const projectTodoList = todoList.parentNode;
+        const projectTodoElementContainer = projectTodoList.parentNode;
+        projectTodoElementContainer.appendChild(editTodoPaneDiv);
+
+
+
+    }
+    this._editTodoPane = _editTodoPane;
 
 
     return {

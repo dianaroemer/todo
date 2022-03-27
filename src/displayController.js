@@ -595,6 +595,103 @@ const displayController = () => {
 
     }
 
+    const generateEditTodoPane = (targetTodo) => {
+
+        const addTodoPane = document.createElement('div');
+        addTodoPane.classList.add('project-add-todo-pane');
+        
+        // Title
+        const titleLabel = document.createElement('label');
+        titleLabel.innerHTML = 'Name: ';
+        titleLabel.classList.add('project-add-todo-name-label');
+        addTodoPane.appendChild(titleLabel);
+        const titleInput = document.createElement('input');
+        titleInput.classList.add('project-add-todo-name-input');
+        titleInput.maxLength = "30";
+        titleInput.value = targetTodo.getTitle();
+        titleInput.minLength = "1";
+        titleLabel.appendChild(titleInput);
+
+        // Description
+        const descriptionLabel = document.createElement('label');
+        descriptionLabel.innerHTML = `Description: `;
+        descriptionLabel.classList.add('project-add-todo-description-label');
+        addTodoPane.appendChild(descriptionLabel);
+        const descriptionInput = document.createElement('input');
+        descriptionInput.classList.add('project-add-todo-description-input');
+        descriptionInput.maxLength = "24";
+        descriptionInput.value = targetTodo.getDescription();
+        descriptionLabel.appendChild(descriptionInput);
+        
+        // Priority
+        let priorityLabel = document.createElement('label');
+        priorityLabel.innerText = `Priority: `;
+        priorityLabel.id = "project-add-todo-priority-label";
+        addTodoPane.appendChild(priorityLabel);
+        let priorityInput = document.createElement('input');
+        priorityInput.type = 'range';
+        priorityInput.max = 5;
+        priorityInput.min = 1;
+        console.log(targetTodo.getPriority());
+        priorityInput.value = targetTodo.getPriority();
+        priorityLabel.appendChild(priorityInput);
+        let priorityOutput = document.createElement('output');
+        priorityOutput.value = priorityInput.value;
+        priorityInput.oninput = () => {priorityOutput.value = priorityInput.value};
+        priorityLabel.appendChild(priorityOutput);
+
+        // Notes
+        const notesLabel = document.createElement('label');
+        notesLabel.innerText = "Notes:                     ";
+        notesLabel.classList.add('project-add-todo-notes-label');
+        addTodoPane.appendChild(notesLabel);
+        const notesInput = document.createElement('textarea');
+        notesInput.classList.add('project-add-todo-notes-input');
+        notesInput.value = targetTodo.getNotes();
+        notesLabel.appendChild(notesInput);
+
+        // Due Date
+        let dueDateLabel = document.createElement('label');
+        dueDateLabel.innerHTML = `Due Date: `;
+        dueDateLabel.classList.add('project-add-todo-date-label');
+        addTodoPane.appendChild(dueDateLabel);
+        let dueDateInput = document.createElement('input');
+        dueDateInput.type = 'date';
+        dueDateInput.required = true;
+        let tempDueDate = targetTodo.getDueDate()
+        tempDueDate = tempDueDate.getTime();
+        dueDateInput.valueAsNumber = tempDueDate;
+        dueDateLabel.appendChild(dueDateInput);
+
+        // Creation Date
+        let creationDateLabel = document.createElement('label');
+        creationDateLabel.innerHTML = `Created On: `;
+        creationDateLabel.classList.add('project-add-todo-date-label');
+        addTodoPane.appendChild(creationDateLabel);
+        let creationDateInput = document.createElement('input');
+        creationDateInput.type = 'date'
+        creationDateInput.required = true;
+        let tempCreationDate = targetTodo.getCreationDate();
+        creationDateInput.valueAsDate = tempCreationDate;
+        creationDateLabel.appendChild(creationDateInput);
+        
+        // Buttons
+        const addTodoButtonContainer = document.createElement('div');
+        addTodoButtonContainer.classList.add('project-add-todo-button-container');
+        let saveButton = document.createElement('button');
+        saveButton.innerHTML = `Save To-Do`;
+        // changing the button's type overrides the default Save Button functionality of the form element to NOT REDIRECT with the form element, aka reloading the page
+        saveButton.type = 'button';
+        let cancelButton = document.createElement('button');
+        cancelButton.innerHTML = `Cancel Edit To-Do`;
+        cancelButton.type = 'button';
+        addTodoButtonContainer.appendChild(saveButton);
+        addTodoButtonContainer.appendChild(cancelButton);
+        addTodoPane.appendChild(addTodoButtonContainer);
+
+        return [addTodoPane, titleInput, descriptionInput, priorityLabel, priorityInput, notesInput, dueDateInput, creationDateInput, saveButton, cancelButton];
+
+    }
 
     return {
         getInfo,
@@ -607,6 +704,7 @@ const displayController = () => {
         generateProjectAddTodoPane,
         generateProjectDeleteTodoPane,
         generateProjectDeleteTodoDiv,
+        generateEditTodoPane,
         
     }
 
