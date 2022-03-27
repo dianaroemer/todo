@@ -820,32 +820,30 @@ function logicController() {
         // console.log(`targetProject is in a state to open a menu, toggling and opening add todo menu`);
         targetProject.toggleProjectMenuOpen();
 
-
-
         let editTodoPaneValues = _displayController.generateEditTodoPane(targetTodo);
-        let editTodoPaneDiv = editTodoPaneValues[0];
-        let editTodoTitleInput = editTodoPaneValues[1]
-        let editTodoDescriptionInput = editTodoPaneValues[2]
-        let editTodoPriorityLabel = editTodoPaneValues[3]
-        let editTodoPriorityInput = editTodoPaneValues[4];
+        const editTodoPaneDiv = editTodoPaneValues[0];
+        const editTodoTitleInput = editTodoPaneValues[1];
+        const editTodoDescriptionInput = editTodoPaneValues[2];
+        const editTodoPriorityLabel = editTodoPaneValues[3];
+        const editTodoPriorityInput = editTodoPaneValues[4];
+        const editTodoNotesInput = editTodoPaneValues[5];
+        const editTodoDueDateInput = editTodoPaneValues[6];
+        const editTodoCreationDateInput = editTodoPaneValues[7];
+        const editTodoSaveButton = editTodoPaneValues[8];
+        const editTodoCancelButton = editTodoPaneValues[9];
 
         // Update and attach priority slider functionality
-        
-
         _updatePriorityColor(editTodoPriorityLabel, editTodoPriorityInput.value);
-
-        console.log('here');
-
-
-        console.log(editTodoPriorityLabel);
-        console.log(editTodoPriorityInput);
-        console.log(editTodoPriorityInput.value);
-
-        // Attach Priority Slider functionality
+            // Attach Priority Slider functionality
         _eventController.attachAddProjectPrioritySlider(editTodoPriorityInput, editTodoPriorityLabel);
         
-        console.log('here');
+        // Attach functionality to Save and Cancel Buttons
+        let savedValues = [editTodoTitleInput, editTodoDescriptionInput, editTodoPriorityInput, editTodoNotesInput, editTodoDueDateInput, editTodoCreationDateInput]
+        _eventController.attachEditTodoSaveButton(editTodoSaveButton, targetProject, targetTodo, editTodoPaneDiv, savedValues);
+        _eventController.attachEditTodoCancelButton(editTodoCancelButton, targetProject, editTodoPaneDiv);
+       
 
+        // Append editTodoPane to the DOM
         const todoList = targetTodo.getTodoDiv().parentNode;
         const projectTodoList = todoList.parentNode;
         const projectTodoElementContainer = projectTodoList.parentNode;
@@ -855,6 +853,39 @@ function logicController() {
 
     }
     this._editTodoPane = _editTodoPane;
+
+    const _projectEditTodoSaveButton = (targetProject, targetTodo, editTodoPaneDiv, savedValues) => {
+        console.log('-----------------------------------')
+        console.log(`I am _projectEditTodoSaveButton. Here are my todo initial values`);
+        console.log(targetTodo.getInfo());
+        console.log('-----------------------------------')
+        
+//         let savedValues = [editTodoTitleInput, editTodoDescriptionInput, editTodoPriorityInput, editTodoNotesInput, editTodoDueDateInput, editTodoCreationDateInput]
+
+
+        // Save the new values to targetTodo
+        console.log(`savedValues are as follows:
+        titleInput: ${savedValues[0].value}
+        descriptionInput: ${savedValues[1].value}
+        priorityInput: ${savedValues[2].value}
+        notesInput: ${savedValues[3].value}
+        dueDateInput: ${savedValues[4].valueAsDate}
+        creationDateInput: ${savedValues[4].valueAsDate}`);
+
+
+        // Update the todo DOM elements to reflect the updated values
+        targetTodo.getTodoDiv().firstChild.nextSibling.innerText = savedValues[0].value;
+            // XXXUPDATEXXX The above code works, but I should type check it for length anyways
+
+        // Target div and delete it
+        const todoElementContainer = targetProject.getProjectDiv().childNodes[1];
+        todoElementContainer.removeChild(editTodoPaneDiv);
+        // Toggle projectMenuOpen to false
+        targetProject.toggleProjectMenuOpen();
+
+        
+    }
+    this._projectEditTodoSaveButton = _projectEditTodoSaveButton;
 
 
     return {

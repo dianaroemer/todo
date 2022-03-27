@@ -97,7 +97,7 @@ const eventController = ( logicControllerReference ) => {
     }
 
     const attachProjectAddTodoCancelButton = (targetCancelButton, targetProject, addTodoPane) => {
-        console.log('here');
+        // console.log('here');
         targetCancelButton.addEventListener('click', () => {
             _logicController._projectAddTodoCancelButton(targetProject, addTodoPane);
         })
@@ -151,6 +151,19 @@ const eventController = ( logicControllerReference ) => {
         })
     }
 
+    const attachEditTodoSaveButton = (targetSaveButton, targetProject, targetTodo, editTodoPaneDiv, savedValues) => {
+        targetSaveButton.addEventListener('click', () => {
+            _logicController._projectEditTodoSaveButton(targetProject, targetTodo, editTodoPaneDiv, savedValues);
+        })
+    }
+
+    const attachEditTodoCancelButton = (targetCancelButton, targetProject, editTodoPaneDiv) => {
+        targetCancelButton.addEventListener('click', () => {
+            _logicController._projectAddTodoCancelButton(targetProject, editTodoPaneDiv);
+
+        })
+    }
+
 
     return {
         _toggleMenuOpen,
@@ -172,6 +185,8 @@ const eventController = ( logicControllerReference ) => {
         attachProjectDeleteCancelButton,
         attachProjectDeleteCompletedButton,
         attachTodoListeners,
+        attachEditTodoSaveButton,
+        attachEditTodoCancelButton,
 
 
 
