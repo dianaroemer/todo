@@ -123,8 +123,12 @@ function logicController() {
         // console.log(values[4].value)
         let dueDateInput;
         if ( values[4].value ) {
-            dueDateInput = new Date(values[4].value);
-            dueDateInput.setDate(dueDateInput.getDate() + 1);
+            dueDateInput = new Date(values[4].valueAsDate);
+            // Compensating for timezoneOffset in display
+            let timezoneOffset = dueDateInput.getTimezoneOffset()
+            let newLocalizedDueDateInput = dueDateInput.getTime() + (timezoneOffset * 60000);
+            dueDateInput = new Date(newLocalizedDueDateInput);
+
         } else {
             dueDateInput = new Date();
         }
@@ -872,10 +876,75 @@ function logicController() {
         dueDateInput: ${savedValues[4].valueAsDate}
         creationDateInput: ${savedValues[4].valueAsDate}`);
 
+        targetTodo.setTitle(savedValues[0].value);
+        targetTodo.setDescription(savedValues[1].value);
+        targetTodo.setPriority(savedValues[2].valueAsNumber);
+        targetTodo.setNotes(savedValues[3].value);
+
+            // Write new dueDate if new dueDate !== oldDueDate values
+            let newDueDate = savedValues[4].value;
+            // console.log(`newDueDate: ${newDueDate}`); // format "2022-03-21"
+            let oldDueDate = targetTodo.getDueDate();
+            // console.log(`oldDueDate: ${oldDueDate}`);
+            let oldDueDateString = `${oldDueDate.getFullYear()}-`
+            if(oldDueDate.getMonth() + 1 < 10) {
+                oldDueDateString += `0${oldDueDate.getMonth() + 1}-`
+            } else {
+                oldDueDateString += `${oldDueDate.getMonth() + 1}-`
+            }
+            if(oldDueDate.getDate() < 10) {
+                oldDueDateString += `0${oldDueDate.getDate()}`
+            } else {
+                oldDueDateString += `${oldDueDate.getDate()}`
+            }
+            // console.log(`oldDueDateString: ${oldDueDateString}`);
+            // console.log(`newDueDate: ${newDueDate} vs ${oldDueDateString}: oldDueDateString`);
+            // console.log( newDueDate != oldDueDateString);
+            if (newDueDate !== oldDueDateString ) {
+                // console.log(`newDueDate !== oldDueDateString!`);
+                // console.log(`Set new due date to ${newDueDate} with current time filled in!`);
+                targetTodo.setDueDate(new Date(newDueDate));
+            }
+
+            // Write new creationDate if new creationDate !== oldCreationDate values
+            let newCreationDate = savedValues[5].value;
+            // console.log(`newCreationDate: ${newCreationDate}`); // format "2022-03-21"
+            let oldCreationDate = targetTodo.getCreationDate();
+            // console.log(`oldCreationDate: ${oldCreationDate}`);
+            let oldCreationDateString = `${oldCreationDate.getFullYear()}-`
+            if(oldCreationDate.getMonth() + 1 < 10) {
+                oldCreationDateString += `0${oldCreationDate.getMonth() + 1}-`
+            } else {
+                oldCreationDateString += `${oldCreationDate.getMonth() + 1}-`
+            }
+            if(oldCreationDate.getDate() < 10) {
+                oldCreationDateString += `0${oldCreationDate.getDate()}`
+            } else {
+                oldCreationDateString += `${oldCreationDate.getDate()}`
+            }
+            // console.log(`oldCreationDateString: ${oldCreationDateString}`);
+            // console.log(`newCreationDate: ${newCreationDate} vs ${oldCreationDateString}: oldCreationDateString`);
+            // console.log( newCreationDate != oldCreationDateString);
+            if (newCreationDate !== oldCreationDateString ) {
+                // console.log(`newCreationDate !== oldCreationDateString!`);
+                // console.log(`Set new due date to ${newCreationDate} with current time filled in!`);
+                targetTodo.setCreationDate(new Date(newCreationDate));
+            }
 
         // Update the todo DOM elements to reflect the updated values
-        targetTodo.getTodoDiv().firstChild.nextSibling.innerText = savedValues[0].value;
-            // XXXUPDATEXXX The above code works, but I should type check it for length anyways
+        let newTitle = "";
+        if (savedValues[0].value.length > 32) {
+            console.log(savedValues[0].value)
+            for ( let i = 0; i < 34; i++) {
+                newTitle += savedValues[0].value.charAt(i);
+            }
+            newTitle += "...";
+        } else {
+            newTitle = savedValues[0].value;
+        }
+        targetTodo.getTodoDiv().firstChild.nextSibling.innerText = newTitle;
+
+
 
         // Target div and delete it
         const todoElementContainer = targetProject.getProjectDiv().childNodes[1];
