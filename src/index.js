@@ -17,7 +17,7 @@ import logicControllerObj from './logicController.js';
 // document.body.appendChild(component());
 
 
-console.log('test')
+// console.log('test')
 const nav = headerNav();
 document.body.insertBefore(nav, document.getElementById('content'));
 

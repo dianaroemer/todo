@@ -43,7 +43,7 @@ function logicController() {
 
     const generateProjectContainerObj = () => {
 
-        console.log('second test')
+        // console.log('second test')
 
         const projectContainerDivArr = _displayController.generateProjectContainerDiv(); 
 
@@ -272,19 +272,20 @@ function logicController() {
         let sampleTodoList = [sampleTodo,sampleTodo2, sampleTodo3, sampleTodo4];
 
 
-        // XXXUPDATEXXX projectPaneDivValues to take todoListInput instead of sampleTodoList
+        // XXXUPDATEXXX Remove this line when appropriate
+        todoListInput = todoListInput.concat(sampleTodoList);
+        // XXXUPDATEXXX Appending sampleTodoList to todoListInput, remove this later
+
         // Generate projectPane Div
-        let projectPaneDivValues = _displayController.generateProjectPane(nameInput, priorityInput, dueDateInput, creationDateInput, sampleTodoList);
+        let projectPaneDivValues = _displayController.generateProjectPane(nameInput, priorityInput, dueDateInput, creationDateInput, todoListInput);
         _projectContainer.getProjectContainerDiv().appendChild(projectPaneDivValues[0]);
-        // XXXUPDATEXXX See above
 
         // updatePriority color of projectPane
         _updatePriorityColor(projectPaneDivValues[2], priorityInput);
 
        
         // Generate projectObj
-        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput,projectPaneDivValues[0], sampleTodoList );
-        // XXXUPDATEXXX Remove sampleTodoList and replace with todoListInput when ready
+        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput,projectPaneDivValues[0], todoListInput );
 
         // Attach projectObj to _projectContainer._projectArr[]
         _projectContainer.addProject(newProject);
@@ -301,7 +302,7 @@ function logicController() {
         _eventController.attachProjectTodoDeleteButton(projectPaneDivValues[4], newProject);
 
         // Attach todoDiv Functionality
-        console.log(newProject.getTodoList());
+        // console.log(newProject.getTodoList());
         newProject.getTodoList().forEach(element => {
             _eventController.attachTodoListeners(element, newProject);
         })
