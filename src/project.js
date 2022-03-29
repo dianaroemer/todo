@@ -192,6 +192,38 @@ const projectObj = () => {
         }
     }
 
+    const writeProjectLocalStorage = (index) => {
+        // console.log(`I am writeProjectLocal Storage, taking index: ${index}, targeting project: ${getProjectName()}`);
+        // console.log(`Writing my values to localStorage`);
+
+        // console.log(`My values are as follows: 
+        // name: ${getProjectName()}
+        // priority: ${getProjectPriority()}
+        // dueDate: ${getProjectDueDate()}
+        // creationDate: ${getProjectCreationDate()}
+        // todoList: ${getTodoList()}
+        // todoList.length: ${getTodoList().length}`);
+
+        localStorage.setItem(`project${index}Name`, `${getProjectName()}`);
+        localStorage.setItem(`project${index}Priority`, `${getProjectPriority()}`);
+        localStorage.setItem(`project${index}DueDate`, `${getProjectDueDate()}`);
+        localStorage.setItem(`project${index}CreationDate`, `${getProjectCreationDate()}`);
+        localStorage.setItem(`project${index}TodoListLength`, `${getTodoList().length}`);
+
+        // Set the follow to be a loop that runs over todoList and runs writeTodoLocalStorage() for each of them, taking projectIndex and todoIndex as a value
+        for( let todoIndex = 0; todoIndex < getTodoList().length; todoIndex++ ) {
+            // _projectArr[i].writeProjectLocalStorage(i);
+            let result = getTodoList()[todoIndex].writeTodoLocalStorage(index, todoIndex);
+            if (!result) {
+                return false;
+            }
+        }
+
+        // localStorage.setItem(`project${index}TodoList`, `${getTodoList()}`);
+
+        return true;
+    }
+
 
      return {
         getInfo,
@@ -203,6 +235,7 @@ const projectObj = () => {
         getProjectDiv, setProjectDiv,
         getProjectMenuOpen, setProjectMenuOpen, toggleProjectMenuOpen,
         getTodoList, setTodoList, addTodo, addTodoObj, removeTodo, removeTargetTodo, reorderTodo,
+        writeProjectLocalStorage,
         
     }
 

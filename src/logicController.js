@@ -22,8 +22,17 @@ function logicController() {
     let _displayController = displayController();
     let _contentDiv = document.getElementById('content'); //_contentDiv should have its own getters and setters for typechecking and safety, but is only invoked and instantiated once on page init to be populated with generateProjectContainer(), so it gets a pass here
     let _eventController = eventController(this);
+    let _useLocalStorage;
 
-    
+    // Test for local storage support and availability, see storageAvailable comments for more details
+    if(storageAvailable('localStorage')) {
+        _useLocalStorage = true;
+    } else {
+        _useLocalStorage = false;
+    }
+
+    readFromLocalStorage();
+
 
 
     const getInfo = () => {
@@ -36,7 +45,7 @@ function logicController() {
     this.getInfo = getInfo;
 
 
-
+    // Init isn't being used at all in logicController, maybe it's safe to remove? XXXUPDATEXXX Trace this
     const init = (newProjectContainerObj) => {
         _projectContainer = newProjectContainerObj;
     }
@@ -162,6 +171,9 @@ function logicController() {
         // Closing the addProject Menu
         _projectContainer.toggleAddButtonMenu();
         _projectContainer.getProjectContainerDiv().removeChild(values[0]);
+
+        // Update Local Storage
+        _writeLocalStorage();
 
     }
     this._addProjectSaveButton = _addProjectSaveButton;
@@ -957,6 +969,206 @@ function logicController() {
     }
     this._projectEditTodoSaveButton = _projectEditTodoSaveButton;
 
+// ---------------------------- localStorage ----------------------------
+
+// function that detects whether localStorage is both supported and available:
+    // Pulled from link - 
+    // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+    function storageAvailable(type) {
+        var storage;
+        try {
+            storage = window[type];
+            var x = '__storage_test__';
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            return true;
+        }
+        catch(e) {
+            return e instanceof DOMException && (
+                // everything except Firefox
+                e.code === 22 ||
+                // Firefox
+                e.code === 1014 ||
+                // test name field too, because code might not be present
+                // everything except Firefox
+                e.name === 'QuotaExceededError' ||
+                // Firefox
+                e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+                // acknowledge QuotaExceededError only if there's something already stored
+                (storage && storage.length !== 0);
+        }
+    }
+    
+    function isLocalStorageEmpty() {
+        console.log("I am isLocalStorageEmpty, I still need functionality implemented here");
+        
+        if(localStorage.key(0) === null ){
+            // yes, instert functionality here
+            console.log("localStorage is empty");
+        } else {
+            // no, insert functionality here
+            console.log("localStorage has values, here they are") 
+                for ( let i = 0; localStorage.key(i) != null; i++) {
+                    console.log(`${localStorage.key(i)} : ${localStorage.getItem(localStorage.key(i))}`);
+                }
+        }
+    }
+    
+
+
+
+
+
+
+
+    // How do I convert projects and their todo-lists to a reasonable string
+    function toLocalStorage ( library ) {
+    
+        if( !useLocalStorage) return;
+    
+        // Clear existing localStorage
+        localStorage.clear();
+    
+        // If myLibrary is empty, don't add anything to localStorage
+        // if( myLibrary.length === 0 ) {
+        //     return;
+        // } else {
+    
+            // localStorage.setItem('myLibraryLength', `${library.length}`);
+            
+            // let index = 0;
+            // let findex = library.length;
+    
+            // while ( index != library.length ) {
+            //     localStorage.setItem(`myLibrary${index}Name`, `${library[index].name}`);
+            //     localStorage.setItem(`myLibrary${index}Platform`, `${library[index].platform}`);
+            //     localStorage.setItem(`myLibrary${index}Owned`, `${library[index].owned}`);
+            //     localStorage.setItem(`myLibrary${index}Desire`, `${library[index].desireToPlay}`);
+            //     localStorage.setItem(`myLibrary${index}Icon`, `${library[index].icon}`);
+            //     localStorage.setItem(`myLibrary${index}Beat`, `${library[index].beat}`);
+            //     // localStorage.setItem(`myLibrary${index}Div`, `${library[index].div.innerHTML}`);
+    
+            //     index++;
+            // }
+    
+                // Game Object data
+            // let name;
+            // let platform;
+            // let owned;
+            // let desireToPlay;
+            // let icon;
+            // let beat;
+            // let div;
+    
+        // }
+    
+    }
+    
+    function readFromLocalStorage() {
+    
+        if( !_useLocalStorage) return;
+        
+        let numProjects = localStorage.getItem('projArrLength');
+    
+        if(numProjects > 0) {
+    
+        //     let tempName;
+        //     let tempPlatform;
+        //     let tempOwned;
+        //     let tempDesire;
+        //     let tempIcon;
+        //     let tempBeat;
+    
+        //     let index = 0;
+        //     while (index < numObjects) {
+    
+        //         tempName = localStorage.getItem(`myLibrary${index}Name`);
+        //         tempPlatform = localStorage.getItem(`myLibrary${index}Platform`);
+        //         tempOwned = localStorage.getItem(`myLibrary${index}Owned`);
+        //         tempDesire = localStorage.getItem(`myLibrary${index}Desire`);
+        //         tempIcon = localStorage.getItem(`myLibrary${index}Icon`);
+        //         tempBeat = localStorage.getItem(`myLibrary${index}Beat`);
+    
+        //         // Type checking this.beat back into a boolean when retrieved as a DOMstring from localStorage
+        //         let beatBool;
+        //         if(tempBeat === 'true') {
+        //             beatBool = true;
+        //         } else {
+        //             beatBool = false;
+        //         }
+    
+        //         Object.create(Game.prototype).initGame(tempName, tempPlatform, tempOwned, tempDesire, tempIcon, beatBool);
+    
+        //         index++;
+        //     }
+    
+        //     updateDisplay();
+    
+        //     addEventListenerToModify();
+    
+            return;
+        } else {
+            return;
+        }
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const _writeLocalStorage = () => {
+
+        if( !_useLocalStorage) return;
+        console.log(' ------------------------------------ _writeLocalStorage() ------------------------------------');
+        localStorage.clear();
+        let result = _projectContainer.writeProjArrLocalStorage();
+        if (!result) {
+            return false;
+        }
+        console.log(result);
+        return true;
+
+    }
+    this._writeLocalStorage = _writeLocalStorage;
 
     return {
         getInfo, init,

@@ -97,8 +97,6 @@ const projectContainerObj = () => {
         }
     }
 
-// projectName, todoList, creationDate, dueDate, projectPriority, projectDiv
-
     const createProject = (projectNameInput, creationDateInput, dueDateInput, projectPriorityInput, projectDivInput, todoListInput) => {
         let newProject = projectObj();
 
@@ -114,17 +112,28 @@ const projectContainerObj = () => {
         }
     }
 
-    const readProject = () => {
 
+    const writeProjArrLocalStorage = () => {
+        // console.log(`I am writeProjArrLocalStorage(). _projArr[]: ${_projectArr}
+        // _projArr.length: ${_projectArr.length}`);
+        // console.log("Writing _projArr[] to localStorage.");
+
+        _projectArr;
+
+        for( let i = 0; i < _projectArr.length; i++ ) {
+            let result = _projectArr[i].writeProjectLocalStorage(i);
+            if (!result) {
+                return false;
+            }
+        }
+
+
+        return true;
     }
 
-    const updateProject = () => {
 
-    }
 
-    const destroyProject = () => {
 
-    }
 
     return {
 
@@ -134,6 +143,7 @@ const projectContainerObj = () => {
         getAddButton, setAddButton, 
         getAddButtonMenu, toggleAddButtonMenu,
         createProject,
+        writeProjArrLocalStorage,
 
 
 

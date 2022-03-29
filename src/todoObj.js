@@ -213,6 +213,32 @@ const todoObj = () => {
         return true;
     }
 
+    const writeTodoLocalStorage = (projectIndex, todoIndex) => {
+        // console.log(`I am writeTodoLocal Storage, taking projectIndex: ${projectIndex} and todoIndex: ${todoIndex}, targeting todo: ${getTitle()}`);
+        // console.log(`Writing my values to localStorage`);
+
+        // console.log(`My values are as follows: 
+        // name: ${getTitle()}
+        // description: ${getDescription()}
+        // priority: ${getPriority()}
+        // notes: ${getNotes()}
+        // dueDate: ${getDueDate()}
+        // creationDate: ${getCreationDate()}
+        // completed: ${getComplete()}`);
+
+
+        localStorage.setItem(`project${projectIndex}todo${todoIndex}Name`, `${getTitle()}`);
+        localStorage.setItem(`project${projectIndex}todo${todoIndex}Description`, `${getDescription()}`);
+        localStorage.setItem(`project${projectIndex}todo${todoIndex}Priority`, `${getPriority()}`);
+        localStorage.setItem(`project${projectIndex}todo${todoIndex}Notes`, `${getNotes()}`);
+        localStorage.setItem(`project${projectIndex}todo${todoIndex}DueDate`, `${getDueDate()}`);
+        localStorage.setItem(`project${projectIndex}todo${todoIndex}CreationDate`, `${getCreationDate()}`);
+        localStorage.setItem(`project${projectIndex}todo${todoIndex}Complete`, `${getComplete()}`);
+
+
+        return true;
+    }
+
     return {
         getInfo,
         init,
@@ -226,6 +252,7 @@ const todoObj = () => {
         getComplete, setComplete,
         getTodoDiv, setTodoDiv,
         getTodoDeletionDiv, setTodoDeletionDiv,
+        writeTodoLocalStorage,
 
 
         
