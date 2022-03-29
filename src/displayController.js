@@ -632,7 +632,7 @@ const displayController = () => {
         priorityInput.type = 'range';
         priorityInput.max = 5;
         priorityInput.min = 1;
-        console.log(targetTodo.getPriority());
+        // console.log(targetTodo.getPriority());
         priorityInput.value = targetTodo.getPriority();
         priorityLabel.appendChild(priorityInput);
         let priorityOutput = document.createElement('output');

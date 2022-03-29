@@ -498,6 +498,10 @@ function logicController() {
         targetProject.toggleProjectMenuOpen();
 
 
+        // Update Local Storage
+        _writeLocalStorage();
+
+
 
     }
     this._editProjectSaveButton = _editProjectSaveButton
@@ -538,6 +542,9 @@ function logicController() {
                 break;
             } 
         }
+
+        // Update Local Storage
+        _writeLocalStorage();
 
     }
     this._editProjectDeleteButton = _editProjectDeleteButton;
@@ -648,6 +655,9 @@ function logicController() {
         // Stack tracing example from the top of logic controller to each todo child
         // console.log(_projectContainer.getProjectArr()[0].getTodoList()[0].getInfo());
 
+        // Update Local Storage
+        _writeLocalStorage();
+
     }
     this._projectAddTodoSaveButton = _projectAddTodoSaveButton;
 
@@ -722,11 +732,11 @@ function logicController() {
             }
         })
 
-        console.log(`The follow to-do elements are marked for deletion: `);
-        console.log(markedForDeletion);
+        // console.log(`The follow to-do elements are marked for deletion: `);
+        // console.log(markedForDeletion);
         markedForDeletion.forEach(element => {
-            console.log(`Deleting the following todo: ${element.getTitle()}
-            from targetProject: ${targetProject.getProjectName()}`)
+            // console.log(`Deleting the following todo: ${element.getTitle()}
+            // from targetProject: ${targetProject.getProjectName()}`)
             targetProject.removeTargetTodo(element);
             
             if( element.getComplete() ){
@@ -736,12 +746,15 @@ function logicController() {
             }
         })
 
-        console.log(targetProject.getTodoList());
+        // console.log(targetProject.getTodoList());
 
         // Remove the deleteTodoPane div Child element from the targetProject
         projectTodoElementContainer.removeChild(deleteTodoPane);
         // Toggle projectMenuOpen to false, so that the editMenu can be re-opened
         targetProject.toggleProjectMenuOpen();
+
+        // Update Local Storage
+        _writeLocalStorage();
 
     }
     this._projectDeleteTodoSelectedButton = _projectDeleteTodoSelectedButton;
@@ -771,16 +784,16 @@ function logicController() {
             }
         })
 
-        console.log(`The follow to-do elements are marked for deletion: `);
-        console.log(markedForDeletion);
+        // console.log(`The follow to-do elements are marked for deletion: `);
+        // console.log(markedForDeletion);
         markedForDeletion.forEach(element => {
-            console.log(`Deleting the following todo: ${element.getTitle()}
-            from targetProject: ${targetProject.getProjectName()}`)
+            // console.log(`Deleting the following todo: ${element.getTitle()}
+            // from targetProject: ${targetProject.getProjectName()}`)
             targetProject.removeTargetTodo(element);
             todoListCompleted.removeChild(element.getTodoDiv());
         })
 
-        console.log(targetProject.getTodoList());
+        // console.log(targetProject.getTodoList());
 
 
 
@@ -792,6 +805,9 @@ function logicController() {
         projectTodoElementContainer.removeChild(deleteTodoPane);
         // Toggle projectMenuOpen to false, so that the editMenu can be re-opened
         targetProject.toggleProjectMenuOpen();
+
+        // Update Local Storage
+        _writeLocalStorage();
 
 
     }
@@ -821,12 +837,15 @@ function logicController() {
             targetTodo.setComplete(true);
             todoListCompleted.appendChild(targetTodoDiv);
         }
+
+        // Update Local Storage
+        _writeLocalStorage();
     }
     this._toggleCompletedTodo = _toggleCompletedTodo;
 
     const _editTodoPane = (targetTodo, targetProject) => {
 
-        console.log(`You clicked the edit button target todo: ${targetTodo.getTitle()}`);
+        // console.log(`You clicked the edit button target todo: ${targetTodo.getTitle()}`);
 
         // Toggle projectMenuOpen, generate editTodoPane, appendEditTodoPane, attach eventListeners to appropriate fields and buttons
 
@@ -872,22 +891,22 @@ function logicController() {
     this._editTodoPane = _editTodoPane;
 
     const _projectEditTodoSaveButton = (targetProject, targetTodo, editTodoPaneDiv, savedValues) => {
-        console.log('-----------------------------------')
-        console.log(`I am _projectEditTodoSaveButton. Here are my todo initial values`);
-        console.log(targetTodo.getInfo());
-        console.log('-----------------------------------')
+        // console.log('-----------------------------------')
+        // console.log(`I am _projectEditTodoSaveButton. Here are my todo initial values`);
+        // console.log(targetTodo.getInfo());
+        // console.log('-----------------------------------')
         
 //         let savedValues = [editTodoTitleInput, editTodoDescriptionInput, editTodoPriorityInput, editTodoNotesInput, editTodoDueDateInput, editTodoCreationDateInput]
 
 
         // Save the new values to targetTodo
-        console.log(`savedValues are as follows:
-        titleInput: ${savedValues[0].value}
-        descriptionInput: ${savedValues[1].value}
-        priorityInput: ${savedValues[2].value}
-        notesInput: ${savedValues[3].value}
-        dueDateInput: ${savedValues[4].valueAsDate}
-        creationDateInput: ${savedValues[4].valueAsDate}`);
+        // console.log(`savedValues are as follows:
+        // titleInput: ${savedValues[0].value}
+        // descriptionInput: ${savedValues[1].value}
+        // priorityInput: ${savedValues[2].value}
+        // notesInput: ${savedValues[3].value}
+        // dueDateInput: ${savedValues[4].valueAsDate}
+        // creationDateInput: ${savedValues[4].valueAsDate}`);
 
         targetTodo.setTitle(savedValues[0].value);
         targetTodo.setDescription(savedValues[1].value);
@@ -947,7 +966,7 @@ function logicController() {
         // Update the todo DOM elements to reflect the updated values
         let newTitle = "";
         if (savedValues[0].value.length > 32) {
-            console.log(savedValues[0].value)
+            // console.log(savedValues[0].value)
             for ( let i = 0; i < 34; i++) {
                 newTitle += savedValues[0].value.charAt(i);
             }
@@ -965,6 +984,8 @@ function logicController() {
         // Toggle projectMenuOpen to false
         targetProject.toggleProjectMenuOpen();
 
+        // Update Local Storage
+        _writeLocalStorage();
         
     }
     this._projectEditTodoSaveButton = _projectEditTodoSaveButton;
@@ -1014,10 +1035,6 @@ function logicController() {
         }
     }
     
-
-
-
-
 
 
 
@@ -1169,6 +1186,17 @@ function logicController() {
 
     }
     this._writeLocalStorage = _writeLocalStorage;
+
+    const _readLocalStorage = () => {
+
+        if( !_useLocalStorage) return;
+        console.log(' ------------------------------------ _readLocalStorage() ------------------------------------');
+
+        let result = _projectContainer.readProjectArrLocalStorage();
+
+
+
+    }
 
     return {
         getInfo, init,

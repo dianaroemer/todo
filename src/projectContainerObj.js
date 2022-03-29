@@ -121,6 +121,9 @@ const projectContainerObj = () => {
         _projectArr;
 
         for( let i = 0; i < _projectArr.length; i++ ) {
+
+            localStorage.setItem(`projArrLength`, `${_projectArr.length}`);
+
             let result = _projectArr[i].writeProjectLocalStorage(i);
             if (!result) {
                 return false;
@@ -131,6 +134,24 @@ const projectContainerObj = () => {
         return true;
     }
 
+    const readProjectArrLocalStorage = () => {
+
+        let result = false;
+
+        let numProjects = localStorage.getItem('projArrLength');
+        if(numProjects > 0) {
+            
+
+
+
+
+        } else {
+            return false;
+        }
+
+
+        
+    }
 
 
 
@@ -144,6 +165,7 @@ const projectContainerObj = () => {
         getAddButtonMenu, toggleAddButtonMenu,
         createProject,
         writeProjArrLocalStorage,
+        readProjectArrLocalStorage,
 
 
 
