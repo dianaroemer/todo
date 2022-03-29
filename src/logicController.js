@@ -31,7 +31,6 @@ function logicController() {
         _useLocalStorage = false;
     }
 
-    readFromLocalStorage();
 
 
 
@@ -62,6 +61,10 @@ function logicController() {
         _eventController.attachProjectContainerAddButtonListener(addButton);
 
         _contentDiv.appendChild(projectContainerDiv);
+
+        // If applicable, read from localStorage 
+        _readLocalStorage()
+
     }
 
     const getProjectContainer = () => {
@@ -285,7 +288,8 @@ function logicController() {
 
 
         // XXXUPDATEXXX Remove this line when appropriate
-        todoListInput = todoListInput.concat(sampleTodoList);
+        // console.log(todoListInput);
+        // todoListInput = todoListInput.concat(sampleTodoList);
         // XXXUPDATEXXX Appending sampleTodoList to todoListInput, remove this later
 
         // Generate projectPane Div
@@ -297,7 +301,7 @@ function logicController() {
 
        
         // Generate projectObj
-        let newProject = _projectContainer.createProject( nameInput, creationDateInput, dueDateInput, priorityInput,projectPaneDivValues[0], todoListInput );
+        let newProject = _projectContainer.createProject( nameInput, new Date(creationDateInput), new Date(dueDateInput), priorityInput,projectPaneDivValues[0], todoListInput );
 
         // Attach projectObj to _projectContainer._projectArr[]
         _projectContainer.addProject(newProject);
@@ -1038,105 +1042,6 @@ function logicController() {
 
 
 
-    // How do I convert projects and their todo-lists to a reasonable string
-    function toLocalStorage ( library ) {
-    
-        if( !useLocalStorage) return;
-    
-        // Clear existing localStorage
-        localStorage.clear();
-    
-        // If myLibrary is empty, don't add anything to localStorage
-        // if( myLibrary.length === 0 ) {
-        //     return;
-        // } else {
-    
-            // localStorage.setItem('myLibraryLength', `${library.length}`);
-            
-            // let index = 0;
-            // let findex = library.length;
-    
-            // while ( index != library.length ) {
-            //     localStorage.setItem(`myLibrary${index}Name`, `${library[index].name}`);
-            //     localStorage.setItem(`myLibrary${index}Platform`, `${library[index].platform}`);
-            //     localStorage.setItem(`myLibrary${index}Owned`, `${library[index].owned}`);
-            //     localStorage.setItem(`myLibrary${index}Desire`, `${library[index].desireToPlay}`);
-            //     localStorage.setItem(`myLibrary${index}Icon`, `${library[index].icon}`);
-            //     localStorage.setItem(`myLibrary${index}Beat`, `${library[index].beat}`);
-            //     // localStorage.setItem(`myLibrary${index}Div`, `${library[index].div.innerHTML}`);
-    
-            //     index++;
-            // }
-    
-                // Game Object data
-            // let name;
-            // let platform;
-            // let owned;
-            // let desireToPlay;
-            // let icon;
-            // let beat;
-            // let div;
-    
-        // }
-    
-    }
-    
-    function readFromLocalStorage() {
-    
-        if( !_useLocalStorage) return;
-        
-        let numProjects = localStorage.getItem('projArrLength');
-    
-        if(numProjects > 0) {
-    
-        //     let tempName;
-        //     let tempPlatform;
-        //     let tempOwned;
-        //     let tempDesire;
-        //     let tempIcon;
-        //     let tempBeat;
-    
-        //     let index = 0;
-        //     while (index < numObjects) {
-    
-        //         tempName = localStorage.getItem(`myLibrary${index}Name`);
-        //         tempPlatform = localStorage.getItem(`myLibrary${index}Platform`);
-        //         tempOwned = localStorage.getItem(`myLibrary${index}Owned`);
-        //         tempDesire = localStorage.getItem(`myLibrary${index}Desire`);
-        //         tempIcon = localStorage.getItem(`myLibrary${index}Icon`);
-        //         tempBeat = localStorage.getItem(`myLibrary${index}Beat`);
-    
-        //         // Type checking this.beat back into a boolean when retrieved as a DOMstring from localStorage
-        //         let beatBool;
-        //         if(tempBeat === 'true') {
-        //             beatBool = true;
-        //         } else {
-        //             beatBool = false;
-        //         }
-    
-        //         Object.create(Game.prototype).initGame(tempName, tempPlatform, tempOwned, tempDesire, tempIcon, beatBool);
-    
-        //         index++;
-        //     }
-    
-        //     updateDisplay();
-    
-        //     addEventListenerToModify();
-    
-            return;
-        } else {
-            return;
-        }
-    
-    }
-
-
-
-
-
-
-
-
 
 
 
@@ -1175,13 +1080,13 @@ function logicController() {
     const _writeLocalStorage = () => {
 
         if( !_useLocalStorage) return;
-        console.log(' ------------------------------------ _writeLocalStorage() ------------------------------------');
+        // console.log(' ------------------------------------ _writeLocalStorage() ------------------------------------');
         localStorage.clear();
         let result = _projectContainer.writeProjArrLocalStorage();
         if (!result) {
             return false;
         }
-        console.log(result);
+        // console.log(result);
         return true;
 
     }
@@ -1190,13 +1095,26 @@ function logicController() {
     const _readLocalStorage = () => {
 
         if( !_useLocalStorage) return;
-        console.log(' ------------------------------------ _readLocalStorage() ------------------------------------');
+        // console.log(' ------------------------------------ _readLocalStorage() ------------------------------------');
 
-        let result = _projectContainer.readProjectArrLocalStorage();
+        let newProjectArr = _projectContainer.readProjectArrLocalStorage();
+        // console.log(newProjectArr[0]);
+        if( newProjectArr ) {
+            for ( let index = 0; index < newProjectArr.length; index++) {
+                _generateProject(newProjectArr[index][0], newProjectArr[index][1], newProjectArr[index][2], newProjectArr[index][3], newProjectArr[index][4] )
+            }
+        }
 
 
 
     }
+    this._readLocalStorage = _readLocalStorage;
+
+
+
+
+    // _readLocalStorage();
+
 
     return {
         getInfo, init,

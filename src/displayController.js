@@ -161,7 +161,7 @@ const displayController = () => {
         const creationDate = document.createElement('div')
         creationDate.classList.add('project-creation-date');
         // functionality converting creationDate to readable format
-        let readableCreationDateInput = creationDateInput.toDateString();
+        let readableCreationDateInput = (new Date(creationDateInput)).toDateString();
         creationDate.innerHTML = readableCreationDateInput;
         dateContainer.appendChild(creationDate);
         
@@ -173,7 +173,7 @@ const displayController = () => {
         const dueDate = document.createElement('div');
         dueDate.classList.add('project-due-date');
         // functionality converting dueDate to readable format
-        let readableDueDateInput = dueDateInput.toDateString();
+        let readableDueDateInput = (new Date(dueDateInput)).toDateString();
         dueDate.innerHTML = readableDueDateInput;
         dateContainer.appendChild(dueDate);
 
@@ -333,6 +333,7 @@ const displayController = () => {
         dueDateInput.required = true;
         // dueDateInput.value = "2021-02-02";
         let tempDueDate = targetProject.getProjectDueDate()
+        console.log(targetProject.getProjectDueDate())
         // tempDueDate.setDate(tempDueDate.getDate() - 1);
         tempDueDate = tempDueDate.getTime();
         dueDateInput.valueAsNumber = tempDueDate;

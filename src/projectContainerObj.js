@@ -1,5 +1,7 @@
 
 import projectObj from './project.js';
+import todoObj from './todoObj';
+
 
 // I am projectContainerObj. I house an object that contains all of projectObs and also contain the <div> reference to relevant DOM elements for later manipulation by logicController
 
@@ -139,7 +141,55 @@ const projectContainerObj = () => {
         let result = false;
 
         let numProjects = localStorage.getItem('projArrLength');
+        
+        let newProjArr = []
+        let index = 0;
+
         if(numProjects > 0) {
+            for( index; index < numProjects; index++ ){
+                let projectName = localStorage.getItem(`project${index}Name`);
+                let projectPriority = localStorage.getItem(`project${index}Priority`);
+                let projectDueDate = localStorage.getItem(`project${index}DueDate`);
+                let projectCreationDate = localStorage.getItem(`project${index}CreationDate`);
+                let projectTodoListLength = localStorage.getItem(`project${index}TodoListLength`);
+                let projectTodoList = [];
+                if (projectTodoListLength > 0) {
+                    // Retrieve todoList
+                    for (let todoIndex = 0; todoIndex < projectTodoListLength; todoIndex++) {
+                        let todoName = localStorage.getItem(`project${index}todo${todoIndex}Name`);
+                        let todoDescription = localStorage.getItem(`project${index}todo${todoIndex}Description`);
+                        let todoPriority = localStorage.getItem(`project${index}todo${todoIndex}Priority`);
+                        let todoNotes = localStorage.getItem(`project${index}todo${todoIndex}Notes`);
+                        let todoDueDate = localStorage.getItem(`project${index}todo${todoIndex}DueDate`);
+                        let todoCreationDate = localStorage.getItem(`project${index}todo${todoIndex}CreationDate`);
+                        let todoComplete = localStorage.getItem(`project${index}todo${todoIndex}Complete`);
+
+                        if (todoComplete === "false") {
+                            todoComplete = false;
+                        } else {
+                            todoComplete = true;
+                        }
+
+                        let newTodo = todoObj();
+                        newTodo.init(todoName, todoDescription, new Date(todoDueDate), new Date(todoCreationDate), Number(todoPriority), todoNotes, [], todoComplete)
+                        projectTodoList.push(newTodo);
+
+
+
+
+
+                    }
+                }
+                let newProject = [projectName, projectCreationDate, projectDueDate, projectPriority, projectTodoList]
+                newProjArr.push(newProject);
+
+
+
+                // localStorage.setItem(`project${index}CreationDate`, `${getProjectCreationDate()}`);
+                // localStorage.setItem(`project${index}TodoListLength`, `${getTodoList().length}`);
+
+
+            }
             
 
 
@@ -149,8 +199,7 @@ const projectContainerObj = () => {
             return false;
         }
 
-
-        
+        return newProjArr;
     }
 
 
