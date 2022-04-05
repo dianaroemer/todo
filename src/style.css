@@ -110,6 +110,7 @@ nav ul li {
 
 .navButtonToggle:hover:after {
     width:70%;
+    pointer-events: none;
 }
 
 .portfolioToggle a{

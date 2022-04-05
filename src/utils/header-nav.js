@@ -1,3 +1,4 @@
+import dropDownMenu from "./dropDownMenu.js";
 
 
 function headerNav() {
@@ -15,6 +16,7 @@ function headerNav() {
     let listOptions = document.createElement('li');
     listOptions.classList.add('navButtonToggle', 'optionsToggle');
     listOptions.innerHTML = 'Options';
+    dropDownMenu(listOptions, 'down', 'Add Samples', 'About this App');
 
     let listAbout = document.createElement('li');
     listAbout.classList.add('navButtonToggle', 'aboutToggle');
